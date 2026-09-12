@@ -510,3 +510,16 @@ Not usable for generation:
 
 ### How to run (once generation completes)
 `python score_correctness.py && python score_lexical.py && python score_semantic_entropy.py && python evaluate_methods.py`
+
+## 2026-09-12 (safeguard) — model retirement risk and substitution plan
+> Primary model may be retired during the thesis (precedent: Groq retired all
+> Llama models, Gemini retired gemini-2.0-flash / gemini-2.5-flash /
+> gemini-2.5-flash-lite for new accounts, both during this project). If
+> `qwen/qwen3.8-27b` becomes unavailable, re-run the affected samples with the
+> closest documented fallback in `fallback_models.md` (e.g. `qwen/qwen3.6-27b`,
+> then `openai/gpt-oss-20b` with `reasoning_effort=low`) and note the
+> substitution explicitly in the methodology section. Every sample in
+> `logs/generations.jsonl` records `provider` and `model_name`, so a partial
+> re-run can be traced to the affected records exactly. Do not mix models
+> within a question's sample set; `--skip-started` keeps each question on a
+> single model.
