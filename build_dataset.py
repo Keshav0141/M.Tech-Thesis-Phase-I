@@ -279,7 +279,7 @@ def build_category(
                     record_rejection(str(item.get("question") or "")[:300], duplicate_reason, str(item.get("question_id") or ""))
             continue
         inspected += 1
-        source_id = str(item.get("question_id") or item.get("id") or "")
+        source_id = str(item.get("question_id") or item.get("id") or item.get("qid") or "")
         raw_question = str(item.get("question") or "")[:300]
 
         record, reason = CHECKERS[category](item)

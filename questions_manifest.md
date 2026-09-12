@@ -1,12 +1,12 @@
 # Questions Manifest
 
-_Living document. Last regenerated: 2026-09-12 04:23 UTC (seed 42, target 150/category)._
+_Living document. Last regenerated: 2026-09-12 08:28 UTC (seed 42, target 150/category)._
 
 ## Dataset summary
 
 Total active questions: **450** — factual: 150, math: 150, reasoning: 150
 
-3 entries are retained in data/dataset.json with status `rejected` (manual spot-check findings) and are excluded from generation and validation counts.
+4 entries are retained in data/dataset.json with status `rejected` (manual spot-check findings) and are excluded from generation and validation counts.
 
 | Category | Source | Inspected | Accepted | Rejected | Target met |
 |---|---|---:|---:|---:|:---:|
@@ -20,7 +20,7 @@ Total active questions: **450** — factual: 150, math: 150, reasoning: 150
 |---|---:|---:|---:|
 | factual | 49 | 64 | 37 |
 | math | 57 | 71 | 22 |
-| reasoning | 85 | 62 | 3 |
+| reasoning | 85 | 63 | 2 |
 
 Difficulty flags are deterministic heuristics, not gold labels: factual = question word count (<=10 / <=16 / more), math = number of calculator steps in the solution (<=2 / <=4 / more), reasoning = number of supporting facts in the evidence (<=2 / <=4 / more).
 
@@ -77,6 +77,7 @@ No inspected StrategyQA candidate reduced to arithmetic, so no mathematical-over
 | factual_0025 | manual spot-check: source question conflates two films — Kasper Gutman is a character from The Maltese Falcon (1941), not Casablanca (1942) |
 | factual_0037 | manual spot-check: source question contains a factual error — Keiko the orca died in Taknes Bay, Halsa (Norway), not off the coast of Finland |
 | factual_0152 | curation guard: time-sensitive wording ('recent London summer Olympics'); auto-replacement rejected during curation |
+| reasoning_0106 | curation guard: time-sensitive wording ('most recent Democrat President' — the referent changes over time); rejected during curation review |
 
 ## Per-question metadata
 
@@ -490,7 +491,7 @@ No inspected StrategyQA candidate reduced to arithmetic, so no mathematical-over
 | reasoning_0103 | reasoning | StrategyQA | easy | auto_validated | 6 |
 | reasoning_0104 | reasoning | StrategyQA | medium | auto_validated | 13 |
 | reasoning_0105 | reasoning | StrategyQA | easy | auto_validated | 11 |
-| reasoning_0106 | reasoning | StrategyQA | hard | auto_validated | 14 |
+| reasoning_0106 | reasoning | StrategyQA | hard | rejected | 14 |
 | reasoning_0107 | reasoning | StrategyQA | easy | auto_validated | 8 |
 | reasoning_0108 | reasoning | StrategyQA | easy | auto_validated | 15 |
 | reasoning_0109 | reasoning | StrategyQA | easy | auto_validated | 10 |
@@ -535,3 +536,4 @@ No inspected StrategyQA candidate reduced to arithmetic, so no mathematical-over
 | reasoning_0148 | reasoning | StrategyQA | easy | auto_validated | 12 |
 | reasoning_0149 | reasoning | StrategyQA | easy | auto_validated | 12 |
 | reasoning_0150 | reasoning | StrategyQA | easy | auto_validated | 13 |
+| reasoning_0151 | reasoning | StrategyQA | medium | auto_validated | 7 |

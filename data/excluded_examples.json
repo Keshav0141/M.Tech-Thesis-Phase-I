@@ -9,7 +9,8 @@
     "exact duplicate of factual_0035": 1,
     "manual spot-check: source question contains a factual error — Keiko the orca died in Taknes Bay, Halsa (Norway), not off the coast of Finland": 1,
     "manual spot-check: source question conflates two films — Kasper Gutman is a character from The Maltese Falcon (1941), not Casablanca (1942)": 1,
-    "curation guard: time-sensitive wording ('recent London summer Olympics'); auto-replacement rejected during curation": 1
+    "curation guard: time-sensitive wording ('recent London summer Olympics'); auto-replacement rejected during curation": 1,
+    "curation guard: time-sensitive wording ('most recent Democrat President' — the referent changes over time); rejected during curation review": 1
   },
   "category_stats": [
     {
@@ -484,7 +485,15 @@
         "question_text": "In the recent London summer Olympics, where was the majority of the Triathlon event(s) held?",
         "reason": "curation guard: time-sensitive wording ('recent London summer Olympics'); auto-replacement rejected during curation"
       }
+    ],
+    "curation guard: time-sensitive wording ('most recent Democrat President' — the referent changes over time); rejected during curation review": [
+      {
+        "category": "reasoning",
+        "question_id": "reasoning_0106",
+        "question_text": "Is the most recent Democrat President in the US known for his painting practice?",
+        "reason": "curation guard: time-sensitive wording ('most recent Democrat President' — the referent changes over time); rejected during curation review"
+      }
     ]
   },
-  "curated_utc": "2026-09-12T04:23:52.097924+00:00"
+  "curated_utc": "2026-09-12T08:28:15.835285+00:00"
 }

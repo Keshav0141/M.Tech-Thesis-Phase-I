@@ -5879,7 +5879,8 @@
     "question_id": "reasoning_0106",
     "category": "reasoning",
     "source_dataset": "StrategyQA",
-    "validation_status": "auto_validated"
+    "validation_status": "rejected",
+    "rejection_reason": "curation guard: time-sensitive wording ('most recent Democrat President' — the referent changes over time); rejected during curation review"
   },
   {
     "question_text": "Is a railroad engineer needed during NASCAR events?",
@@ -6493,6 +6494,20 @@
       "source_id": ""
     },
     "question_id": "reasoning_0150",
+    "category": "reasoning",
+    "source_dataset": "StrategyQA",
+    "validation_status": "auto_validated"
+  },
+  {
+    "question_text": "Would Emmanuel Macron celebrate Cinco de Mayo?",
+    "ground_truth_answer": "no",
+    "difficulty_flag": "medium",
+    "metadata": {
+      "n_supporting_facts": 4,
+      "word_count": 7,
+      "source_id": "6f1f8afdf44cf088997d"
+    },
+    "question_id": "reasoning_0151",
     "category": "reasoning",
     "source_dataset": "StrategyQA",
     "validation_status": "auto_validated"

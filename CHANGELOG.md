@@ -29,3 +29,7 @@ Dated entries tied to git commits.
 - Generation run 1 (gpt-oss-20b, n=5, temp 0.8): factual 735/750 samples
   (725 Groq + 20 Gemini fallback, ~156k tokens, 316 retries); math/reasoning
   blocked by free-tier daily caps, to resume after reset.
+- Curation pass 2: `reasoning_0106` rejected (time-sensitive wording),
+  replacement `reasoning_0151` added; dataset re-validated 150/150/150 with
+  4 rejected entries retained.
+- Added `check_remaining.py` (per-category resume checker with exit codes).

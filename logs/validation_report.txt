@@ -1,10 +1,10 @@
 Dataset validation report
 ============================================================
-Active questions: 450 (rejected entries retained: 3)
+Active questions: 450 (rejected entries retained: 4)
 Category counts : factual=150, math=150, reasoning=150
 Balance spread  : 0 (max-min); imbalance = 0.0%
-Difficulty      : easy=191, hard=62, medium=197
-Statuses        : auto_validated=432, rejected=3, spot_checked=18
+Difficulty      : easy=191, hard=61, medium=198
+Statuses        : auto_validated=432, rejected=4, spot_checked=18
 
 All structural checks passed.
 No duplicate/near-duplicate warnings.

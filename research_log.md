@@ -110,10 +110,10 @@ produced, and problems hit with their fixes.
   been human-reviewed; they belong in the next spot-check round.
 
 ### Open issue
-- `reasoning_0106` ("Is the most recent Democrat President in the US known for
-  his painting practice?") uses time-relative wording. Deliberately not
-  replaced in this pass to keep IDs stable; decision needed for the next
-  curation round.
+- Resolved 2026-09-12 (curation pass 2): `reasoning_0106` was rejected and
+  replaced by `reasoning_0151`; the time-sensitivity guard now applies to
+  replacement candidates in every category and will be folded into the base
+  validators at the next full rebuild.
 
 ### Problems hit and fixes
 - First replacement batch included a time-relative question. Fixed with the
@@ -162,3 +162,35 @@ produced, and problems hit with their fixes.
   resumable log means only missing samples are fetched.
 - After math/reasoning complete, implement answer extraction and Semantic
   Entropy.
+
+## 2026-09-12 (curation pass 2 + resume tooling)
+
+### What was done
+- Rejected `reasoning_0106` ("most recent Democrat President" — time-sensitive
+  referent) and pulled `reasoning_0151` ("Would Emmanuel Macron celebrate Cinco
+  de Mayo?") with the existing reasoning validators plus the time-sensitivity
+  guard. Dataset re-validated: 450 active, 150/150/150, 0 structural errors,
+  0 duplicates (4 rejected entries retained for provenance).
+- Generalized `apply_spot_check.py` replacements to any category (factual and
+  reasoning are handled by the same code path; math needs none).
+- Added `check_remaining.py`: prints questions complete and samples
+  done/expected/missing per category, provider totals, and the exact next
+  command per category; `--json` and `--list-gaps` available; exit code 1
+  while work remains.
+
+### Quota status and plan
+- Quota exhaustion is expected on free tiers and was anticipated: Groq
+  gpt-oss-20b allows 200k tokens/day and Gemini gemini-3.6-flash only 20
+  requests/day. Factual consumed the full Groq budget (~150k logged tokens,
+  ~200k billed including retries).
+- Current coverage: factual 735/750, math 0/750, reasoning 0/750 —
+  1515 samples remaining.
+- Plan: resume daily by re-running the same three commands; completed samples
+  are skipped automatically. Expected another 2-3 days of quota (roughly one
+  category per day) until all 2250 samples (450 questions x 5) are collected.
+
+### Problems hit and fixes
+- One in-session resume was blocked because the rolling token budget frees up
+  only as old requests age out; confirmed with a probe call (~300 tokens of
+  headroom). No fix needed — the pipeline fails over to failures.jsonl and
+  resumes cleanly.

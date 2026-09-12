@@ -1,14 +1,15 @@
-"""Apply manual spot-check results to the locked dataset.
+"""Apply manual spot-check results and curation findings to the locked dataset.
 
 Curation step, run after a human has reviewed data/spot_check_sample.md:
-    1. Marks known source-data errors as `rejected` (reasons attached).
+    1. Marks known source-data errors and curation-guard findings as `rejected`
+       (reasons attached).
     2. Marks every other reviewed question as `spot_checked`.
-    3. Pulls replacement questions from the TriviaQA candidate pool, applying
-       the same automated validation criteria as build_dataset.py.
+    3. Pulls replacement questions from the source candidate pools, applying
+       the existing per-category validators plus a time-sensitivity guard.
     4. Rewrites data/dataset.json and refreshes data/excluded_examples.json and
        questions_manifest.md.
 
-Safe to re-run: it only adds replacements while the active factual count is
+Safe to re-run: it only adds replacements while an active category count is
 below target.
 """
 
@@ -33,17 +34,21 @@ MANUAL_REJECTIONS = {
     ),
 }
 
-# Caught while reviewing auto-selected replacements: wording is time-relative,
-# which violates the factual criterion. Replaced like the manual rejections.
+# Caught during curation review (not part of the spot-check sample). Both are
+# time-relative: the intended answer can change with time.
 CURATION_REJECTIONS = {
     "factual_0152": (
         "curation guard: time-sensitive wording ('recent London summer Olympics'); "
         "auto-replacement rejected during curation"
     ),
+    "reasoning_0106": (
+        "curation guard: time-sensitive wording ('most recent Democrat President' — "
+        "the referent changes over time); rejected during curation review"
+    ),
 }
 
-# Stricter guard applied to replacements only, so the locked original 450 are
-# not shifted. The base criterion regex will fold this in at the next rebuild.
+# Stricter guard applied to replacements only, so the locked original questions
+# are not shifted. build_dataset.TIME_SENSITIVE_RE covers the rest.
 REPLACEMENT_GUARD_RE = re.compile(r"\b(recent|recently|lately)\b", re.IGNORECASE)
 
 
@@ -69,65 +74,74 @@ def main() -> int:
 
     spot_checked = 0
     for question_id in reviewed:
-        if question_id not in MANUAL_REJECTIONS:
+        if question_id not in MANUAL_REJECTIONS and question_id not in CURATION_REJECTIONS:
             by_id[question_id]["validation_status"] = "spot_checked"
             spot_checked += 1
     print(f"[curate] marked {spot_checked} reviewed questions as spot_checked")
 
-    active_factual = [
-        entry
-        for entry in dataset
-        if entry["category"] == "factual" and entry.get("validation_status") != "rejected"
-    ]
-    needed = max(0, config.TARGET_PER_CATEGORY - len(active_factual))
-    replacements: list[dict] = []
+    def active_count(category: str) -> int:
+        return sum(
+            1
+            for entry in dataset
+            if entry["category"] == category and entry.get("validation_status") != "rejected"
+        )
 
-    if needed:
+    categories_needing = [
+        category for category in config.CATEGORIES if active_count(category) < config.TARGET_PER_CATEGORY
+    ]
+
+    if categories_needing:
         deduper = build_dataset.Deduper()
         for entry in dataset:
             if entry.get("validation_status") != "rejected":
                 deduper.check(entry["question_text"], entry["category"], entry["question_id"])
-
         used_source_ids = {entry.get("metadata", {}).get("source_id") for entry in dataset}
-        next_index = 1 + max(
-            int(entry["question_id"].split("_")[1]) for entry in dataset if entry["category"] == "factual"
-        )
 
-        for item in build_dataset.iter_candidates("factual", config.RANDOM_SEED, 4000):
-            if len(replacements) >= needed:
-                break
-            if REPLACEMENT_GUARD_RE.search(str(item.get("question") or "")):
-                continue
-            source_id = str(item.get("question_id") or "")
-            if source_id and source_id in used_source_ids:
-                continue
-            record, reason = build_dataset.check_factual(item)
-            if reason or record is None:
-                continue
-            question_id = f"factual_{next_index:04d}"
-            duplicate = deduper.check(record["question_text"], "factual", question_id)
-            if duplicate:
-                continue
-            record.update(
-                {
-                    "question_id": question_id,
-                    "category": "factual",
-                    "source_dataset": config.SOURCE_DATASETS["factual"],
-                    "validation_status": "auto_validated",
-                }
+        for category in categories_needing:
+            needed = config.TARGET_PER_CATEGORY - active_count(category)
+            next_index = 1 + max(
+                int(entry["question_id"].split("_")[1])
+                for entry in dataset
+                if entry["category"] == category
             )
-            record["metadata"]["source_id"] = source_id
-            replacements.append(record)
-            next_index += 1
-            print(f"[curate] replacement {question_id}: {record['question_text'][:100]}")
+            replacements: list[dict] = []
 
-        if len(replacements) < needed:
-            raise SystemExit(
-                f"Only found {len(replacements)} of {needed} replacements in the candidate pool."
-            )
+            for item in build_dataset.iter_candidates(category, config.RANDOM_SEED, 4000):
+                if len(replacements) >= needed:
+                    break
+                text = str(item.get("question") or "")
+                if REPLACEMENT_GUARD_RE.search(text) or build_dataset.TIME_SENSITIVE_RE.search(text):
+                    continue
+                source_id = str(item.get("question_id") or item.get("qid") or "")
+                if source_id and source_id in used_source_ids:
+                    continue
+                record, reason = build_dataset.CHECKERS[category](item)
+                if reason or record is None:
+                    continue
+                question_id = f"{category}_{next_index:04d}"
+                if deduper.check(record["question_text"], category, question_id):
+                    continue
+                record.update(
+                    {
+                        "question_id": question_id,
+                        "category": category,
+                        "source_dataset": config.SOURCE_DATASETS[category],
+                        "validation_status": "auto_validated",
+                    }
+                )
+                record["metadata"]["source_id"] = source_id
+                replacements.append(record)
+                used_source_ids.add(source_id)
+                next_index += 1
+                print(f"[curate] replacement {question_id}: {record['question_text'][:100]}")
 
-        insert_at = max(i for i, entry in enumerate(dataset) if entry["category"] == "factual") + 1
-        dataset[insert_at:insert_at] = replacements
+            if len(replacements) < needed:
+                raise SystemExit(
+                    f"Only found {len(replacements)} of {needed} {category} replacements in the candidate pool."
+                )
+
+            insert_at = max(i for i, entry in enumerate(dataset) if entry["category"] == category) + 1
+            dataset[insert_at:insert_at] = replacements
 
     config.DATASET_PATH.write_text(json.dumps(dataset, indent=2, ensure_ascii=False), encoding="utf-8")
 
