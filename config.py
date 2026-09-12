@@ -40,25 +40,36 @@ NEAR_DUPLICATE_THRESHOLD = 0.90
 N_SAMPLES_DEFAULT = 5
 TEMPERATURE_DEFAULT = 0.8
 MAX_TOKENS_BY_CATEGORY = {
-    "factual": 512,
+    "factual": 1024,
     "math": 1024,
-    "reasoning": 512,
+    "reasoning": 1024,
 }
 
-# Groq's current open-weight models are reasoning models: without a token
-# budget for hidden reasoning they return empty content. reasoning_effort is
-# only sent to models that support it (verified live).
-GROQ_REASONING_EFFORT = os.getenv("GROQ_REASONING_EFFORT", "low")
+# Single-model plan (decided 2026-09-12): qwen/qwen3.8-27b in instruct mode as
+# the sole dataset model. Groq free tier for it: 1,000 requests/day, 200k
+# tokens/day, and 1,000 output tokens/minute (OTPM) -- the throughput binding
+# limit. ~22s between calls keeps OTPM under the cap for typical outputs.
+# reasoning_effort="none" must be SENT (not omitted) to disable Qwen thinking.
+GROQ_DEFAULT_MODEL = os.getenv("GROQ_MODEL", "qwen/qwen3.8-27b")
+GROQ_REASONING_EFFORT = os.getenv("GROQ_REASONING_EFFORT", "none")
+DEFAULT_SLEEP_SECONDS = 22.0
+# Dynamic pacing target: after each call the wrapper waits at least
+# completion_tokens / GROQ_OTPM_TARGET * 60 seconds, so the rolling output
+# tokens/minute stays under Groq's 1,000 OTPM limit even for 1,000-token
+# completions. The --sleep value acts as the floor.
+GROQ_OTPM_TARGET = 900
+
+# Groq reasoning models accept reasoning_effort; values differ by family
+# (gpt-oss: low/medium/high; qwen3: none disables thinking).
 REASONING_EFFORT_MODELS = ("openai/gpt-oss", "qwen/qwen3")
 
 # Model availability drifts fast. Verified against the live APIs on 2026-09-12:
 # Groq serves openai/gpt-oss-20b|120b and qwen/qwen3.x (no Llama models anymore).
 # Gemini: gemini-2.0-flash, gemini-2.5-flash and gemini-2.5-flash-lite are all
-# retired for new accounts (404). gemini-3.6-flash free tier allows only
-# 20 requests/day, so the fallback is gemini-3.5-flash-lite (verified 30/30
-# calls at ~13 requests/min; free-tier RPM ceiling is ~15, so pace with --sleep
-# >= 4.5 when using it as primary). Re-check with: python generate.py --list-models
-GROQ_DEFAULT_MODEL = os.getenv("GROQ_MODEL", "openai/gpt-oss-20b")
+# retired for new accounts (404); gemini-3.6-flash has only 20 requests/day.
+# The dataset uses qwen/qwen3.8-27b on Groq as the sole model; Gemini remains
+# available only for ad-hoc runs, not for the dataset.
+# Re-check with: python generate.py --list-models
 GEMINI_DEFAULT_MODEL = os.getenv("GEMINI_MODEL", "gemini-3.5-flash-lite")
 
 # Free-tier pacing when Gemini is the primary provider (requests/minute cap).

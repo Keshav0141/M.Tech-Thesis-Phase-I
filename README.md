@@ -57,11 +57,17 @@ Get-ScheduledTask -TaskName "ThesisDailyResume" | Get-ScheduledTaskInfo
 ## Notes
 - Task Scheduler needs `python` on PATH; `daily_resume.ps1` resolves it and
   fails with a clear message if missing.
-- Free-tier budgets: Groq `openai/gpt-oss-20b` 200k tokens/day. Gemini free
-  tier is paced at ~15 requests/minute; `gemini-2.5-flash` is retired for new
-  accounts, so the fallback is `gemini-3.5-flash-lite` (the previous
-  `gemini-3.6-flash` had an unusually restrictive 20 requests/day cap).
-- The wrapper auto-paces Gemini calls (`GEMINI_PRIMARY_SLEEP`), so fallback
-  bursts do not burn retries on per-minute 429s.
+- **Single-model plan (decided 2026-09-12):** the dataset uses Groq
+  `qwen/qwen3.8-27b` with `reasoning-effort none` (`--max-tokens 1024`,
+  temperature 0.7, `--sleep 22`) for all 450 questions. No multi-provider
+  fallback and no paid tier; expected timeline is ~5-6 days because Groq's
+  free tier allows 200k tokens/day, ~1,000 requests/day, and 1,000 output
+  tokens/minute (OTPM).
+- Pacing: `--sleep 22` is the floor; the wrapper additionally waits
+  `completion_tokens / 900 * 60` seconds after each call so the rolling OTPM
+  stays under Groq's cap even for long math/reasoning completions. A full
+  category run (~750 calls) takes roughly 4.5-6 hours, so the machine must stay
+  awake; the run is resumable if interrupted.
 - Per-run logs go to `logs/resume_<timestamp>.log`; successful/failed samples
-  go to `logs/generations.jsonl` / `logs/failures.jsonl`.
+  go to `logs/generations.jsonl` / `logs/failures.jsonl`. Earlier pilot data is
+  archived under `logs/pilot_run/` and is not part of the final dataset.

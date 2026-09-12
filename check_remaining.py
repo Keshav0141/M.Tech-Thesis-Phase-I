@@ -129,7 +129,11 @@ def main() -> int:
         print("\nNext (runs skip completed samples automatically):")
         for category in categories:
             if report[category]["samples_missing"]:
-                print(f"  python generate.py --category {category} --n {args.n} --temperature 0.8")
+                print(
+                    f"  python generate.py --category {category} --n {args.n} --temperature 0.7 "
+                    "--provider groq --model qwen/qwen3.8-27b --reasoning-effort none "
+                    "--max-tokens 1024 --sleep 22"
+                )
     return 0 if total_missing == 0 else 1
 
 

@@ -33,3 +33,13 @@ Dated entries tied to git commits.
   replacement `reasoning_0151` added; dataset re-validated 150/150/150 with
   4 rejected entries retained.
 - Added `check_remaining.py` (per-category resume checker with exit codes).
+
+## 2026-09-12 (decision: single model qwen3.8-27b)
+- Chose `qwen/qwen3.8-27b` (Groq, instruct mode) as the sole dataset model;
+  accepted a 5-6 day timeline with no multi-provider fallback or paid tier.
+- `MAX_TOKENS_BY_CATEGORY` = 1024 for all categories; `--reasoning-effort none`
+  is now sent (not omitted); default `--sleep 22` with dynamic OTPM pacing
+  (completion_tokens/900 x 60 s floor increase).
+- Archived all pilot/test artifacts to `logs/pilot_run/`.
+- Started the factual run (750 calls) in the background; math/reasoning follow.
+- `daily_resume.ps1` and `check_remaining.py` updated to the canonical flags.

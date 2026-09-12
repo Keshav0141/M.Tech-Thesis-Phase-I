@@ -253,8 +253,9 @@ def call_with_retries(provider, prompt, system, temperature, max_tokens, max_ret
 def build_providers(args) -> list:
     providers = []
     if args.provider in ("auto", "groq"):
-        effort = None if args.reasoning_effort == "none" else args.reasoning_effort
-        providers.append(GroqProvider(args.model or config.GROQ_DEFAULT_MODEL, reasoning_effort=effort))
+        providers.append(
+            GroqProvider(args.model or config.GROQ_DEFAULT_MODEL, reasoning_effort=args.reasoning_effort)
+        )
     if args.provider in ("auto", "gemini"):
         model = args.model if args.provider == "gemini" else args.fallback_model
         providers.append(GeminiProvider(model or config.GEMINI_DEFAULT_MODEL))
@@ -275,13 +276,25 @@ def main() -> int:
         "--reasoning-effort",
         choices=["none", "low", "medium", "high"],
         default=config.GROQ_REASONING_EFFORT,
-        help="for Groq reasoning models (gpt-oss, qwen3); 'none' omits the parameter",
+        help=(
+            "passed through for Groq reasoning models: qwen3 uses 'none' to "
+            "disable thinking; gpt-oss uses low/medium/high"
+        ),
     )
     parser.add_argument("--provider", choices=["auto", "groq", "gemini"], default="auto")
     parser.add_argument("--no-fallback", action="store_true", help="never fall back to the secondary provider")
     parser.add_argument("--max-retries", type=int, default=5)
     parser.add_argument("--backoff-base", type=float, default=5.0, help="seconds, doubled per retry")
-    parser.add_argument("--sleep", type=float, default=0.0, help="seconds between successful calls")
+    parser.add_argument(
+        "--sleep",
+        type=float,
+        default=config.DEFAULT_SLEEP_SECONDS,
+        help=(
+            "seconds between successful calls; default is OTPM-safe for Groq "
+            "qwen3 models (1 request ~22s keeps output tokens/min under 1,000). "
+            "Pass 0 to use provider-specific auto-pacing."
+        ),
+    )
     parser.add_argument("--max-tokens", type=int, help="override per-category cap")
     parser.add_argument("--force", action="store_true", help="regenerate samples already logged")
     parser.add_argument(
@@ -403,8 +416,12 @@ def main() -> int:
                     fallback_calls += 1
                     print(f"  {label} sample {sample_id}: served by fallback {provider.name}/{provider.model}")
                 sleep_seconds = args.sleep
-                if sleep_seconds == 0 and provider.name == "gemini":
+                if provider.name == "gemini" and sleep_seconds == 0:
                     sleep_seconds = config.GEMINI_PRIMARY_SLEEP
+                completion_tokens = (usage or {}).get("completion_tokens") or 0
+                if provider.name == "groq" and provider.model.startswith("qwen/qwen3") and completion_tokens:
+                    otpm_floor = completion_tokens * 60.0 / config.GROQ_OTPM_TARGET + 2.0
+                    sleep_seconds = max(sleep_seconds, otpm_floor)
                 if sleep_seconds:
                     time.sleep(sleep_seconds)
                 break

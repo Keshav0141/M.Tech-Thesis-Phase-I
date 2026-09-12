@@ -367,3 +367,50 @@ Not usable for generation:
   and more verbose.
 - Fast same-day option remains a small paid top-up (Zen or OpenRouter, ~$1-3);
   zero-cost option remains the multi-provider pool at ~2 days.
+
+## 2026-09-12 (final decision) — single model qwen3.8-27b; factual run started
+
+### Decision
+- Sole model for the entire dataset: Groq **`qwen/qwen3.8-27b`** in instruct
+  mode (`reasoning_effort="none"`), 450 questions x 5 samples, temperature 0.7.
+- Accept a **~5-6 calendar day** collection timeline. No multi-provider
+  fallback and no paid top-up.
+- Why: the professor requires one consistent model, and there is no compute
+  budget; every alternative (multi-model pool, paid credits) was rejected
+  despite being faster.
+
+### Configuration changes
+- `MAX_TOKENS_BY_CATEGORY` raised to **1024** for all categories.
+- `--reasoning-effort none` is now **sent** to the API. Previously the wrapper
+  treated "none" as "omit the parameter", which would silently re-enable Qwen
+  thinking -- fixed.
+- Default `--sleep` is **22s**, plus dynamic OTPM pacing: after each call the
+  wrapper waits
+  `max(--sleep, completion_tokens / 900 * 60 + 2s)` seconds, keeping the rolling
+  output tokens/minute under Groq's 1,000 OTPM cap even for long completions.
+  Static 22s pacing had produced a 429 immediately after a 1,024-token call in
+  the retest.
+- Groq defaults are now qwen3.8-27b + `reasoning_effort=none`;
+  `daily_resume.ps1` runs the same canonical flags.
+
+### Verification (5-call reasoning retest at 1024)
+- Truncation improved from 2/5 (at 512) to **1/4 completed calls** (one call hit
+  a 429 before dynamic pacing was added). `reasoning_0001` still consumed the
+  entire 1,024-token budget without emitting a final answer.
+- Implication: a small share of reasoning samples may need re-runs at a higher
+  cap later. Factual is unaffected (5/5 parseable, ~88 tokens/sample).
+
+### Archive
+- Pilot and probe artifacts are under `logs/pilot_run/`: pilot
+  generations/failures, `qwen_feasibility_results.json`, and
+  `qwen_reasoning_1024_results.json`. The Zen/OpenRouter probe calls were
+  ad-hoc and are discarded; they never entered any dataset.
+
+### Run started
+- Factual generation launched in the background at 16:34 local (PID 14480),
+  log `logs/factual_qwen_20260912_163454.log`.
+  Command:
+  `python generate.py --category factual --n 5 --temperature 0.7 --provider groq --model qwen/qwen3.8-27b --reasoning-effort none --max-tokens 1024 --sleep 22`
+- 750 calls at ~23s each ~ 4.8 hours; resumable if interrupted. Math and
+  reasoning follow on later days (or when quota allows) with the same command
+  and `--category` swapped.
