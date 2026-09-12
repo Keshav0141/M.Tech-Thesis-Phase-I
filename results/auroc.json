@@ -1,0 +1,112 @@
+{
+  "generated_utc": "2026-09-12 12:03 UTC",
+  "coverage": {
+    "factual": {
+      "dataset_questions": 150,
+      "scored_questions": 150,
+      "with_semantic_entropy": 29
+    },
+    "math": {
+      "dataset_questions": 150,
+      "scored_questions": 150,
+      "with_semantic_entropy": 0
+    },
+    "reasoning": {
+      "dataset_questions": 150,
+      "scored_questions": 150,
+      "with_semantic_entropy": 0
+    }
+  },
+  "results": {
+    "lexical_uncertainty": {
+      "factual": {
+        "auroc": 0.8375,
+        "n_incorrect": 10,
+        "n_correct": 16,
+        "mean_score_incorrect": 0.7912,
+        "mean_score_correct": 0.5391
+      },
+      "math": {
+        "auroc": null,
+        "n_incorrect": 0,
+        "n_correct": 0,
+        "mean_score_incorrect": null,
+        "mean_score_correct": null
+      },
+      "reasoning": {
+        "auroc": null,
+        "n_incorrect": 0,
+        "n_correct": 0,
+        "mean_score_incorrect": null,
+        "mean_score_correct": null
+      },
+      "all": {
+        "auroc": 0.8375,
+        "n_incorrect": 10,
+        "n_correct": 16,
+        "mean_score_incorrect": 0.7912,
+        "mean_score_correct": 0.5391
+      }
+    },
+    "semantic_entropy": {
+      "factual": {
+        "auroc": 0.725,
+        "n_incorrect": 10,
+        "n_correct": 16,
+        "mean_score_incorrect": 1.0445,
+        "mean_score_correct": 0.6298
+      },
+      "math": {
+        "auroc": null,
+        "n_incorrect": 0,
+        "n_correct": 0,
+        "mean_score_incorrect": null,
+        "mean_score_correct": null
+      },
+      "reasoning": {
+        "auroc": null,
+        "n_incorrect": 0,
+        "n_correct": 0,
+        "mean_score_incorrect": null,
+        "mean_score_correct": null
+      },
+      "all": {
+        "auroc": 0.725,
+        "n_incorrect": 10,
+        "n_correct": 16,
+        "mean_score_incorrect": 1.0445,
+        "mean_score_correct": 0.6298
+      }
+    },
+    "semantic_entropy_normalized": {
+      "factual": {
+        "auroc": 0.725,
+        "n_incorrect": 10,
+        "n_correct": 16,
+        "mean_score_incorrect": 0.649,
+        "mean_score_correct": 0.3913
+      },
+      "math": {
+        "auroc": null,
+        "n_incorrect": 0,
+        "n_correct": 0,
+        "mean_score_incorrect": null,
+        "mean_score_correct": null
+      },
+      "reasoning": {
+        "auroc": null,
+        "n_incorrect": 0,
+        "n_correct": 0,
+        "mean_score_incorrect": null,
+        "mean_score_correct": null
+      },
+      "all": {
+        "auroc": 0.725,
+        "n_incorrect": 10,
+        "n_correct": 16,
+        "mean_score_incorrect": 0.649,
+        "mean_score_correct": 0.3913
+      }
+    }
+  }
+}

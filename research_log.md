@@ -451,3 +451,62 @@ Not usable for generation:
 ### Status
 - Factual run still in progress (healthy, 0 retries). Math will start after it
   reaches 750/750; reasoning last with the new prompt and 1536 cap.
+
+## 2026-09-12 (UQ scoring pipeline) — built and tested on partial data
+
+### What was built
+- `uq_common.py` — shared loading/extraction/AUC helpers.
+- `score_correctness.py` — per-sample labels (factual exact/alias match, math
+  numeric, reasoning yes/no) + strict majority vote; writes
+  `results/correctness.jsonl` and `results/needs_review.jsonl`.
+- `score_lexical.py` — pairwise Jaccard over word n-grams; uncertainty =
+  1 - mean similarity; writes `results/lexical.jsonl`.
+- `score_semantic_entropy.py` — bidirectional NLI entailment clustering
+  (cross-encoder/nli-deberta-v3-base) + Shannon entropy; writes
+  `results/semantic_entropy.jsonl`.
+- `evaluate_methods.py` — joins labels and scores, AUROC per method/category;
+  writes `results/week1_auroc_report.md` and `results/auroc.json`.
+- All scripts are independently callable and filterable by `--model/--provider`;
+  three scoring methods stay separate for next week's ensemble step.
+
+### Test results (partial data: first 30 factual questions)
+- lexical_uncertainty: AUROC 0.731 (6 incorrect / 13 correct in the scored set)
+- semantic_entropy: AUROC 0.725 (10 incorrect / 16 correct)
+- math/reasoning: n/a until those categories are generated.
+- These numbers are a smoke signal only; n is far too small for conclusions.
+
+### Bugs found and fixed
+1. `sentence-transformers` 5.5.1 crashes the interpreter on import
+   (0xC0000005 access violation) with transformers 5.3.0. Replaced with direct
+   `transformers.AutoModelForSequenceClassification` usage (same NLI model,
+   entailment index 1); no sentence-transformers dependency remains.
+2. `write_jsonl` only accepted `Path`; `--output` passes strings. Fixed.
+3. Semantic entropy pair indexing used per-question pair positions against the
+   global probability array, so every question clustered on question 1's
+   probabilities (constant entropy, AUROC 0.5000). Fixed with a running global
+   offset; entropy now varies (mean 0.74 nats).
+4. Factual normalization handled badly: "King Charles II", "Mormons (...)",
+   "The Gunpowder Plot of 1605" etc. all fell into needs_review. Added
+   parenthetical stripping, honorific stripping, and stopword/numeric-only
+   extra-token rules. needs_review samples dropped 15 -> 9 and unresolved
+   questions 4 -> 2 in the same snapshot.
+5. The active generation run predates `finish_reason` logging (added to
+   `generate.py` for future samples), so truncation cannot be detected from the
+   existing records; correctness extraction falls back to text scanning.
+
+### Edge cases and notes
+- Scoring while generation is running is a moving snapshot: sample counts
+  changed between repeated runs (141 samples -> 29-30 questions). Re-run all
+  four scripts once generation is complete.
+- The coverage table lists all 150 questions per category as "scored" because
+  `no_samples` rows are emitted; AUROC uses only questions with both a label
+  and a method score.
+- `results/needs_review.jsonl` currently has 4 questions with ambiguous factual
+  matches for manual review.
+- Math/reasoning extraction paths were verified with 12 synthetic cases
+  (numbers with commas/decimals/negatives, unmarked numbers, yes/no variants);
+  12/12 pass after the normalization fix.
+- NLI runs on CUDA (torch 2.6.0+cu124); first run downloaded ~750 MB.
+
+### How to run (once generation completes)
+`python score_correctness.py && python score_lexical.py && python score_semantic_entropy.py && python evaluate_methods.py`

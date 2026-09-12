@@ -168,7 +168,7 @@ class GroqProvider:
             "total_tokens": getattr(usage, "total_tokens", None),
             "reasoning_tokens": getattr(details, "reasoning_tokens", None),
         }
-        return text, token_usage
+        return text, token_usage, response.choices[0].finish_reason
 
     @staticmethod
     def list_models() -> list[str]:
@@ -207,7 +207,11 @@ class GeminiProvider:
             "total_tokens": getattr(usage, "total_token_count", None),
             "reasoning_tokens": getattr(usage, "thoughts_token_count", None),
         }
-        return text, token_usage
+        finish_reason = None
+        candidates = getattr(response, "candidates", None) or []
+        if candidates:
+            finish_reason = str(getattr(candidates[0], "finish_reason", None))
+        return text, token_usage, finish_reason
 
     @staticmethod
     def list_models() -> list[str]:
@@ -227,8 +231,8 @@ def call_with_retries(provider, prompt, system, temperature, max_tokens, max_ret
     last_error: Exception | None = None
     for attempt in range(1, max_retries + 1):
         try:
-            text, usage = provider.generate(prompt, system, temperature, max_tokens)
-            return text, usage, attempt
+            text, usage, finish_reason = provider.generate(prompt, system, temperature, max_tokens)
+            return text, usage, finish_reason, attempt
         except Exception as error:  # provider SDKs raise varied exception types
             last_error = error
             if is_auth_error(error):
@@ -367,7 +371,7 @@ def main() -> int:
                     continue
                 sample_start = time.time()
                 try:
-                    text, usage, attempts = call_with_retries(
+                    text, usage, finish_reason, attempts = call_with_retries(
                         provider,
                         question["question_text"],
                         system,
@@ -398,6 +402,7 @@ def main() -> int:
                     "model_name": provider.model,
                     "sample_id": sample_id,
                     "response_text": text,
+                    "finish_reason": finish_reason,
                     "timestamp": utc_now(),
                     "token_usage": usage,
                     "parameters": {
