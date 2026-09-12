@@ -147,7 +147,7 @@
     "question_id": "factual_0010",
     "category": "factual",
     "source_dataset": "TriviaQA (rc.nocontext)",
-    "validation_status": "auto_validated"
+    "validation_status": "spot_checked"
   },
   {
     "question_text": "What religiously affiliated people are associated with Salt Lake City?",
@@ -372,7 +372,8 @@
     "question_id": "factual_0025",
     "category": "factual",
     "source_dataset": "TriviaQA (rc.nocontext)",
-    "validation_status": "auto_validated"
+    "validation_status": "rejected",
+    "rejection_reason": "manual spot-check: source question conflates two films — Kasper Gutman is a character from The Maltese Falcon (1941), not Casablanca (1942)"
   },
   {
     "question_text": "According to Elvis Presley, what do you find at the end of Lonely Street?",
@@ -552,7 +553,8 @@
     "question_id": "factual_0037",
     "category": "factual",
     "source_dataset": "TriviaQA (rc.nocontext)",
-    "validation_status": "auto_validated"
+    "validation_status": "rejected",
+    "rejection_reason": "manual spot-check: source question contains a factual error — Keiko the orca died in Taknes Bay, Halsa (Norway), not off the coast of Finland"
   },
   {
     "question_text": "What is the hunting dog usually a cross between a collie and a greyhound called?",
@@ -1107,7 +1109,7 @@
     "question_id": "factual_0074",
     "category": "factual",
     "source_dataset": "TriviaQA (rc.nocontext)",
-    "validation_status": "auto_validated"
+    "validation_status": "spot_checked"
   },
   {
     "question_text": "First published in 1858, what anatomy textbook has become synonymous with the subject?",
@@ -1422,7 +1424,7 @@
     "question_id": "factual_0095",
     "category": "factual",
     "source_dataset": "TriviaQA (rc.nocontext)",
-    "validation_status": "auto_validated"
+    "validation_status": "spot_checked"
   },
   {
     "question_text": "\"The song \"\"Do Not Forsake Me, Oh My Darlin'\"\" from the film \"\"High Noon\"\" was a big hit for Frankie Laine in the early 1950s. Who sang it on the film soundtrack?\"",
@@ -1752,7 +1754,7 @@
     "question_id": "factual_0117",
     "category": "factual",
     "source_dataset": "TriviaQA (rc.nocontext)",
-    "validation_status": "auto_validated"
+    "validation_status": "spot_checked"
   },
   {
     "question_text": "A ‘Sackbut’ was a medieval forerunner of which musical instrument?",
@@ -1782,7 +1784,7 @@
     "question_id": "factual_0119",
     "category": "factual",
     "source_dataset": "TriviaQA (rc.nocontext)",
-    "validation_status": "auto_validated"
+    "validation_status": "spot_checked"
   },
   {
     "question_text": "Who directed the film Ryan's Daughter (1970)?",
@@ -2250,6 +2252,52 @@
     "validation_status": "auto_validated"
   },
   {
+    "question_text": "Who won the Eurovision song contest for Ireland in 1980 singing What's Another Year",
+    "ground_truth_answer": "Johnny Logan",
+    "difficulty_flag": "medium",
+    "metadata": {
+      "word_count": 14,
+      "is_year_answer": false,
+      "n_aliases": 3,
+      "source_id": "bt_1439"
+    },
+    "question_id": "factual_0151",
+    "category": "factual",
+    "source_dataset": "TriviaQA (rc.nocontext)",
+    "validation_status": "auto_validated"
+  },
+  {
+    "question_text": "In the recent London summer Olympics, where was the majority of the Triathlon event(s) held?",
+    "ground_truth_answer": "Hyde Park",
+    "difficulty_flag": "medium",
+    "metadata": {
+      "word_count": 15,
+      "is_year_answer": false,
+      "n_aliases": 3,
+      "source_id": "sfq_15744"
+    },
+    "question_id": "factual_0152",
+    "category": "factual",
+    "source_dataset": "TriviaQA (rc.nocontext)",
+    "validation_status": "rejected",
+    "rejection_reason": "curation guard: time-sensitive wording ('recent London summer Olympics'); auto-replacement rejected during curation"
+  },
+  {
+    "question_text": "Shelley’s Adonias is an elegy on the death of which poet?",
+    "ground_truth_answer": "Keats",
+    "difficulty_flag": "medium",
+    "metadata": {
+      "word_count": 11,
+      "is_year_answer": false,
+      "n_aliases": 4,
+      "source_id": "dpql_1009"
+    },
+    "question_id": "factual_0153",
+    "category": "factual",
+    "source_dataset": "TriviaQA (rc.nocontext)",
+    "validation_status": "auto_validated"
+  },
+  {
     "question_text": "Stefan goes to a restaurant to eat dinner with his family. They order an appetizer that costs $10 and 4 entrees that are $20 each. If they tip 20% of the total for the waiter, what is the total amount of money that they spend at the restaurant?",
     "ground_truth_answer": "108",
     "difficulty_flag": "medium",
@@ -2317,7 +2365,7 @@
     "question_id": "math_0005",
     "category": "math",
     "source_dataset": "GSM8K (main)",
-    "validation_status": "auto_validated"
+    "validation_status": "spot_checked"
   },
   {
     "question_text": "Darla needs to pay $4/watt of electricity for 300 watts of electricity, plus a $150 late fee. How much does she pay in total?",
@@ -3591,7 +3639,7 @@
     "question_id": "math_0096",
     "category": "math",
     "source_dataset": "GSM8K (main)",
-    "validation_status": "auto_validated"
+    "validation_status": "spot_checked"
   },
   {
     "question_text": "Lily has 5 lottery tickets to sell.  She sells the first ticket for $1.  She then sells each successive ticket for a dollar more than the previous ticket. She plans to keep a $4 profit and give the remaining money as the prize. How much money will the winner of the lottery receive?",
@@ -3801,7 +3849,7 @@
     "question_id": "math_0111",
     "category": "math",
     "source_dataset": "GSM8K (main)",
-    "validation_status": "auto_validated"
+    "validation_status": "spot_checked"
   },
   {
     "question_text": "The Dark Lord needs to transport 1200 pounds of swords to the Enchanted Forest for a battle with the elves. He has 10 squads of 8 orcs each. How many pounds of swords does each orc have to carry?",
@@ -4039,7 +4087,7 @@
     "question_id": "math_0128",
     "category": "math",
     "source_dataset": "GSM8K (main)",
-    "validation_status": "auto_validated"
+    "validation_status": "spot_checked"
   },
   {
     "question_text": "At Sunshine Orchard, there are 12 more than three times the number of pumpkins at Moonglow Orchard. If Moonglow Orchard has 14 pumpkins how many are there at Sunshine Orchard?",
@@ -4095,7 +4143,7 @@
     "question_id": "math_0132",
     "category": "math",
     "source_dataset": "GSM8K (main)",
-    "validation_status": "auto_validated"
+    "validation_status": "spot_checked"
   },
   {
     "question_text": "James injured his ankle and decides to slowly start working back up to his previous running goals and then surpass them.  Before the injury, he was able to run 100 miles per week.  He wants to get up to 20% more than that total in 280 days and each week he will increase miles walked in the week by the same amount.  How many miles does he need to add per week?",
@@ -4221,7 +4269,7 @@
     "question_id": "math_0141",
     "category": "math",
     "source_dataset": "GSM8K (main)",
-    "validation_status": "auto_validated"
+    "validation_status": "spot_checked"
   },
   {
     "question_text": "Sandi had $600. She spent half of it at a farmer’s market. Gillian spent $150 more than three times Sandi's total. What is the total that Gillian spent at the farmer’s market?",
@@ -4319,7 +4367,7 @@
     "question_id": "math_0148",
     "category": "math",
     "source_dataset": "GSM8K (main)",
-    "validation_status": "auto_validated"
+    "validation_status": "spot_checked"
   },
   {
     "question_text": "Brianne saves $10 in January. Each month, she saves twice as much as her previous month's savings. How much will she save in May?",
@@ -4557,7 +4605,7 @@
     "question_id": "reasoning_0015",
     "category": "reasoning",
     "source_dataset": "StrategyQA",
-    "validation_status": "auto_validated"
+    "validation_status": "spot_checked"
   },
   {
     "question_text": "Are blue lips normal?",
@@ -4739,7 +4787,7 @@
     "question_id": "reasoning_0028",
     "category": "reasoning",
     "source_dataset": "StrategyQA",
-    "validation_status": "auto_validated"
+    "validation_status": "spot_checked"
   },
   {
     "question_text": "Do astronomers write horoscopes?",
@@ -4795,7 +4843,7 @@
     "question_id": "reasoning_0032",
     "category": "reasoning",
     "source_dataset": "StrategyQA",
-    "validation_status": "auto_validated"
+    "validation_status": "spot_checked"
   },
   {
     "question_text": "Is Cantonese spoken in Japan?",
@@ -4991,7 +5039,7 @@
     "question_id": "reasoning_0046",
     "category": "reasoning",
     "source_dataset": "StrategyQA",
-    "validation_status": "auto_validated"
+    "validation_status": "spot_checked"
   },
   {
     "question_text": "Could a giant squid fit aboard the deck of the titanic?",
@@ -5761,7 +5809,7 @@
     "question_id": "reasoning_0101",
     "category": "reasoning",
     "source_dataset": "StrategyQA",
-    "validation_status": "auto_validated"
+    "validation_status": "spot_checked"
   },
   {
     "question_text": "Did Northwest Airlines' longevity surpass Betty White?",
@@ -5915,7 +5963,7 @@
     "question_id": "reasoning_0112",
     "category": "reasoning",
     "source_dataset": "StrategyQA",
-    "validation_status": "auto_validated"
+    "validation_status": "spot_checked"
   },
   {
     "question_text": "Did Disney get most of Rudyard Kipling's The Jungle Book profits?",

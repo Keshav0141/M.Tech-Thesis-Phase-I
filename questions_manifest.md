@@ -1,10 +1,12 @@
 # Questions Manifest
 
-_Living document. Last regenerated: 2026-09-12 04:06 UTC (seed 42, target 150/category)._
+_Living document. Last regenerated: 2026-09-12 04:23 UTC (seed 42, target 150/category)._
 
 ## Dataset summary
 
-Total questions: **450** — factual: 150, math: 150, reasoning: 150
+Total active questions: **450** — factual: 150, math: 150, reasoning: 150
+
+3 entries are retained in data/dataset.json with status `rejected` (manual spot-check findings) and are excluded from generation and validation counts.
 
 | Category | Source | Inspected | Accepted | Rejected | Target met |
 |---|---|---:|---:|---:|:---:|
@@ -16,7 +18,7 @@ Total questions: **450** — factual: 150, math: 150, reasoning: 150
 
 | Category | easy | medium | hard |
 |---|---:|---:|---:|
-| factual | 49 | 63 | 38 |
+| factual | 49 | 64 | 37 |
 | math | 57 | 71 | 22 |
 | reasoning | 85 | 62 | 3 |
 
@@ -34,16 +36,16 @@ All questions were additionally required to be unique (exact and near-duplicate 
 
 Selected dropped candidates (full reasons in data/excluded_examples.json):
 
-1. **factual** — `In 2006, Michelle Bachelet became the first female president of which country?`
+1. **factual_0037** (factual) — `December 12, 2003 saw the death of Keiko, an Orca whale, off the coast of Finland. Keiko achieved fame as a star in what movie series?`
+   - Reason: manual spot-check: source question contains a factual error — Keiko the orca died in Taknes Bay, Halsa (Norway), not off the coast of Finland
+2. **factual_0025** (factual) — `Who made his film debut playing Kasper Gutman in the 1941 film ‘Casablanca’?`
+   - Reason: manual spot-check: source question conflates two films — Kasper Gutman is a character from The Maltese Falcon (1941), not Casablanca (1942)
+3. **factual** — `In 2006, Michelle Bachelet became the first female president of which country?`
    - Reason: ambiguous answer (aliases refer to different answers)
-2. **factual** — `Which post-war Prime Minister was MP for Warwick and Leamington?`
+4. **factual** — `Which post-war Prime Minister was MP for Warwick and Leamington?`
    - Reason: exact duplicate of factual_0035
-3. **factual** — `This couple were iconic dance partners who made motion pictures together from 1933 - 1949. They made a total of 10 movies?`
+5. **factual** — `This couple were iconic dance partners who made motion pictures together from 1933 - 1949. They made a total of 10 movies?`
    - Reason: answer too long to be atomic
-4. **factual** — `Cambodia, which over the course of 1841 to 1953 was under the joint suzerainty of Thailand and Vietnam then was a monarchy under the protect`
-   - Reason: question length outside 20-220 chars
-5. **factual** — `Which predatory insect, with two pairs of large transparent wings, that are spread while resting, can fly the fastest ? The Australian varie`
-   - Reason: multiple questions in one item
 
 Aggregate rejection counts by category:
 
@@ -58,10 +60,23 @@ Aggregate rejection counts by category:
   - 1x multiple questions in one item
 - **reasoning**: 0 rejected
 
+Manual spot-check rejections (source-data errors, not filtering misses):
+
+- **factual_0037**: manual spot-check: source question contains a factual error — Keiko the orca died in Taknes Bay, Halsa (Norway), not off the coast of Finland
+- **factual_0025**: manual spot-check: source question conflates two films — Kasper Gutman is a character from The Maltese Falcon (1941), not Casablanca (1942)
+
 ## Overlap / MECE note
 
 The three categories are defined as: factual = single-hop lookup from parametric knowledge; mathematical = numeric computation on a word problem; reasoning = multi-hop logical inference over stated or world facts.
 No inspected StrategyQA candidate reduced to arithmetic, so no mathematical-overlap item was dropped in this build; the filter still runs at build time.
+
+## Rejected entries (excluded from generation)
+
+| question_id | reason |
+|---|---|
+| factual_0025 | manual spot-check: source question conflates two films — Kasper Gutman is a character from The Maltese Falcon (1941), not Casablanca (1942) |
+| factual_0037 | manual spot-check: source question contains a factual error — Keiko the orca died in Taknes Bay, Halsa (Norway), not off the coast of Finland |
+| factual_0152 | curation guard: time-sensitive wording ('recent London summer Olympics'); auto-replacement rejected during curation |
 
 ## Per-question metadata
 
@@ -76,7 +91,7 @@ No inspected StrategyQA candidate reduced to arithmetic, so no mathematical-over
 | factual_0007 | factual | TriviaQA (rc.nocontext) | easy | auto_validated | 8 |
 | factual_0008 | factual | TriviaQA (rc.nocontext) | medium | auto_validated | 13 |
 | factual_0009 | factual | TriviaQA (rc.nocontext) | hard | auto_validated | 23 |
-| factual_0010 | factual | TriviaQA (rc.nocontext) | easy | auto_validated | 6 |
+| factual_0010 | factual | TriviaQA (rc.nocontext) | easy | spot_checked | 6 |
 | factual_0011 | factual | TriviaQA (rc.nocontext) | easy | auto_validated | 10 |
 | factual_0012 | factual | TriviaQA (rc.nocontext) | easy | auto_validated | 10 |
 | factual_0013 | factual | TriviaQA (rc.nocontext) | medium | auto_validated | 11 |
@@ -91,7 +106,7 @@ No inspected StrategyQA candidate reduced to arithmetic, so no mathematical-over
 | factual_0022 | factual | TriviaQA (rc.nocontext) | easy | auto_validated | 10 |
 | factual_0023 | factual | TriviaQA (rc.nocontext) | hard | auto_validated | 17 |
 | factual_0024 | factual | TriviaQA (rc.nocontext) | medium | auto_validated | 12 |
-| factual_0025 | factual | TriviaQA (rc.nocontext) | medium | auto_validated | 13 |
+| factual_0025 | factual | TriviaQA (rc.nocontext) | medium | rejected | 13 |
 | factual_0026 | factual | TriviaQA (rc.nocontext) | medium | auto_validated | 14 |
 | factual_0027 | factual | TriviaQA (rc.nocontext) | easy | auto_validated | 10 |
 | factual_0028 | factual | TriviaQA (rc.nocontext) | medium | auto_validated | 11 |
@@ -103,7 +118,7 @@ No inspected StrategyQA candidate reduced to arithmetic, so no mathematical-over
 | factual_0034 | factual | TriviaQA (rc.nocontext) | medium | auto_validated | 15 |
 | factual_0035 | factual | TriviaQA (rc.nocontext) | easy | auto_validated | 10 |
 | factual_0036 | factual | TriviaQA (rc.nocontext) | hard | auto_validated | 33 |
-| factual_0037 | factual | TriviaQA (rc.nocontext) | hard | auto_validated | 26 |
+| factual_0037 | factual | TriviaQA (rc.nocontext) | hard | rejected | 26 |
 | factual_0038 | factual | TriviaQA (rc.nocontext) | medium | auto_validated | 15 |
 | factual_0039 | factual | TriviaQA (rc.nocontext) | hard | auto_validated | 24 |
 | factual_0040 | factual | TriviaQA (rc.nocontext) | hard | auto_validated | 32 |
@@ -140,7 +155,7 @@ No inspected StrategyQA candidate reduced to arithmetic, so no mathematical-over
 | factual_0071 | factual | TriviaQA (rc.nocontext) | medium | auto_validated | 14 |
 | factual_0072 | factual | TriviaQA (rc.nocontext) | hard | auto_validated | 23 |
 | factual_0073 | factual | TriviaQA (rc.nocontext) | medium | auto_validated | 13 |
-| factual_0074 | factual | TriviaQA (rc.nocontext) | medium | auto_validated | 14 |
+| factual_0074 | factual | TriviaQA (rc.nocontext) | medium | spot_checked | 14 |
 | factual_0075 | factual | TriviaQA (rc.nocontext) | medium | auto_validated | 13 |
 | factual_0076 | factual | TriviaQA (rc.nocontext) | easy | auto_validated | 10 |
 | factual_0077 | factual | TriviaQA (rc.nocontext) | medium | auto_validated | 14 |
@@ -161,7 +176,7 @@ No inspected StrategyQA candidate reduced to arithmetic, so no mathematical-over
 | factual_0092 | factual | TriviaQA (rc.nocontext) | medium | auto_validated | 12 |
 | factual_0093 | factual | TriviaQA (rc.nocontext) | medium | auto_validated | 12 |
 | factual_0094 | factual | TriviaQA (rc.nocontext) | easy | auto_validated | 8 |
-| factual_0095 | factual | TriviaQA (rc.nocontext) | hard | auto_validated | 21 |
+| factual_0095 | factual | TriviaQA (rc.nocontext) | hard | spot_checked | 21 |
 | factual_0096 | factual | TriviaQA (rc.nocontext) | hard | auto_validated | 32 |
 | factual_0097 | factual | TriviaQA (rc.nocontext) | easy | auto_validated | 10 |
 | factual_0098 | factual | TriviaQA (rc.nocontext) | easy | auto_validated | 6 |
@@ -183,9 +198,9 @@ No inspected StrategyQA candidate reduced to arithmetic, so no mathematical-over
 | factual_0114 | factual | TriviaQA (rc.nocontext) | hard | auto_validated | 18 |
 | factual_0115 | factual | TriviaQA (rc.nocontext) | medium | auto_validated | 12 |
 | factual_0116 | factual | TriviaQA (rc.nocontext) | easy | auto_validated | 10 |
-| factual_0117 | factual | TriviaQA (rc.nocontext) | medium | auto_validated | 16 |
+| factual_0117 | factual | TriviaQA (rc.nocontext) | medium | spot_checked | 16 |
 | factual_0118 | factual | TriviaQA (rc.nocontext) | easy | auto_validated | 10 |
-| factual_0119 | factual | TriviaQA (rc.nocontext) | easy | auto_validated | 8 |
+| factual_0119 | factual | TriviaQA (rc.nocontext) | easy | spot_checked | 8 |
 | factual_0120 | factual | TriviaQA (rc.nocontext) | easy | auto_validated | 7 |
 | factual_0121 | factual | TriviaQA (rc.nocontext) | easy | auto_validated | 10 |
 | factual_0122 | factual | TriviaQA (rc.nocontext) | easy | auto_validated | 8 |
@@ -217,11 +232,14 @@ No inspected StrategyQA candidate reduced to arithmetic, so no mathematical-over
 | factual_0148 | factual | TriviaQA (rc.nocontext) | medium | auto_validated | 12 |
 | factual_0149 | factual | TriviaQA (rc.nocontext) | hard | auto_validated | 23 |
 | factual_0150 | factual | TriviaQA (rc.nocontext) | medium | auto_validated | 14 |
+| factual_0151 | factual | TriviaQA (rc.nocontext) | medium | auto_validated | 14 |
+| factual_0152 | factual | TriviaQA (rc.nocontext) | medium | rejected | 15 |
+| factual_0153 | factual | TriviaQA (rc.nocontext) | medium | auto_validated | 11 |
 | math_0001 | math | GSM8K (main) | medium | auto_validated | 48 |
 | math_0002 | math | GSM8K (main) | easy | auto_validated | 36 |
 | math_0003 | math | GSM8K (main) | medium | auto_validated | 29 |
 | math_0004 | math | GSM8K (main) | hard | auto_validated | 55 |
-| math_0005 | math | GSM8K (main) | easy | auto_validated | 33 |
+| math_0005 | math | GSM8K (main) | easy | spot_checked | 33 |
 | math_0006 | math | GSM8K (main) | easy | auto_validated | 24 |
 | math_0007 | math | GSM8K (main) | easy | auto_validated | 27 |
 | math_0008 | math | GSM8K (main) | hard | auto_validated | 59 |
@@ -312,7 +330,7 @@ No inspected StrategyQA candidate reduced to arithmetic, so no mathematical-over
 | math_0093 | math | GSM8K (main) | medium | auto_validated | 54 |
 | math_0094 | math | GSM8K (main) | easy | auto_validated | 18 |
 | math_0095 | math | GSM8K (main) | hard | auto_validated | 62 |
-| math_0096 | math | GSM8K (main) | medium | auto_validated | 33 |
+| math_0096 | math | GSM8K (main) | medium | spot_checked | 33 |
 | math_0097 | math | GSM8K (main) | hard | auto_validated | 53 |
 | math_0098 | math | GSM8K (main) | hard | auto_validated | 75 |
 | math_0099 | math | GSM8K (main) | medium | auto_validated | 37 |
@@ -327,7 +345,7 @@ No inspected StrategyQA candidate reduced to arithmetic, so no mathematical-over
 | math_0108 | math | GSM8K (main) | medium | auto_validated | 54 |
 | math_0109 | math | GSM8K (main) | medium | auto_validated | 45 |
 | math_0110 | math | GSM8K (main) | easy | auto_validated | 46 |
-| math_0111 | math | GSM8K (main) | medium | auto_validated | 58 |
+| math_0111 | math | GSM8K (main) | medium | spot_checked | 58 |
 | math_0112 | math | GSM8K (main) | easy | auto_validated | 39 |
 | math_0113 | math | GSM8K (main) | medium | auto_validated | 61 |
 | math_0114 | math | GSM8K (main) | medium | auto_validated | 78 |
@@ -344,11 +362,11 @@ No inspected StrategyQA candidate reduced to arithmetic, so no mathematical-over
 | math_0125 | math | GSM8K (main) | easy | auto_validated | 38 |
 | math_0126 | math | GSM8K (main) | easy | auto_validated | 38 |
 | math_0127 | math | GSM8K (main) | medium | auto_validated | 26 |
-| math_0128 | math | GSM8K (main) | easy | auto_validated | 37 |
+| math_0128 | math | GSM8K (main) | easy | spot_checked | 37 |
 | math_0129 | math | GSM8K (main) | easy | auto_validated | 30 |
 | math_0130 | math | GSM8K (main) | easy | auto_validated | 16 |
 | math_0131 | math | GSM8K (main) | easy | auto_validated | 24 |
-| math_0132 | math | GSM8K (main) | medium | auto_validated | 51 |
+| math_0132 | math | GSM8K (main) | medium | spot_checked | 51 |
 | math_0133 | math | GSM8K (main) | medium | auto_validated | 72 |
 | math_0134 | math | GSM8K (main) | medium | auto_validated | 50 |
 | math_0135 | math | GSM8K (main) | medium | auto_validated | 55 |
@@ -357,14 +375,14 @@ No inspected StrategyQA candidate reduced to arithmetic, so no mathematical-over
 | math_0138 | math | GSM8K (main) | medium | auto_validated | 33 |
 | math_0139 | math | GSM8K (main) | medium | auto_validated | 67 |
 | math_0140 | math | GSM8K (main) | medium | auto_validated | 34 |
-| math_0141 | math | GSM8K (main) | medium | auto_validated | 46 |
+| math_0141 | math | GSM8K (main) | medium | spot_checked | 46 |
 | math_0142 | math | GSM8K (main) | easy | auto_validated | 32 |
 | math_0143 | math | GSM8K (main) | hard | auto_validated | 38 |
 | math_0144 | math | GSM8K (main) | easy | auto_validated | 23 |
 | math_0145 | math | GSM8K (main) | medium | auto_validated | 61 |
 | math_0146 | math | GSM8K (main) | medium | auto_validated | 48 |
 | math_0147 | math | GSM8K (main) | medium | auto_validated | 68 |
-| math_0148 | math | GSM8K (main) | medium | auto_validated | 36 |
+| math_0148 | math | GSM8K (main) | medium | spot_checked | 36 |
 | math_0149 | math | GSM8K (main) | medium | auto_validated | 24 |
 | math_0150 | math | GSM8K (main) | medium | auto_validated | 42 |
 | reasoning_0001 | reasoning | StrategyQA | medium | auto_validated | 15 |
@@ -381,7 +399,7 @@ No inspected StrategyQA candidate reduced to arithmetic, so no mathematical-over
 | reasoning_0012 | reasoning | StrategyQA | easy | auto_validated | 9 |
 | reasoning_0013 | reasoning | StrategyQA | medium | auto_validated | 6 |
 | reasoning_0014 | reasoning | StrategyQA | easy | auto_validated | 8 |
-| reasoning_0015 | reasoning | StrategyQA | medium | auto_validated | 7 |
+| reasoning_0015 | reasoning | StrategyQA | medium | spot_checked | 7 |
 | reasoning_0016 | reasoning | StrategyQA | medium | auto_validated | 4 |
 | reasoning_0017 | reasoning | StrategyQA | hard | auto_validated | 8 |
 | reasoning_0018 | reasoning | StrategyQA | medium | auto_validated | 7 |
@@ -394,11 +412,11 @@ No inspected StrategyQA candidate reduced to arithmetic, so no mathematical-over
 | reasoning_0025 | reasoning | StrategyQA | medium | auto_validated | 9 |
 | reasoning_0026 | reasoning | StrategyQA | easy | auto_validated | 13 |
 | reasoning_0027 | reasoning | StrategyQA | easy | auto_validated | 13 |
-| reasoning_0028 | reasoning | StrategyQA | medium | auto_validated | 8 |
+| reasoning_0028 | reasoning | StrategyQA | medium | spot_checked | 8 |
 | reasoning_0029 | reasoning | StrategyQA | easy | auto_validated | 4 |
 | reasoning_0030 | reasoning | StrategyQA | easy | auto_validated | 4 |
 | reasoning_0031 | reasoning | StrategyQA | easy | auto_validated | 8 |
-| reasoning_0032 | reasoning | StrategyQA | medium | auto_validated | 7 |
+| reasoning_0032 | reasoning | StrategyQA | medium | spot_checked | 7 |
 | reasoning_0033 | reasoning | StrategyQA | easy | auto_validated | 5 |
 | reasoning_0034 | reasoning | StrategyQA | medium | auto_validated | 9 |
 | reasoning_0035 | reasoning | StrategyQA | medium | auto_validated | 11 |
@@ -412,7 +430,7 @@ No inspected StrategyQA candidate reduced to arithmetic, so no mathematical-over
 | reasoning_0043 | reasoning | StrategyQA | easy | auto_validated | 10 |
 | reasoning_0044 | reasoning | StrategyQA | medium | auto_validated | 12 |
 | reasoning_0045 | reasoning | StrategyQA | easy | auto_validated | 6 |
-| reasoning_0046 | reasoning | StrategyQA | easy | auto_validated | 8 |
+| reasoning_0046 | reasoning | StrategyQA | easy | spot_checked | 8 |
 | reasoning_0047 | reasoning | StrategyQA | easy | auto_validated | 11 |
 | reasoning_0048 | reasoning | StrategyQA | easy | auto_validated | 10 |
 | reasoning_0049 | reasoning | StrategyQA | medium | auto_validated | 8 |
@@ -467,7 +485,7 @@ No inspected StrategyQA candidate reduced to arithmetic, so no mathematical-over
 | reasoning_0098 | reasoning | StrategyQA | medium | auto_validated | 9 |
 | reasoning_0099 | reasoning | StrategyQA | easy | auto_validated | 11 |
 | reasoning_0100 | reasoning | StrategyQA | medium | auto_validated | 11 |
-| reasoning_0101 | reasoning | StrategyQA | medium | auto_validated | 10 |
+| reasoning_0101 | reasoning | StrategyQA | medium | spot_checked | 10 |
 | reasoning_0102 | reasoning | StrategyQA | easy | auto_validated | 7 |
 | reasoning_0103 | reasoning | StrategyQA | easy | auto_validated | 6 |
 | reasoning_0104 | reasoning | StrategyQA | medium | auto_validated | 13 |
@@ -478,7 +496,7 @@ No inspected StrategyQA candidate reduced to arithmetic, so no mathematical-over
 | reasoning_0109 | reasoning | StrategyQA | easy | auto_validated | 10 |
 | reasoning_0110 | reasoning | StrategyQA | medium | auto_validated | 10 |
 | reasoning_0111 | reasoning | StrategyQA | easy | auto_validated | 16 |
-| reasoning_0112 | reasoning | StrategyQA | medium | auto_validated | 11 |
+| reasoning_0112 | reasoning | StrategyQA | medium | spot_checked | 11 |
 | reasoning_0113 | reasoning | StrategyQA | medium | auto_validated | 11 |
 | reasoning_0114 | reasoning | StrategyQA | easy | auto_validated | 13 |
 | reasoning_0115 | reasoning | StrategyQA | easy | auto_validated | 9 |

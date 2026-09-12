@@ -75,3 +75,90 @@ produced, and problems hit with their fixes.
   (repeat per category; runs resume automatically if interrupted).
 - Implement the first UQ method (Semantic Entropy) and AUROC evaluation once
   generations exist.
+
+## 2026-09-12 (curation pass) — manual spot-check results applied
+
+### What was done
+- Reviewed `data/spot_check_sample.md` (20 questions: 7 factual, 7 math,
+  6 reasoning) and applied the results with `apply_spot_check.py`.
+- Rejected 2 factual source questions for data errors and logged the reasons in
+  `questions_manifest.md` and `data/excluded_examples.json`:
+  - `factual_0037`: Keiko the orca died in Taknes Bay, Halsa (Norway), not off
+    Finland as the source question states.
+  - `factual_0025`: Kasper Gutman is from The Maltese Falcon (1941), not
+    Casablanca (1942) — the source question conflates two films.
+- Marked the other 18 reviewed questions `spot_checked`.
+- Pulled replacements from the TriviaQA pool with the same automated
+  validators: `factual_0151` (Johnny Logan, Eurovision 1980) and
+  `factual_0153` (Shelley's elegy for Keats).
+- One auto-replacement, `factual_0152` ("recent London summer Olympics"), was
+  rejected by a curation guard for time-sensitive wording and replaced by
+  `factual_0153`.
+- `validate_dataset.py` re-passed: 450 active questions, factual/math/reasoning
+  = 150/150/150, 0 structural errors, 0 exact or near duplicates. Statuses:
+  auto_validated=432, spot_checked=18, rejected=3.
+
+### Decisions and why
+- Rejected entries stay in `dataset.json` with a `rejection_reason` instead of
+  being deleted, so the audit trail stays visible; counts and generation ignore
+  them.
+- The stricter time-sensitivity guard (`recent|recently|lately`) is applied to
+  replacement selection only. Folding it into the global regex would shift
+  locked question IDs at the next rebuild and invalidate this spot-check
+  mapping; it will go into the next full rebuild instead.
+- Replacements stay `auto_validated` (not `spot_checked`) because they have not
+  been human-reviewed; they belong in the next spot-check round.
+
+### Open issue
+- `reasoning_0106` ("Is the most recent Democrat President in the US known for
+  his painting practice?") uses time-relative wording. Deliberately not
+  replaced in this pass to keep IDs stable; decision needed for the next
+  curation round.
+
+### Problems hit and fixes
+- First replacement batch included a time-relative question. Fixed with the
+  curation guard above. Lesson: replacement candidates need the same scrutiny
+  as the base set, not just an automated pass.
+
+## 2026-09-12 (generation run 1) — factual category, partial
+
+### What was done
+- Started the real generation run for `openai/gpt-oss-20b` (n=5, temperature
+  0.8, reasoning_effort=low), factual category first.
+- factual: 735/750 samples logged (147/150 questions complete; 7 questions
+  missing 15 samples). Groq served 725, Gemini fallback served 20.
+- Token usage: ~150k Groq tokens, ~5.2k Gemini tokens. 316 rate-limit retry
+  attempts were needed on successful calls (Groq free tier: 8k tokens/min,
+  200k tokens/day; Gemini free tier: 20 requests/day for gemini-3.6-flash).
+- math and reasoning: not started (both providers hit their daily caps before
+  they could begin).
+
+### Decisions and why
+- Wrapper improvements made mid-run (all logged runs stay valid):
+  - Factual max_tokens raised 256 -> 512: gpt-oss-20b occasionally spent the
+    whole budget on hidden reasoning and returned empty content; the wrapper
+    now also retries empty responses with short delays instead of exponential
+    backoff.
+  - Daily-quota 429s (TPD errors) now raise ProviderExhausted: the provider is
+    skipped for the rest of the run instead of burning ~75s of backoff per
+    sample before falling back.
+- Paced calls with --sleep 1.2 after observing bursty 429s.
+- Kept the fallback Gemini samples tagged with their own provider/model so the
+  analysis can filter to a single model; --no-fallback gives strict single-model
+  runs if needed.
+
+### Blockers (plain statement)
+- Groq free tier: 200k tokens/day for gpt-oss-20b — covers roughly one category
+  per day at n=5. Gemini free tier: 20 requests/day — negligible capacity.
+- Remaining work: 15 factual samples + 750 math + 750 reasoning = 1515 samples.
+  At Groq-only free-tier limits this needs ~2-3 more days of quota, or one
+  category per day with a daily re-run; runs resume automatically, so the plan
+  is to re-run the same three commands after the daily reset (midnight UTC).
+- Option to discuss with advisor: pay-as-you-go Groq (Dev Tier) or accepting a
+  multi-day collection schedule.
+
+### Next
+- Re-run the three generation commands after the daily quota reset; the
+  resumable log means only missing samples are fetched.
+- After math/reasoning complete, implement answer extraction and Semantic
+  Entropy.

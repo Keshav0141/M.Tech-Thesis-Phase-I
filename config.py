@@ -40,7 +40,7 @@ NEAR_DUPLICATE_THRESHOLD = 0.90
 N_SAMPLES_DEFAULT = 5
 TEMPERATURE_DEFAULT = 0.8
 MAX_TOKENS_BY_CATEGORY = {
-    "factual": 256,
+    "factual": 512,
     "math": 1024,
     "reasoning": 512,
 }

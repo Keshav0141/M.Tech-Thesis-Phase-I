@@ -35,7 +35,11 @@ def load_dataset(limit: int | None, categories: list[str]) -> list[dict]:
     if not config.DATASET_PATH.exists():
         raise SystemExit(f"{config.DATASET_PATH} not found. Run build_dataset.py first.")
     dataset = json.loads(config.DATASET_PATH.read_text(encoding="utf-8"))
-    selected = [q for q in dataset if q["category"] in categories]
+    selected = [
+        q
+        for q in dataset
+        if q["category"] in categories and q.get("validation_status") != "rejected"
+    ]
     if limit is not None:
         selected = selected[:limit]
     return selected
@@ -83,6 +87,21 @@ def status_code_of(error: Exception) -> int | None:
 
 def is_auth_error(error: Exception) -> bool:
     return status_code_of(error) in (401, 403)
+
+
+class ProviderExhausted(Exception):
+    """Daily quota gone; retrying today is pointless."""
+
+
+def is_daily_quota(error: Exception) -> bool:
+    text = str(error).lower()
+    return (
+        "tokens per day" in text
+        or "requests per day" in text
+        or "per-day" in text
+        or " tpd" in text
+        or "tpd)" in text
+    )
 
 
 def is_rate_limit(error: Exception) -> bool:
@@ -197,10 +216,15 @@ def call_with_retries(provider, prompt, system, temperature, max_tokens, max_ret
                 raise SystemExit(
                     f"[{provider.name}] authentication failed ({error}). Check the API key in .env."
                 ) from error
+            if is_daily_quota(error):
+                raise ProviderExhausted(str(error)) from error
             rate_limited = is_rate_limit(error)
             if attempt == max_retries:
                 break
-            delay = min(base_delay * (2 ** (attempt - 1)), 60.0) + random.uniform(0, 1.0)
+            if "empty response content" in str(error):
+                delay = 1.0 * attempt + random.uniform(0, 0.5)
+            else:
+                delay = min(base_delay * (2 ** (attempt - 1)), 60.0) + random.uniform(0, 1.0)
             reason = "rate limit" if rate_limited else type(error).__name__
             print(f"    retry {attempt}/{max_retries - 1} for {question_id} sample {sample_id} ({reason}) in {delay:.1f}s")
             time.sleep(delay)
@@ -277,6 +301,8 @@ def main() -> int:
     calls_made = skipped = failures = 0
     tokens_total = 0
     fallback_calls = 0
+    retries_total = 0
+    exhausted_providers: set[str] = set()
     start = time.time()
 
     for index, question in enumerate(questions, start=1):
@@ -293,6 +319,8 @@ def main() -> int:
 
             last_error: Exception | None = None
             for provider_index, provider in enumerate(providers):
+                if provider.name in exhausted_providers:
+                    continue
                 sample_start = time.time()
                 try:
                     text, usage, attempts = call_with_retries(
@@ -307,6 +335,11 @@ def main() -> int:
                         qid,
                         sample_id,
                     )
+                except ProviderExhausted as error:
+                    exhausted_providers.add(provider.name)
+                    print(f"  {provider.name} daily quota exhausted for today; switching to fallback for the rest of this run")
+                    last_error = error
+                    continue
                 except Exception as error:
                     last_error = error
                     print(f"  {label} sample {sample_id}: {provider.name} failed ({error})")
@@ -333,6 +366,7 @@ def main() -> int:
                 }
                 append_jsonl(config.GENERATIONS_PATH, record)
                 calls_made += 1
+                retries_total += attempts - 1
                 tokens_total += usage.get("total_tokens") or 0
                 if provider_index > 0:
                     fallback_calls += 1
@@ -365,6 +399,7 @@ def main() -> int:
     print(f"  calls completed : {calls_made}")
     print(f"  samples skipped : {skipped}")
     print(f"  fallback calls  : {fallback_calls}")
+    print(f"  retry attempts  : {retries_total}")
     print(f"  failed samples  : {failures}")
     print(f"  total tokens    : {tokens_total}")
     print(f"  elapsed         : {elapsed:.1f}s")

@@ -94,6 +94,8 @@ def validate_entries(dataset: list) -> tuple[list[str], list[str]]:
             errors.append(f"{qid}: reasoning ground truth is not yes/no: {answer!r}")
 
         norm = normalize(entry["question_text"])
+        if entry["validation_status"] == "rejected":
+            continue
         if norm in texts:
             errors.append(f"{qid}: exact duplicate of {texts[norm]}")
         texts[norm] = qid
@@ -132,7 +134,7 @@ def coverage_report(dataset: list) -> str:
             per_model[key].add((record["question_id"], record["sample_id"]))
             samples[key] += 1
 
-    total = len(dataset)
+    total = len([e for e in dataset if e.get("validation_status") != "rejected"])
     lines = ["Generation coverage:"]
     for (provider, model), pairs in sorted(per_model.items()):
         questions = {qid for qid, _ in pairs}
@@ -159,14 +161,16 @@ def main() -> int:
         return 1
 
     errors, warnings = validate_entries(dataset)
-    counts = Counter(entry["category"] for entry in dataset if isinstance(entry, dict))
-    difficulties = Counter(entry.get("difficulty_flag") for entry in dataset if isinstance(entry, dict))
+    active = [e for e in dataset if isinstance(e, dict) and e.get("validation_status") != "rejected"]
+    rejected = [e for e in dataset if isinstance(e, dict) and e.get("validation_status") == "rejected"]
+    counts = Counter(entry["category"] for entry in active)
+    difficulties = Counter(entry.get("difficulty_flag") for entry in active)
     statuses = Counter(entry.get("validation_status") for entry in dataset if isinstance(entry, dict))
 
     lines = []
     lines.append("Dataset validation report")
     lines.append("=" * 60)
-    lines.append(f"Total questions : {len(dataset)}")
+    lines.append(f"Active questions: {len(active)} (rejected entries retained: {len(rejected)})")
     lines.append("Category counts : " + ", ".join(f"{c}={counts.get(c, 0)}" for c in config.CATEGORIES))
     if counts:
         spread = max(counts.values()) - min(counts.values())

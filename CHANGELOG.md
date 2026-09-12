@@ -15,3 +15,17 @@ Dated entries tied to git commits.
 - `validate_dataset.py`: structural checks, duplicates, balance, difficulty and
   status spread, optional generation coverage report.
 - Smoke-tested both providers (6 samples logged, 1 forced-fallback sample).
+
+## 2026-09-12 (later, commit 207696c)
+- Manual spot-check applied via `apply_spot_check.py`: `factual_0037` and
+  `factual_0025` rejected (source-data errors, reasons logged in manifest),
+  18 reviewed questions set to `spot_checked`, replacements pulled from
+  TriviaQA with a stricter time-sensitivity guard (`factual_0151`, `factual_0153`;
+  guard also rejected the time-relative auto-replacement `factual_0152`).
+- `validate_dataset.py` re-passed: 450 active (150/150/150), 0 duplicates,
+  0 structural errors; rejected entries retained in the dataset file.
+- `generate.py` hardened: empty-response retry path, `ProviderExhausted`
+  short-circuit on daily quota errors, retry counter in run summary.
+- Generation run 1 (gpt-oss-20b, n=5, temp 0.8): factual 735/750 samples
+  (725 Groq + 20 Gemini fallback, ~156k tokens, 316 retries); math/reasoning
+  blocked by free-tier daily caps, to resume after reset.

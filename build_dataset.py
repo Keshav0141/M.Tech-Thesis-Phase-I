@@ -348,11 +348,21 @@ def difficulty_table(dataset: list[dict]) -> dict:
     return table
 
 
-def write_manifest(dataset: list[dict], stats: list[dict], reason_examples: dict, seed: int, target: int):
+def write_manifest(
+    dataset: list[dict],
+    stats: list[dict],
+    reason_examples: dict,
+    seed: int,
+    target: int,
+    manual_examples: list[dict] | None = None,
+):
     now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
-    counts = Counter(q["category"] for q in dataset)
-    diffs = difficulty_table(dataset)
-    total = len(dataset)
+    manual_examples = list(manual_examples or [])
+    active = [q for q in dataset if q.get("validation_status") != "rejected"]
+    rejected = [q for q in dataset if q.get("validation_status") == "rejected"]
+    counts = Counter(q["category"] for q in active)
+    diffs = difficulty_table(active)
+    total = len(active)
 
     lines: list[str] = []
     lines.append("# Questions Manifest")
@@ -361,7 +371,13 @@ def write_manifest(dataset: list[dict], stats: list[dict], reason_examples: dict
     lines.append("")
     lines.append("## Dataset summary")
     lines.append("")
-    lines.append(f"Total questions: **{total}** — " + ", ".join(f"{c}: {counts.get(c, 0)}" for c in config.CATEGORIES))
+    lines.append(f"Total active questions: **{total}** — " + ", ".join(f"{c}: {counts.get(c, 0)}" for c in config.CATEGORIES))
+    if rejected:
+        lines.append("")
+        lines.append(
+            f"{len(rejected)} entries are retained in data/dataset.json with status `rejected` "
+            "(manual spot-check findings) and are excluded from generation and validation counts."
+        )
     lines.append("")
     lines.append("| Category | Source | Inspected | Accepted | Rejected | Target met |")
     lines.append("|---|---|---:|---:|---:|:---:|")
@@ -409,8 +425,8 @@ def write_manifest(dataset: list[dict], stats: list[dict], reason_examples: dict
         "near duplicate",
     ]
 
-    chosen: list[tuple[str, dict]] = []
-    used_reasons: set[str] = set()
+    chosen: list[tuple[str, dict]] = [(example["reason"], example) for example in manual_examples]
+    used_reasons: set[str] = {reason for reason, _ in chosen}
     for prefix in priority_prefixes:
         for reason, examples in reason_examples.items():
             if reason.startswith(prefix) and reason not in used_reasons and examples:
@@ -429,7 +445,11 @@ def write_manifest(dataset: list[dict], stats: list[dict], reason_examples: dict
 
     if chosen:
         for number, (reason, example) in enumerate(chosen, 1):
-            lines.append(f"{number}. **{example['category']}** — `{example['question_text'][:140]}`")
+            if example.get("question_id"):
+                label = f"**{example['question_id']}** ({example['category']})"
+            else:
+                label = f"**{example['category']}**"
+            lines.append(f"{number}. {label} — `{example['question_text'][:140]}`")
             lines.append(f"   - Reason: {reason}")
     else:
         lines.append("_No exclusions were recorded for this build._")
@@ -440,6 +460,12 @@ def write_manifest(dataset: list[dict], stats: list[dict], reason_examples: dict
         lines.append(f"- **{s['category']}**: {s['rejected']} rejected")
         for reason, count in s["rejections_by_reason"].items():
             lines.append(f"  - {count}x {reason}")
+    if manual_examples:
+        lines.append("")
+        lines.append("Manual spot-check rejections (source-data errors, not filtering misses):")
+        lines.append("")
+        for example in manual_examples:
+            lines.append(f"- **{example['question_id']}**: {example['reason']}")
     lines.append("")
     lines.append("## Overlap / MECE note")
     lines.append("")
@@ -463,6 +489,14 @@ def write_manifest(dataset: list[dict], stats: list[dict], reason_examples: dict
             "dropped in this build; the filter still runs at build time."
         )
     lines.append("")
+    if rejected:
+        lines.append("## Rejected entries (excluded from generation)")
+        lines.append("")
+        lines.append("| question_id | reason |")
+        lines.append("|---|---|")
+        for q in rejected:
+            lines.append(f"| {q['question_id']} | {q.get('rejection_reason', '')} |")
+        lines.append("")
     lines.append("## Per-question metadata")
     lines.append("")
     lines.append("| question_id | category | source | difficulty | status | words |")
@@ -521,6 +555,7 @@ def main() -> int:
             {
                 "generated_utc": datetime.now(timezone.utc).isoformat(),
                 "rejections_by_reason": dict(true_counts.most_common()),
+                "category_stats": stats,
                 "examples": dict(all_examples),
             },
             indent=2,

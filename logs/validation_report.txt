@@ -1,12 +1,14 @@
 Dataset validation report
 ============================================================
-Total questions : 450
+Active questions: 450 (rejected entries retained: 3)
 Category counts : factual=150, math=150, reasoning=150
 Balance spread  : 0 (max-min); imbalance = 0.0%
-Difficulty      : easy=191, hard=63, medium=196
-Statuses        : auto_validated=450
+Difficulty      : easy=191, hard=62, medium=197
+Statuses        : auto_validated=432, rejected=3, spot_checked=18
 
 All structural checks passed.
 No duplicate/near-duplicate warnings.
 
-generations.jsonl not found (nothing generated yet)
+Generation coverage:
+  gemini/gemini-3.6-flash: 12/450 questions, 20 successful samples
+  groq/openai/gpt-oss-20b: 149/450 questions, 725 successful samples

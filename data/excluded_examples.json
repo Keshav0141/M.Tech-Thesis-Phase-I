@@ -1,13 +1,51 @@
 {
-  "generated_utc": "2026-09-12T04:06:50.239500+00:00",
+  "generated_utc": "2026-09-12T04:22:22.199341+00:00",
   "rejections_by_reason": {
     "ambiguous answer (aliases refer to different answers)": 323,
     "question length outside 20-400 chars": 6,
     "question length outside 20-220 chars": 4,
     "multiple questions in one item": 4,
     "answer too long to be atomic": 2,
-    "exact duplicate of factual_0035": 1
+    "exact duplicate of factual_0035": 1,
+    "manual spot-check: source question contains a factual error — Keiko the orca died in Taknes Bay, Halsa (Norway), not off the coast of Finland": 1,
+    "manual spot-check: source question conflates two films — Kasper Gutman is a character from The Maltese Falcon (1941), not Casablanca (1942)": 1,
+    "curation guard: time-sensitive wording ('recent London summer Olympics'); auto-replacement rejected during curation": 1
   },
+  "category_stats": [
+    {
+      "category": "factual",
+      "target": 150,
+      "inspected": 883,
+      "accepted": 150,
+      "rejected": 333,
+      "rejections_by_reason": {
+        "ambiguous answer (aliases refer to different answers)": 323,
+        "question length outside 20-220 chars": 4,
+        "multiple questions in one item": 3,
+        "answer too long to be atomic": 2,
+        "exact duplicate of factual_0035": 1
+      }
+    },
+    {
+      "category": "math",
+      "target": 150,
+      "inspected": 557,
+      "accepted": 150,
+      "rejected": 7,
+      "rejections_by_reason": {
+        "question length outside 20-400 chars": 6,
+        "multiple questions in one item": 1
+      }
+    },
+    {
+      "category": "reasoning",
+      "target": 150,
+      "inspected": 550,
+      "accepted": 150,
+      "rejected": 0,
+      "rejections_by_reason": {}
+    }
+  ],
   "examples": {
     "ambiguous answer (aliases refer to different answers)": [
       {
@@ -422,6 +460,31 @@
         "reason": "question length outside 20-400 chars",
         "source_id": ""
       }
+    ],
+    "manual spot-check: source question contains a factual error — Keiko the orca died in Taknes Bay, Halsa (Norway), not off the coast of Finland": [
+      {
+        "category": "factual",
+        "question_id": "factual_0037",
+        "question_text": "December 12, 2003 saw the death of Keiko, an Orca whale, off the coast of Finland. Keiko achieved fame as a star in what movie series?",
+        "reason": "manual spot-check: source question contains a factual error — Keiko the orca died in Taknes Bay, Halsa (Norway), not off the coast of Finland"
+      }
+    ],
+    "manual spot-check: source question conflates two films — Kasper Gutman is a character from The Maltese Falcon (1941), not Casablanca (1942)": [
+      {
+        "category": "factual",
+        "question_id": "factual_0025",
+        "question_text": "Who made his film debut playing Kasper Gutman in the 1941 film ‘Casablanca’?",
+        "reason": "manual spot-check: source question conflates two films — Kasper Gutman is a character from The Maltese Falcon (1941), not Casablanca (1942)"
+      }
+    ],
+    "curation guard: time-sensitive wording ('recent London summer Olympics'); auto-replacement rejected during curation": [
+      {
+        "category": "factual",
+        "question_id": "factual_0152",
+        "question_text": "In the recent London summer Olympics, where was the majority of the Triathlon event(s) held?",
+        "reason": "curation guard: time-sensitive wording ('recent London summer Olympics'); auto-replacement rejected during curation"
+      }
     ]
-  }
+  },
+  "curated_utc": "2026-09-12T04:23:52.097924+00:00"
 }
