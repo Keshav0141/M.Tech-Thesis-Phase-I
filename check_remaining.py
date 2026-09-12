@@ -131,8 +131,7 @@ def main() -> int:
             if report[category]["samples_missing"]:
                 print(
                     f"  python generate.py --category {category} --n {args.n} --temperature 0.7 "
-                    "--provider groq --model qwen/qwen3.8-27b --reasoning-effort none "
-                    "--max-tokens 1024 --sleep 22"
+                    "--provider groq --model qwen/qwen3.8-27b --reasoning-effort none --sleep 22"
                 )
     return 0 if total_missing == 0 else 1
 

@@ -83,10 +83,10 @@ $stoppedReason = "all incomplete categories attempted"
 
 try {
     foreach ($category in $incomplete) {
-        Write-RunLog ("starting generate.py --category {0} --n 5 --temperature 0.7 --provider groq --model qwen/qwen3.8-27b --reasoning-effort none --max-tokens 1024 --sleep 22" -f $category)
+        Write-RunLog ("starting generate.py --category {0} --n 5 --temperature 0.7 --provider groq --model qwen/qwen3.8-27b --reasoning-effort none --sleep 22 (per-category caps from config)" -f $category)
         $output = & $python generate.py --category $category --n 5 --temperature 0.7 `
             --provider groq --model qwen/qwen3.8-27b --reasoning-effort none `
-            --max-tokens 1024 --sleep 22 2>&1 |
+            --sleep 22 2>&1 |
             Tee-Object -FilePath $runLog -Append | Out-String
 
         $collected = 0

@@ -42,7 +42,7 @@ TEMPERATURE_DEFAULT = 0.8
 MAX_TOKENS_BY_CATEGORY = {
     "factual": 1024,
     "math": 1024,
-    "reasoning": 1024,
+    "reasoning": 1536,
 }
 
 # Single-model plan (decided 2026-09-12): qwen/qwen3.8-27b in instruct mode as
@@ -86,8 +86,9 @@ CATEGORY_INSTRUCTIONS = {
         "line exactly in the form: 'Final answer: <number>'."
     ),
     "reasoning": (
-        "Reason step by step about the question. End your response with one "
-        "line exactly in the form: 'Final answer: yes' or 'Final answer: no'."
+        "Answer with just yes/no followed by a one-sentence justification. "
+        "End your response with one line exactly in the form: "
+        "'Final answer: yes' or 'Final answer: no'."
     ),
 }
 

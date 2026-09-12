@@ -43,3 +43,12 @@ Dated entries tied to git commits.
 - Archived all pilot/test artifacts to `logs/pilot_run/`.
 - Started the factual run (750 calls) in the background; math/reasoning follow.
 - `daily_resume.ps1` and `check_remaining.py` updated to the canonical flags.
+
+## 2026-09-12 (reasoning prompt fix)
+- Reasoning prompt shortened to "yes/no + one-sentence justification";
+  retest on 5 questions: 5/5 parseable, 0 truncations, avg 174 completion
+  tokens (was 369-1024+ with 40%/25% truncation).
+- `MAX_TOKENS_BY_CATEGORY["reasoning"] = 1536`; per-category config caps now
+  drive daily_resume and check_remaining (global override removed).
+- Revised capacity: ~265 tokens/sample, ~754 samples/day under 200k TPD,
+  ~3 days of budget instead of 5-6.

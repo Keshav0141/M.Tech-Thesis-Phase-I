@@ -414,3 +414,40 @@ Not usable for generation:
 - 750 calls at ~23s each ~ 4.8 hours; resumable if interrupted. Math and
   reasoning follow on later days (or when quota allows) with the same command
   and `--category` swapped.
+
+## 2026-09-12 (reasoning fix) — shorter prompt + 1536 cap eliminates truncation
+
+### What was tested
+- Reasoning prompt changed to: "Answer with just yes/no followed by a
+  one-sentence justification. End your response with one line exactly in the
+  form: 'Final answer: yes' or 'Final answer: no'."
+- Retested on the same 5 reasoning questions (reasoning_0001..0005) with
+  `max_tokens=1536`, `reasoning_effort=none`, temperature 0.7, dynamic OTPM
+  pacing. The test ran alongside the factual background run (which uses only
+  ~41 of the 1,000 OTPM), so it did not slow or disturb it.
+
+### Results
+- **5/5 parseable, 0 truncations, all `finish_reason="stop"`.**
+- Completion tokens: [669, 39, 49, 50, 64] -- average 174 (previously
+  369-1024+ with a 2/5 truncation rate at 512 and 1/4 at 1024).
+- Raw records: `logs/pilot_run/qwen_reasoning_1536_results.json`.
+
+### Changes applied
+- `CATEGORY_INSTRUCTIONS["reasoning"]` updated to the short-form prompt.
+- `MAX_TOKENS_BY_CATEGORY`: reasoning raised to **1536** (factual/math stay
+  1024).
+- `daily_resume.ps1` and `check_remaining.py` now rely on per-category config
+  caps instead of a single global `--max-tokens` override.
+
+### Revised capacity estimate (with the new reasoning prompt)
+- Per-category averages: factual 88, math 471, reasoning ~236 tokens/sample
+  (62 prompt + 174 completion).
+- Weighted average: ~265 tokens/sample -> 2,250 samples ~ 596k tokens.
+- Under 200k tokens/day: ~754 samples/day (the 1,000 RPD cap does not bind)
+  -> about **3 days** of token budget instead of the earlier 5-6, with
+  ~15 hours of paced wall-clock spread across those days (factual 4.6h,
+  math 5.6h at ~27s/sample, reasoning 4.6h at the 22s floor).
+
+### Status
+- Factual run still in progress (healthy, 0 retries). Math will start after it
+  reaches 750/750; reasoning last with the new prompt and 1536 cap.
