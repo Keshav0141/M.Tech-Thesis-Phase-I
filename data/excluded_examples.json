@@ -1,0 +1,427 @@
+{
+  "generated_utc": "2026-09-12T04:06:50.239500+00:00",
+  "rejections_by_reason": {
+    "ambiguous answer (aliases refer to different answers)": 323,
+    "question length outside 20-400 chars": 6,
+    "question length outside 20-220 chars": 4,
+    "multiple questions in one item": 4,
+    "answer too long to be atomic": 2,
+    "exact duplicate of factual_0035": 1
+  },
+  "examples": {
+    "ambiguous answer (aliases refer to different answers)": [
+      {
+        "category": "factual",
+        "question_text": "In 2006, Michelle Bachelet became the first female president of which country?",
+        "reason": "ambiguous answer (aliases refer to different answers)",
+        "source_id": "qw_8567"
+      },
+      {
+        "category": "factual",
+        "question_text": "In which city is the HQ of the car company Mercedes?",
+        "reason": "ambiguous answer (aliases refer to different answers)",
+        "source_id": "sfq_22900"
+      },
+      {
+        "category": "factual",
+        "question_text": "By population, which is the second biggest city in Germany?",
+        "reason": "ambiguous answer (aliases refer to different answers)",
+        "source_id": "odql_10677"
+      },
+      {
+        "category": "factual",
+        "question_text": "Which former US President's real name is William Jefferson Blythe III?",
+        "reason": "ambiguous answer (aliases refer to different answers)",
+        "source_id": "sfq_22976"
+      },
+      {
+        "category": "factual",
+        "question_text": "What is the former British Crown colony of the Gold Coast now called?",
+        "reason": "ambiguous answer (aliases refer to different answers)",
+        "source_id": "sfq_9921"
+      },
+      {
+        "category": "factual",
+        "question_text": "Which Turkish mountains have the same name as a sign of the Zodiac?",
+        "reason": "ambiguous answer (aliases refer to different answers)",
+        "source_id": "sfq_11689"
+      },
+      {
+        "category": "factual",
+        "question_text": "In Greek mythology, who is the twin sister of Helenus?",
+        "reason": "ambiguous answer (aliases refer to different answers)",
+        "source_id": "sfq_12135"
+      },
+      {
+        "category": "factual",
+        "question_text": "In which month is Candlemas celebrated?",
+        "reason": "ambiguous answer (aliases refer to different answers)",
+        "source_id": "odql_8294"
+      },
+      {
+        "category": "factual",
+        "question_text": "What controversial process uses a 'proppant' with 'slickwater' or gel/foam including additives such as hydrochloric acid, guar gum, radioactive tracers?",
+        "reason": "ambiguous answer (aliases refer to different answers)",
+        "source_id": "bb_5152"
+      },
+      {
+        "category": "factual",
+        "question_text": "What was the name of Sir Ernest Henry Shackleton's ship?",
+        "reason": "ambiguous answer (aliases refer to different answers)",
+        "source_id": "odql_5467"
+      },
+      {
+        "category": "factual",
+        "question_text": "Which player defeated the reigning champion Neil Robertson in the First Round of the 2011 World Snooker Championships before losing in the Final to John Higgins?",
+        "reason": "ambiguous answer (aliases refer to different answers)",
+        "source_id": "odql_6149"
+      },
+      {
+        "category": "factual",
+        "question_text": "In which town or city is the principal site of the University of the Highlands and Islands?",
+        "reason": "ambiguous answer (aliases refer to different answers)",
+        "source_id": "odql_11259"
+      },
+      {
+        "category": "factual",
+        "question_text": "Which king had daughters named Cordelia, Regan and Goneril?",
+        "reason": "ambiguous answer (aliases refer to different answers)",
+        "source_id": "sfq_2747"
+      },
+      {
+        "category": "factual",
+        "question_text": "What was first brought to Europe by Francisco Fernandes, and sent as a treat by Jean Nicot to Catherine de Medici?",
+        "reason": "ambiguous answer (aliases refer to different answers)",
+        "source_id": "qw_3060"
+      },
+      {
+        "category": "factual",
+        "question_text": "What is the family name of the mother of the former Tennis players Emilio Sanchez and his sister Aranxta?",
+        "reason": "ambiguous answer (aliases refer to different answers)",
+        "source_id": "odql_8333"
+      },
+      {
+        "category": "factual",
+        "question_text": "What is the more common name for the garden plant pyracantha",
+        "reason": "ambiguous answer (aliases refer to different answers)",
+        "source_id": "bt_4190"
+      },
+      {
+        "category": "factual",
+        "question_text": "Prudhoe Bay Oil Field, the largest in North America, is in which US state?",
+        "reason": "ambiguous answer (aliases refer to different answers)",
+        "source_id": "odql_2487"
+      },
+      {
+        "category": "factual",
+        "question_text": "In which European city is Marco Polo Airport?",
+        "reason": "ambiguous answer (aliases refer to different answers)",
+        "source_id": "sfq_25977"
+      },
+      {
+        "category": "factual",
+        "question_text": "What type of stone is The Blarney Stone made from",
+        "reason": "ambiguous answer (aliases refer to different answers)",
+        "source_id": "bt_3212"
+      },
+      {
+        "category": "factual",
+        "question_text": "What was snooker player Cliff Thorburn’s nickname?",
+        "reason": "ambiguous answer (aliases refer to different answers)",
+        "source_id": "dpql_4160"
+      },
+      {
+        "category": "factual",
+        "question_text": "What metallic element typically makes up between 10% and 25% of stainless steel?",
+        "reason": "ambiguous answer (aliases refer to different answers)",
+        "source_id": "bb_7578"
+      },
+      {
+        "category": "factual",
+        "question_text": "Which mountain completes the title of a short story by Ernest Hemingway first published in 1936 - The Snows of ________?",
+        "reason": "ambiguous answer (aliases refer to different answers)",
+        "source_id": "odql_14916"
+      },
+      {
+        "category": "factual",
+        "question_text": "“4 out of 5 dentists surveyed would recommend sugarless gum to their patients who chew gum.” was used to advertise what company’s product?",
+        "reason": "ambiguous answer (aliases refer to different answers)",
+        "source_id": "qg_4337"
+      },
+      {
+        "category": "factual",
+        "question_text": "What city was led by a doge?",
+        "reason": "ambiguous answer (aliases refer to different answers)",
+        "source_id": "jp_3878"
+      },
+      {
+        "category": "factual",
+        "question_text": "Which artist’s works include 32 Campbell’s soup cans?",
+        "reason": "ambiguous answer (aliases refer to different answers)",
+        "source_id": "odql_12112"
+      },
+      {
+        "category": "factual",
+        "question_text": "In which Shakespeare play does the character 'Autolycus' appear?",
+        "reason": "ambiguous answer (aliases refer to different answers)",
+        "source_id": "odql_54"
+      },
+      {
+        "category": "factual",
+        "question_text": "\"\"\"Robert Langdon awoke slowly\"\", is the first line of which novel?\"",
+        "reason": "ambiguous answer (aliases refer to different answers)",
+        "source_id": "odql_732"
+      },
+      {
+        "category": "factual",
+        "question_text": "What are the punched holes on the sides of postage stamps called",
+        "reason": "ambiguous answer (aliases refer to different answers)",
+        "source_id": "bt_3814"
+      },
+      {
+        "category": "factual",
+        "question_text": "Which author created the detective Harry Bosch?",
+        "reason": "ambiguous answer (aliases refer to different answers)",
+        "source_id": "sfq_21614"
+      },
+      {
+        "category": "factual",
+        "question_text": "Who replaced Mike Harding as the presenter of Radio 2's Folk Show?",
+        "reason": "ambiguous answer (aliases refer to different answers)",
+        "source_id": "sfq_17646"
+      },
+      {
+        "category": "factual",
+        "question_text": "In which year was the Falklands War?",
+        "reason": "ambiguous answer (aliases refer to different answers)",
+        "source_id": "qf_542"
+      },
+      {
+        "category": "factual",
+        "question_text": "Which Mediterranean island is divided by the Attila Line?",
+        "reason": "ambiguous answer (aliases refer to different answers)",
+        "source_id": "dpql_3634"
+      },
+      {
+        "category": "factual",
+        "question_text": "What breed of dog was traditionally used for the retrieval of game birds, particularly quail and woodcock",
+        "reason": "ambiguous answer (aliases refer to different answers)",
+        "source_id": "bt_2219"
+      },
+      {
+        "category": "factual",
+        "question_text": "The American showman Ely Culbertson is credited with popularising which sport/pastime?",
+        "reason": "ambiguous answer (aliases refer to different answers)",
+        "source_id": "tb_2297"
+      },
+      {
+        "category": "factual",
+        "question_text": "\"Whose novels \"\"Northanger Abbey\"\" and \"\"Persuasion\"\" were published posthumously in 1818, and who died before completing one that was eventually called \"\"Sanditon\"\"?\"",
+        "reason": "ambiguous answer (aliases refer to different answers)",
+        "source_id": "qw_8427"
+      },
+      {
+        "category": "factual",
+        "question_text": "In which ITV comedy do Steve Pemberton and Siobhan Finneran play 'Mick' and 'Janice Garvey'?",
+        "reason": "ambiguous answer (aliases refer to different answers)",
+        "source_id": "odql_1695"
+      },
+      {
+        "category": "factual",
+        "question_text": "Sydney is the capital of which Australian state?",
+        "reason": "ambiguous answer (aliases refer to different answers)",
+        "source_id": "sfq_14327"
+      },
+      {
+        "category": "factual",
+        "question_text": "On a standard dartboard, what number lies opposite 10?",
+        "reason": "ambiguous answer (aliases refer to different answers)",
+        "source_id": "qb_9221"
+      },
+      {
+        "category": "factual",
+        "question_text": "Which English author said ‘Serious sport has nothing to do with fair play……..it is war minus the shooting’?",
+        "reason": "ambiguous answer (aliases refer to different answers)",
+        "source_id": "qb_5346"
+      },
+      {
+        "category": "factual",
+        "question_text": "Which club won the Coca Cola Football League Championship for the 2007-08 season?",
+        "reason": "ambiguous answer (aliases refer to different answers)",
+        "source_id": "bb_7789"
+      },
+      {
+        "category": "factual",
+        "question_text": "Which European capital city is on the River Tagus?",
+        "reason": "ambiguous answer (aliases refer to different answers)",
+        "source_id": "sfq_11003"
+      },
+      {
+        "category": "factual",
+        "question_text": "In ‘Lovejoy’, what was the occupation of the title character?",
+        "reason": "ambiguous answer (aliases refer to different answers)",
+        "source_id": "dpql_2988"
+      },
+      {
+        "category": "factual",
+        "question_text": "Which football league club moved from Belle Vue and played their first game at the new Keepmoat Stadium on New Year's Day 2007?",
+        "reason": "ambiguous answer (aliases refer to different answers)",
+        "source_id": "sfq_4906"
+      },
+      {
+        "category": "factual",
+        "question_text": "In which country is the Nullabor Plain?",
+        "reason": "ambiguous answer (aliases refer to different answers)",
+        "source_id": "odql_8615"
+      },
+      {
+        "category": "factual",
+        "question_text": "On which holiday island are the peaks of 'Ruivo' and 'Arieiro', and the airport of 'Santa Cruz'?",
+        "reason": "ambiguous answer (aliases refer to different answers)",
+        "source_id": "odql_3989"
+      },
+      {
+        "category": "factual",
+        "question_text": "According to the Bible, who were Balthazar, Melchior and Caspar?",
+        "reason": "ambiguous answer (aliases refer to different answers)",
+        "source_id": "qw_4464"
+      },
+      {
+        "category": "factual",
+        "question_text": "\"What \"\"stick-thin\"\" model became a symbol of Swingin' Sixties London?\"",
+        "reason": "ambiguous answer (aliases refer to different answers)",
+        "source_id": "jp_3921"
+      },
+      {
+        "category": "factual",
+        "question_text": "Which mythical creature had the head of an Eagle and the bodyand legs of a Lion?",
+        "reason": "ambiguous answer (aliases refer to different answers)",
+        "source_id": "odql_2662"
+      },
+      {
+        "category": "factual",
+        "question_text": "What European nation was the first to drink tea?",
+        "reason": "ambiguous answer (aliases refer to different answers)",
+        "source_id": "qf_741"
+      },
+      {
+        "category": "factual",
+        "question_text": "In Arthurian legend, who fought the Green Night?",
+        "reason": "ambiguous answer (aliases refer to different answers)",
+        "source_id": "qz_4862"
+      }
+    ],
+    "answer too long to be atomic": [
+      {
+        "category": "factual",
+        "question_text": "This couple were iconic dance partners who made motion pictures together from 1933 - 1949. They made a total of 10 movies?",
+        "reason": "answer too long to be atomic",
+        "source_id": "qf_827"
+      },
+      {
+        "category": "factual",
+        "question_text": "What was unusual about how George I, a 17 year old Danish prince, became King of the Hellenes, ruling from 1863 to 1913?",
+        "reason": "answer too long to be atomic",
+        "source_id": "qw_7784"
+      }
+    ],
+    "question length outside 20-220 chars": [
+      {
+        "category": "factual",
+        "question_text": "Cambodia, which over the course of 1841 to 1953 was under the joint suzerainty of Thailand and Vietnam then was a monarchy under the protection of France which included an occupation by Japan, was steered to independence in 1953 by whom?",
+        "reason": "question length outside 20-220 chars",
+        "source_id": "qw_15932"
+      },
+      {
+        "category": "factual",
+        "question_text": "What satirical musical by Kyle Jarrow about L. Ron Hubbard that pokes fun at his science fiction writing and personal beliefs, was originally presented in 2003 in New York City by Les Freres Corbusier (winning an Obie Award) and received a Garland Award for the director for the 2004 Los Angeles prod",
+        "reason": "question length outside 20-220 chars",
+        "source_id": "qw_14678"
+      },
+      {
+        "category": "factual",
+        "question_text": "In the year 1636 during the Dutch Golden Age, what unlikely item became the fourth leading export after gin, herring and cheese causing a journalist to write a book Extraordinary Popular Delusions and the Madness of Crowds?",
+        "reason": "question length outside 20-220 chars",
+        "source_id": "tb_263"
+      },
+      {
+        "category": "factual",
+        "question_text": "\"Which cabinet minister made the following apology in 2011? \"\"I have always believed that all rape is extremely serious and must be treated as such. I am sorry if my comments gave you any other impression or upset you\"\".\"",
+        "reason": "question length outside 20-220 chars",
+        "source_id": "wh_349"
+      }
+    ],
+    "multiple questions in one item": [
+      {
+        "category": "factual",
+        "question_text": "Which predatory insect, with two pairs of large transparent wings, that are spread while resting, can fly the fastest ? The Australian variety can reach a speed of 36 mph ?",
+        "reason": "multiple questions in one item",
+        "source_id": "wh_1930"
+      },
+      {
+        "category": "factual",
+        "question_text": "The creamy cherimoya/chirimoya fruit with a soft cactus-like skin is also known as the '(what?) apple'?",
+        "reason": "multiple questions in one item",
+        "source_id": "bb_4628"
+      },
+      {
+        "category": "factual",
+        "question_text": "What was salvaged from HMS Lutine after it sank in 1799 and is still used on the main underwriting floor at Lloyd's of London? Compass; Captain's desk; Bell; or Globe?",
+        "reason": "multiple questions in one item",
+        "source_id": "bb_3785"
+      },
+      {
+        "category": "math",
+        "question_text": "There have been 15 \"Where's Waldo?\" books published. Each book has 30 puzzles to find Waldo. The average person takes 3 minutes to find Waldo in a puzzle. How long would it take to find every Waldo?",
+        "reason": "multiple questions in one item",
+        "source_id": ""
+      }
+    ],
+    "exact duplicate of factual_0035": [
+      {
+        "category": "factual",
+        "question_text": "Which post-war Prime Minister was MP for Warwick and Leamington?",
+        "reason": "exact duplicate of factual_0035",
+        "source_id": "odql_8508"
+      }
+    ],
+    "question length outside 20-400 chars": [
+      {
+        "category": "math",
+        "question_text": "Mary is trying to get Zoom set up for the first time. She spent 10 minutes downloading the Mac version, only to realize she needed the Windows version, which took three times as long to download. During her first call, the audio glitched twice for 4 minutes each time and the video glitched once for ",
+        "reason": "question length outside 20-400 chars",
+        "source_id": ""
+      },
+      {
+        "category": "math",
+        "question_text": "40% of the mosquitos in Jack's area are infected with malaria. 20% of the mosquitos are infected with Zika virus. Without a vaccine, the chances of getting infected with either virus after getting bitten by an infected mosquito are 50%. Jack is taking an experimental malaria vaccine that reduces the",
+        "reason": "question length outside 20-400 chars",
+        "source_id": ""
+      },
+      {
+        "category": "math",
+        "question_text": "Amanda and her family are going to re-paint all the walls inside their house. Before they get started they want to divide up the work. Since all the rooms in the house have different numbers and sizes of walls in them, they figure the fairest way to divide up the work is to count all the walls in th",
+        "reason": "question length outside 20-400 chars",
+        "source_id": ""
+      },
+      {
+        "category": "math",
+        "question_text": "Matthew, the baker, arrives at work early every morning to make his famous caramel-apple coffee cakes for the day.  It usually takes Matthew 1 hour to assemble ingredients, 1.5 hours to bake the cakes, and another 1 hour to decorate each cake with cinnamon sprinkles.  One day, Matthew's oven failed ",
+        "reason": "question length outside 20-400 chars",
+        "source_id": ""
+      },
+      {
+        "category": "math",
+        "question_text": "Mason, Noah and Jacob want to have an eating contest but can't agree on what food to eat. Mason wants hot dogs, Noah insists on burgers, and Jacob thinks they should eat pies. They finally agree that everyone can eat whatever they want and they'll use the weight of the food to determine who wins. A ",
+        "reason": "question length outside 20-400 chars",
+        "source_id": ""
+      },
+      {
+        "category": "math",
+        "question_text": "Mary is writing a story, and wants her 60 characters to be split according to their initials. Half of her characters have the initial A, and half of this amount have the initial C. Mary wants the rest of her characters to have the initials D and E, but she wants there to be twice as many characters ",
+        "reason": "question length outside 20-400 chars",
+        "source_id": ""
+      }
+    ]
+  }
+}

@@ -1,0 +1,12 @@
+Dataset validation report
+============================================================
+Total questions : 450
+Category counts : factual=150, math=150, reasoning=150
+Balance spread  : 0 (max-min); imbalance = 0.0%
+Difficulty      : easy=191, hard=63, medium=196
+Statuses        : auto_validated=450
+
+All structural checks passed.
+No duplicate/near-duplicate warnings.
+
+generations.jsonl not found (nothing generated yet)
