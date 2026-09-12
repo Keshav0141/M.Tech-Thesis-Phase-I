@@ -523,3 +523,42 @@ Not usable for generation:
 > re-run can be traced to the affected records exactly. Do not mix models
 > within a question's sample set; `--skip-started` keeps each question on a
 > single model.
+
+## 2026-09-12 16:32 UTC - automatic resume run
+- 16:32-18:39 UTC: +246 samples (math +246); 1 quota errors, 504 failed, 5 retry attempts; quota exhausted, resume tomorrow.
+
+## 2026-09-12 19:33 UTC - automatic resume run
+- 19:33-19:51 UTC: +36 samples (math +36); 1 quota errors, 468 failed, 6 retry attempts; quota exhausted, resume tomorrow.
+
+## 2026-09-13 (quota mechanics) — rolling RPD window + automation
+
+### Confirmed quota behavior (headers + 429 bodies)
+- Groq free tier for `qwen/qwen3.8-27b`: 1,000 requests/day is a **rolling
+  24-hour window**, not a calendar-day reset.
+- Exhaustion returns `429 ... requests per day (RPD): Limit 1000, Used 1000`;
+  the wrapper's `ProviderExhausted` short-circuit stops the run cleanly.
+- Slots free one per request, ~24h after each request was made. Header probe
+  (2026-09-13 03:28 IST): 83 requests remaining, full reset 22h out.
+- Yesterday's usage (factual 16:34-21:42 IST; math 16:32-19:50 UTC) means
+  today's big refill lands ~16:30-21:40 IST; earlier bursts get only tens of
+  requests.
+
+### Automation set up
+- Windows scheduled task **ThesisDailyResume**: daily 16:45 IST, repeating
+  hourly for 6 hours (16:45-21:45 IST), `StartWhenAvailable`,
+  action = `daily_resume.ps1`. Idempotent and stops early on quota, so
+  repeated runs during the refill window are safe.
+- Manual math grab started 2026-09-13 03:30 IST (83 free slots) with the
+  canonical command (temperature 0.7 kept for dataset uniformity;
+  reasoning_effort none; sleep 22).
+
+### Status after the 03:30 grab
+- (fill in once the run stops)
+
+## 2026-09-13 (verification) — temperature consistency
+> Confirmed all generation calls use temperature=0.7 uniformly across factual,
+> math, and reasoning categories. An earlier command draft mentioned 0.8 in
+> error; caught and corrected before any samples were generated at the wrong
+> setting. Verified 2026-09-13: 1,039/1,039 records in `logs/generations.jsonl`
+> have `parameters.temperature == 0.7`; no non-0.7 samples exist (pilot-era
+> 0.8 runs are quarantined in `logs/pilot_run/` and excluded from the dataset).
