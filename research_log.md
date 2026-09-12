@@ -226,3 +226,36 @@ produced, and problems hit with their fixes.
 - Run math and reasoning with `--provider gemini --model gemini-3.5-flash-lite`
   (auto-paced), then re-run with Groq once its TPD resets if strictly uniform
   Groq-only sets are wanted later.
+
+## 2026-09-12 (strategy check) — trial-access feasibility for accelerated generation
+
+### What was done
+- Archived all pilot generations to `logs/pilot_run/` (1.3 MB
+  `generations.jsonl`, 85 KB `failures.jsonl`); they no longer count toward the
+  final dataset. Final dataset will be regenerated with the chosen provider.
+- Fixed a latent `.env` bug: the file has a UTF-8 BOM, so the first line
+  (`OPENCODE_ZEN_API_KEY`) never loaded. `config.py` now reads with
+  `encoding="utf-8-sig"`.
+- Checked OpenCode Zen trial access:
+  - The API key authenticates and lists 70 models at
+    `https://opencode.ai/zen/v1`.
+  - Paid models return `401 CreditsError: No payment method` for the workspace.
+  - Free Zen models return `400 MissingSessionID: OpenCode's free tier can only
+    be used in OpenCode`.
+  - Conclusion: Zen cannot serve this pipeline without adding a payment method.
+- Checked OpenRouter: key valid, 0 credits, 22 free models listed.
+  `inclusionai/ling-3.0-flash-fin:free` answers cleanly (33/10 tokens on a
+  trivial prompt); `nvidia/nemotron-3.5-lightning:free` works but is a thinking
+  model that needs a larger token budget. Usable as a zero-cost supplement,
+  subject to OpenRouter free-tier rate limits.
+
+### Status of the original plan
+- "Use trial access now, qwen as permanent fallback" cannot be executed as
+  stated: there is no trial credit on the Zen workspace.
+- Viable options, pending decision:
+  - Add a payment method to Zen (~$1-3 total at DeepSeek V4 Flash / GPT-5.6
+    Luna prices for all 2250 samples) for a fast single-model dataset.
+  - Stay zero-cost: pool Gemini 3.1/3.5-flash-lite (500 requests/day each) +
+    Groq qwen3.8-27b (200k tokens/day) + OpenRouter free models, roughly two
+    days of collection.
+- In all cases `qwen/qwen3.8-27b` will be wired as the no-cost Groq fallback.

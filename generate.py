@@ -70,6 +70,25 @@ def load_completed() -> set[tuple[str, str, str, int]]:
     return completed
 
 
+def load_started_questions() -> set[str]:
+    """Question ids that already have at least one successful sample, any model."""
+    started: set[str] = set()
+    if not config.GENERATIONS_PATH.exists():
+        return started
+    with config.GENERATIONS_PATH.open("r", encoding="utf-8") as handle:
+        for line in handle:
+            line = line.strip()
+            if not line:
+                continue
+            try:
+                record = json.loads(line)
+            except json.JSONDecodeError:
+                continue
+            if record.get("status") == "ok":
+                started.add(record["question_id"])
+    return started
+
+
 def append_jsonl(path, record: dict):
     with path.open("a", encoding="utf-8") as handle:
         handle.write(json.dumps(record, ensure_ascii=False) + "\n")
@@ -265,6 +284,11 @@ def main() -> int:
     parser.add_argument("--sleep", type=float, default=0.0, help="seconds between successful calls")
     parser.add_argument("--max-tokens", type=int, help="override per-category cap")
     parser.add_argument("--force", action="store_true", help="regenerate samples already logged")
+    parser.add_argument(
+        "--skip-started",
+        action="store_true",
+        help="skip questions that already have samples from any model; use when a fresh model/quota window should only start untouched questions (keeps one model per question)",
+    )
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--list-models", action="store_true")
     args = parser.parse_args()
@@ -281,10 +305,13 @@ def main() -> int:
     questions = load_dataset(args.limit, categories)
     providers = build_providers(args)
     completed = set() if args.force else load_completed()
+    started_questions = set() if (args.force or not args.skip_started) else load_started_questions()
     run_id = uuid.uuid4().hex[:12]
 
     planned = 0
     for question in questions:
+        if question["question_id"] in started_questions:
+            continue
         for sample_id in range(args.n):
             if (question["question_id"], providers[0].name, providers[0].model, sample_id) in completed:
                 continue
@@ -307,6 +334,10 @@ def main() -> int:
 
     for index, question in enumerate(questions, start=1):
         qid = question["question_id"]
+        if qid in started_questions:
+            skipped += args.n
+            print(f"[{index}/{len(questions)}] {qid} skipped (samples already exist under another model)")
+            continue
         category = question["category"]
         system = config.CATEGORY_INSTRUCTIONS[category]
         max_tokens = args.max_tokens or config.MAX_TOKENS_BY_CATEGORY[category]
