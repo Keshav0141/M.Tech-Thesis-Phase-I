@@ -52,12 +52,17 @@ GROQ_REASONING_EFFORT = os.getenv("GROQ_REASONING_EFFORT", "low")
 REASONING_EFFORT_MODELS = ("openai/gpt-oss", "qwen/qwen3")
 
 # Model availability drifts fast. Verified against the live APIs on 2026-09-12:
-# Groq serves openai/gpt-oss-20b|120b and qwen/qwen3.x (no Llama models anymore);
-# Gemini serves gemini-2.5-flash and gemini-3.x (gemini-2.0-flash retired).
-# Llama-3.2-1B / Llama-3.1-8B from the original plan are NOT on Groq anymore.
-# Re-check with: python generate.py --list-models
+# Groq serves openai/gpt-oss-20b|120b and qwen/qwen3.x (no Llama models anymore).
+# Gemini: gemini-2.0-flash, gemini-2.5-flash and gemini-2.5-flash-lite are all
+# retired for new accounts (404). gemini-3.6-flash free tier allows only
+# 20 requests/day, so the fallback is gemini-3.5-flash-lite (verified 30/30
+# calls at ~13 requests/min; free-tier RPM ceiling is ~15, so pace with --sleep
+# >= 4.5 when using it as primary). Re-check with: python generate.py --list-models
 GROQ_DEFAULT_MODEL = os.getenv("GROQ_MODEL", "openai/gpt-oss-20b")
-GEMINI_DEFAULT_MODEL = os.getenv("GEMINI_MODEL", "gemini-3.6-flash")
+GEMINI_DEFAULT_MODEL = os.getenv("GEMINI_MODEL", "gemini-3.5-flash-lite")
+
+# Free-tier pacing when Gemini is the primary provider (requests/minute cap).
+GEMINI_PRIMARY_SLEEP = 4.5
 
 CATEGORY_INSTRUCTIONS = {
     "factual": (

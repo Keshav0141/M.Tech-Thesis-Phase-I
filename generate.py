@@ -371,8 +371,11 @@ def main() -> int:
                 if provider_index > 0:
                     fallback_calls += 1
                     print(f"  {label} sample {sample_id}: served by fallback {provider.name}/{provider.model}")
-                if args.sleep:
-                    time.sleep(args.sleep)
+                sleep_seconds = args.sleep
+                if sleep_seconds == 0 and provider.name == "gemini":
+                    sleep_seconds = config.GEMINI_PRIMARY_SLEEP
+                if sleep_seconds:
+                    time.sleep(sleep_seconds)
                 break
             else:
                 failures += 1

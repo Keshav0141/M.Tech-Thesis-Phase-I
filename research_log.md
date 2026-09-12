@@ -194,3 +194,35 @@ produced, and problems hit with their fixes.
   only as old requests age out; confirmed with a probe call (~300 tokens of
   headroom). No fix needed — the pipeline fails over to failures.jsonl and
   resumes cleanly.
+
+## 2026-09-12 (model switch) — Gemini fallback -> gemini-3.5-flash-lite
+
+### What was done
+- Requested replacement `gemini-2.5-flash` is retired for new accounts (404);
+  `gemini-2.5-flash-lite` is retired too. Tested the available candidates:
+  `gemini-3.1-flash-lite`, `gemini-3.5-flash-lite`, `gemini-flash-lite-latest`
+  all respond.
+- Switched the default fallback to `gemini-3.5-flash-lite` and verified quota
+  behaviour: a 30-call paced test (4.5s between calls, ~13 calls/min) ran 30/30
+  with 0 failures. An unpaced burst hit 429 at call 15, so the free tier is
+  RPM-bound at roughly 15 requests/minute, while the per-day cap is far above
+  the old model's 20 requests/day (44 calls made so far today).
+- Added automatic Gemini pacing in `generate.py`
+  (`config.GEMINI_PRIMARY_SLEEP = 4.5s`), applied whenever the wrapper serves a
+  fallback call or Gemini is the primary provider.
+
+### Why this matters
+- The previous fallback (`gemini-3.6-flash`) had an unusually restrictive
+  free-tier cap of 20 requests/day, which is why the factual tail could not be
+  absorbed by the fallback earlier today. The lite model can take a meaningful
+  share of daily load while Groq's 200k-token TPD resets.
+- factual is now complete (750/750). math stands at 69 samples generated under
+  `gpt-oss-20b` (48) and `gemini-3.6-flash` (21); the remainder will be
+  generated uniformly under `gemini-3.5-flash-lite` so the category has one
+  consistent model per sample set. The earlier 69 remain in the log as
+  additional per-model data and are ignored by the lite-model completion check.
+
+### Next
+- Run math and reasoning with `--provider gemini --model gemini-3.5-flash-lite`
+  (auto-paced), then re-run with Groq once its TPD resets if strictly uniform
+  Groq-only sets are wanted later.
