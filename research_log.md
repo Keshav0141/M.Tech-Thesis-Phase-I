@@ -325,3 +325,45 @@ Not usable for generation:
   20 RPM** on this account, chosen model
   **`inclusionai/ling-3.0-flash-fin:free`** (stable; reasoning field handled by
   the wrapper's token budget and empty-content retry).
+
+## 2026-09-12 (feasibility test) — qwen3.8-27b as single dataset model: NOT FEASIBLE
+
+### Test setup
+- 15 calls (5 factual, 5 math, 5 reasoning) pulled from `data/dataset.json`,
+  temperature 0.8, per-category token caps (512/1024/512),
+  `reasoning_effort="none"`, paced at ~26 requests/min and then 45s pauses
+  after hitting output-token 429s.
+- Raw per-call records: `qwen_feasibility_results.json` (temp work dir).
+
+### Results (real numbers)
+- 15/15 calls resolved after retries; **0 empty responses**;
+  `reasoning_effort="none"` was accepted with no reasoning tokens leaked.
+- Parseable answers: factual 5/5, math 5/5, reasoning **3/5** — two reasoning
+  generations hit the 512-token cap (`finish_reason=length`) mid-sentence and
+  never produced a final answer (40% truncation for reasoning).
+- Average tokens per sample (usable calls): factual **88** (completion 15),
+  math **471** (completion 374), reasoning **516** (completion 452).
+- Binding limit: **output tokens per minute (OTPM) = 1,000**. Math/reasoning
+  produce 300-500 output tokens per call, so sustained throughput is only
+  ~2-4 requests/minute. Headers confirm 1,000 RPD and 8,000 TPM per model;
+  Groq's 200k tokens/day per-model cap still applies.
+
+### Capacity math
+- Measured weighted average: 806k tokens for all 2,250 samples ≈ **358
+  tokens/sample** → 200,000/358 ≈ **558 samples/day** (the 1,000 RPD cap does
+  not bind) → ceil(2250/558) = **5 calendar days minimum**.
+- After fixing reasoning truncation (cap 1,024, est. ~750 completion tokens):
+  ≈ 458 tokens/sample → ≈ 437 samples/day → **5-6 calendar days**.
+- OTPM pacing puts total generation time at 14+ hours spread across those days.
+
+### Verdict
+- **NOT FEASIBLE** as the single model for the whole dataset: the honest floor
+  is 5-6 calendar days, and reasoning is 40% truncated at the current cap.
+- Next candidate to test if a single Groq model is required:
+  `openai/gpt-oss-20b` with `reasoning_effort="low"` (pilot data: ~207
+  tokens/sample for factual, clean outputs). Note the same 200k tokens/day
+  ceiling keeps any single Groq model at roughly 5+ days.
+  `qwen/qwen3.6-27b` shares the same provider limits; `gpt-oss-120b` is larger
+  and more verbose.
+- Fast same-day option remains a small paid top-up (Zen or OpenRouter, ~$1-3);
+  zero-cost option remains the multi-provider pool at ~2 days.
