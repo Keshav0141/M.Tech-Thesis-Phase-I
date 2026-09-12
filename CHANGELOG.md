@@ -2,7 +2,7 @@
 
 Dated entries tied to git commits.
 
-## 2026-09-12
+## 2026-09-12 (commit 180ebc6)
 - Project scaffold: `config.py`, `data/`, `logs/`, `requirements.txt`, `.gitignore`.
 - `build_dataset.py`: 450-question MECE dataset (150 factual TriviaQA,
   150 math GSM8K, 150 reasoning StrategyQA) with per-category validation,
