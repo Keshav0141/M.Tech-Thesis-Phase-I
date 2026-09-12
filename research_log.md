@@ -259,3 +259,69 @@ produced, and problems hit with their fixes.
     Groq qwen3.8-27b (200k tokens/day) + OpenRouter free models, roughly two
     days of collection.
 - In all cases `qwen/qwen3.8-27b` will be wired as the no-cost Groq fallback.
+
+## 2026-09-12 (OpenRouter verification) — limits, free models, chosen candidate
+
+### 1. Actual OpenRouter limits (confirmed from OpenRouter's own docs)
+- Free (`:free`) model variants: **20 requests/minute**, always.
+- Daily cap: **50 requests/day with less than $10 lifetime credits purchased**;
+  1,000/day only after a $10+ lifetime top-up.
+- This account: `total_credits = 0`, `usage = 0`, `is_free_tier` (never paid)
+  → the **50 RPD tier applies**.
+- Successful responses do **not** include `X-RateLimit-*` headers (only 429
+  error responses do). Failed/429 attempts still count toward the daily quota.
+- Requests used during testing today: ~25 (including failed attempts), so
+  ~25 free requests remain for today.
+
+### 2. The 22 free models (context length + reasoning assessment)
+Non-reasoning, instruct, 7-30B class (preferred):
+- `google/gemma-4-26b-a4b-it:free` — 262k ctx, non-reasoning — **upstream 429s: 1/10 calls OK**
+- `google/gemma-4-31b-it:free` — 262k ctx, non-reasoning — **upstream 429s: 0/5 calls OK**
+- `liquid/lfm-2.5-2.6b:free` — 65k ctx, small (2.6B), quality too low for the thesis
+
+Reasoning models (separate `reasoning` field; need >=512 output tokens):
+- `inclusionai/ling-3.0-flash-fin:free` — 262k ctx — **5/5 stable, 0.7-1.8s, correct** (chosen)
+- `inclusionai/ling-3.0-flash-sante:free`, `ling-3.0-flash-vl:free` — 262k ctx (same family)
+- `nex-agi/nex-n2.5-mini:free`, `nex-n2.5-pro:free` — 262k ctx
+- `nvidia/nemotron-3.5-lightning:free` — 1M ctx (observed thinking output)
+- `nvidia/nemotron-3-ultra-550b-a55b:free` — 1M ctx, 550B
+- `nvidia/nemotron-3-super-120b-a12b:free` — 262k ctx, 120B
+- `nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free` — 256k ctx
+- `thinkingmachines/inkling:free`, `inkling-small:free` — 1M ctx
+- `poolside/laguna-s-2.1:free`, `laguna-xs-2.1:free` — 262k ctx (code-oriented)
+- `dots-studio/dots-3-note-preview:free` — 512k ctx
+- `cohere/north-mini-code:free` — 256k ctx (code-oriented)
+
+Not usable for generation:
+- `nvidia/nemotron-3.5-content-safety:free` — 128k ctx (classifier)
+- `google/lyria-3-pro-preview`, `lyria-3-clip-preview` — 1M ctx (music models)
+- `openrouter/free` — 200k ctx (router; model varies per request)
+
+### 3. Chosen candidate and smoke test
+- Chosen: `inclusionai/ling-3.0-flash-fin:free` (the only free model that was
+  both reachable and stable; gemma's non-reasoning models are currently
+  upstream-starved).
+- 5-call production-style test at temperature 0.8, max_tokens 512: 5/5 OK,
+  avg latency ~1.4s, correct outputs (Bute, Sophie's Choice, Johnny Logan);
+  reasoning is returned in a separate `message.reasoning` field and does not
+  starve `content` at this token budget.
+
+### 4. Capacity estimate
+- OpenRouter alone covers ~25 more samples today and at most 50/day on this
+  tier: **not nearly enough** for 2,250 samples (about 2%).
+- Realistic no-cost pool per UTC day: Gemini 3.1-flash-lite 500 + Gemini
+  3.5-flash-lite 500 (after reset) + Groq qwen3.8-27b ~300-600 samples
+  (200k TPD) + OpenRouter 50 ≈ **1,350-1,650 samples/day** → the 2,250-sample
+  dataset needs **~2 days**.
+- Alternative: a one-time $10 OpenRouter top-up raises free-model RPD to 1,000
+  (still 20 RPM); spending ~$1-2 of it on a cheap paid model (e.g.,
+  deepseek-v4-flash) has no platform RPD cap and finishes in one session.
+
+### 5. Verdict
+- Zen free tier is app-session-locked (`MissingSessionID`) and cannot be called
+  via raw API; the paid tier needs a payment method the workspace does not
+  have → **Zen ruled out**.
+- OpenRouter is confirmed as a viable no-cost alternative with **50 RPD /
+  20 RPM** on this account, chosen model
+  **`inclusionai/ling-3.0-flash-fin:free`** (stable; reasoning field handled by
+  the wrapper's token budget and empty-content retry).
