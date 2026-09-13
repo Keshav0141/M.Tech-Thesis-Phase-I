@@ -92,6 +92,7 @@ def load_started_questions() -> set[str]:
 def append_jsonl(path, record: dict):
     with path.open("a", encoding="utf-8") as handle:
         handle.write(json.dumps(record, ensure_ascii=False) + "\n")
+        handle.flush()
 
 
 def status_code_of(error: Exception) -> int | None:
