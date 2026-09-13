@@ -593,3 +593,25 @@ Not usable for generation:
 
 ## 2026-09-13 12:15 UTC - automatic resume run
 - 12:15-12:17 UTC: +4 samples (math +4); 1 quota errors, 216 failed, 5 retry attempts; quota exhausted, resume tomorrow.
+
+## 2026-09-13 13:15 UTC - automatic resume run
+- 13:15-13:26 UTC: +22 samples (math +22); 1 quota errors, 194 failed, 7 retry attempts; quota exhausted, resume tomorrow.
+
+## 2026-09-13 14:15 UTC - automatic resume run
+- 14:15-14:23 UTC: +21 samples (math +21); 1 quota errors, 173 failed, 0 retry attempts; quota exhausted, resume tomorrow.
+
+## 2026-09-13 15:15 UTC - automatic resume run
+- 15:15-15:23 UTC: +17 samples (math +17); 1 quota errors, 156 failed, 0 retry attempts; quota exhausted, resume tomorrow.
+
+## 2026-09-13 16:15 UTC - automatic resume run
+- 16:15-16:23 UTC: +13 samples (math +13); 1 quota errors, 143 failed, 5 retry attempts; quota exhausted, resume tomorrow.
+
+## 2026-09-13 (scheduling change) — hourly around-the-clock harvest
+- `ThesisDailyResume` task extended from 16:45-21:45 IST only to **hourly,
+  24h/day** (daily trigger 00:05 IST, 60-min repetition, 24h duration,
+  `WakeToRun`, 12h execution limit). Night runs now harvest the overnight
+  trickle of the rolling RPD window. Machine must be on AC power for
+  wake-on-timer to work.
+
+## 2026-09-13 17:15 UTC - automatic resume run
+- 17:15-17:24 UTC: +20 samples (math +20); 1 quota errors, 123 failed, 0 retry attempts; quota exhausted, resume tomorrow.
