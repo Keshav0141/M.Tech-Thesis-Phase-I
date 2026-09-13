@@ -2,6 +2,12 @@
 
 Dated entries tied to git commits.
 
+## 2026-09-14
+- Reorganized project into `dataset/`, `generation/`, `scoring/`, `docs/`
+  folders; `config.py` and `.env` remain at root. All references (Python
+  imports via sys.path shims, `daily_resume.ps1` paths, Task Scheduler
+  action, README) updated and verified working before re-enabling automation.
+
 ## 2026-09-12 (commit 180ebc6)
 - Project scaffold: `config.py`, `data/`, `logs/`, `requirements.txt`, `.gitignore`.
 - `build_dataset.py`: 450-question MECE dataset (150 factual TriviaQA,

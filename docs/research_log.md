@@ -606,6 +606,19 @@ Not usable for generation:
 ## 2026-09-13 16:15 UTC - automatic resume run
 - 16:15-16:23 UTC: +13 samples (math +13); 1 quota errors, 143 failed, 5 retry attempts; quota exhausted, resume tomorrow.
 
+## 2026-09-14 (reorganization) — project restructured into folders
+- Project restructured for clarity: `dataset/` (build/validate/spot-check),
+  `generation/` (generate, check_remaining, daily_resume), `scoring/`
+  (UQ modules + evaluate), `docs/` (README, research_log, CHANGELOG,
+  questions_manifest, fallback_models). `config.py` and `.env` remain at the
+  root; `data/`, `logs/`, `results/` unchanged.
+- All moved Python modules got a `sys.path` shim pointing at the root;
+  `daily_resume.ps1` paths, manifest write paths, README examples, and the
+  Task Scheduler action were updated to the new locations.
+- Verified before re-enabling automation: validate_dataset.py,
+  check_remaining.py, and a manual daily_resume.ps1 run all work from their
+  new folders; task re-enabled (state Ready, next run 16:45 IST).
+
 ## 2026-09-13 (scheduling change) — hourly around-the-clock harvest
 - `ThesisDailyResume` task extended from 16:45-21:45 IST only to **hourly,
   24h/day** (daily trigger 00:05 IST, 60-min repetition, 24h duration,
