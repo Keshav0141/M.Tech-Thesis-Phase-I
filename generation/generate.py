@@ -8,10 +8,9 @@ a (question_id, provider, model_name, sample_id) tuple that already exists in
 the log is skipped, so interrupted free-tier runs can simply be restarted.
 
 Examples:
-    python generate.py --list-models
-    python generate.py --category factual --limit 5 --n 2 --dry-run
-    python generate.py --model llama-3.1-8b-instant --n 5 --temperature 0.8
-    python generate.py --provider gemini --model gemini-2.0-flash --n 5
+    python generation/generate.py --list-models
+    python generation/generate.py --category factual --limit 5 --n 2 --dry-run
+    python generation/generate.py --category math --n 5 --temperature 0.7 --provider groq --model qwen/qwen3.8-27b --reasoning-effort none --sleep 22
 """
 
 from __future__ import annotations
@@ -23,6 +22,9 @@ import sys
 import time
 import uuid
 from datetime import datetime, timezone
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 import config
 
@@ -92,7 +94,6 @@ def load_started_questions() -> set[str]:
 def append_jsonl(path, record: dict):
     with path.open("a", encoding="utf-8") as handle:
         handle.write(json.dumps(record, ensure_ascii=False) + "\n")
-        handle.flush()
 
 
 def status_code_of(error: Exception) -> int | None:

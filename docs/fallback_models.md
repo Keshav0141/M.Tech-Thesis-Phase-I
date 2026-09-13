@@ -53,7 +53,7 @@ If `qwen/qwen3.8-27b` becomes unavailable:
 
 1. Stop the current generation run (it resumes cleanly).
 2. Pick the first viable model from this list; validate it with a short
-   feasibility probe (e.g., `python generate.py --list-models` to confirm the
+   feasibility probe (e.g., `python generation/generate.py --list-models` to confirm the
    model is still listed; then 5-15 test calls).
 3. Re-run only the affected samples with the replacement model, using
    `--skip-started` so already-started questions keep a single model.

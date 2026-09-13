@@ -15,7 +15,8 @@ Schedule with Windows Task Scheduler; see README.md.
 #>
 
 $ErrorActionPreference = "Continue"
-$ProjectRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
+# generation/ folder -> project root is the parent directory
+$ProjectRoot = Split-Path -Parent (Split-Path -Parent $MyInvocation.MyCommand.Path)
 Set-Location -LiteralPath $ProjectRoot
 
 # Concurrency guard: refuse to run if another generation driver is active
@@ -32,7 +33,7 @@ $stamp = $startUtc.ToString("yyyyMMdd_HHmmss")
 $logsDir = Join-Path $ProjectRoot "logs"
 New-Item -ItemType Directory -Force -Path $logsDir | Out-Null
 $runLog = Join-Path $logsDir ("resume_{0}.log" -f $stamp)
-$researchLog = Join-Path $ProjectRoot "research_log.md"
+$researchLog = Join-Path $ProjectRoot "docs\research_log.md"
 
 function Write-RunLog {
     param([string]$Message)
@@ -56,7 +57,7 @@ $python = $pythonCommand.Source
 Write-RunLog "daily resume started"
 
 # --- 1. check remaining ------------------------------------------------------
-$statusText = & $python check_remaining.py --json | Out-String
+$statusText = & $python (Join-Path $ProjectRoot "generation\check_remaining.py") --json | Out-String
 if ($LASTEXITCODE -eq 0) {
     Write-RunLog "All samples collected. Nothing to do."
     Append-ResearchLog "- All 2250 samples collected; nothing left to generate."
@@ -93,7 +94,7 @@ $stoppedReason = "all incomplete categories attempted"
 try {
     foreach ($category in $incomplete) {
         Write-RunLog ("starting generate.py --category {0} --n 5 --temperature 0.7 --provider groq --model qwen/qwen3.8-27b --reasoning-effort none --sleep 22 (per-category caps from config)" -f $category)
-        $output = & $python generate.py --category $category --n 5 --temperature 0.7 `
+        $output = & $python (Join-Path $ProjectRoot "generation\generate.py") --category $category --n 5 --temperature 0.7 `
             --provider groq --model qwen/qwen3.8-27b --reasoning-effort none `
             --sleep 22 2>&1 |
             Tee-Object -FilePath $runLog -Append | Out-String
@@ -112,7 +113,7 @@ try {
         Write-RunLog ("{0}: +{1} samples, {2} failed, {3} quota events" -f $category, $collected, $failed, $quotaHere)
 
         if ($quotaHere -gt 0) {
-            $recheckText = & $python check_remaining.py --json --category $category | Out-String
+            $recheckText = & $python (Join-Path $ProjectRoot "generation\check_remaining.py") --json --category $category | Out-String
             $recheck = $recheckText | ConvertFrom-Json
             if ([int]$recheck.$category.samples_missing -gt 0) {
                 $stoppedReason = "quota exhausted, resume tomorrow"
@@ -131,5 +132,5 @@ try {
     Write-RunLog ("summary: {0}" -f $summary)
 }
 
-& $python check_remaining.py
+& $python (Join-Path $ProjectRoot "generation\check_remaining.py")
 exit 0

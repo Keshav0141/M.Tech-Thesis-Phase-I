@@ -19,6 +19,9 @@ import json
 import re
 import sys
 from datetime import datetime, timezone
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 import build_dataset
 import config
@@ -178,7 +181,7 @@ def main() -> int:
         manual_examples=manual_examples,
     )
     print(f"[curate] dataset updated -> {config.DATASET_PATH}")
-    print(f"[curate] manifest refreshed -> {config.PROJECT_ROOT / 'questions_manifest.md'}")
+    print(f"[curate] manifest refreshed -> {config.PROJECT_ROOT / 'docs' / 'questions_manifest.md'}")
     return 0
 
 

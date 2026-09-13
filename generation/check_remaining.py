@@ -9,7 +9,7 @@ Usage:
 
 Exit code is 0 when every active question has n samples, 1 otherwise, so it
 can be used in a daily shell loop:
-    python check_remaining.py || python generate.py --category factual --n 5 --temperature 0.8
+    python check_remaining.py || python generation/generate.py --category factual --n 5 --temperature 0.7
 """
 
 from __future__ import annotations
@@ -18,6 +18,9 @@ import argparse
 import json
 import sys
 from collections import Counter, defaultdict
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 import config
 
@@ -130,7 +133,7 @@ def main() -> int:
         for category in categories:
             if report[category]["samples_missing"]:
                 print(
-                    f"  python generate.py --category {category} --n {args.n} --temperature 0.7 "
+                    f"  python generation/generate.py --category {category} --n {args.n} --temperature 0.7 "
                     "--provider groq --model qwen/qwen3.8-27b --reasoning-effort none --sleep 22"
                 )
     return 0 if total_missing == 0 else 1

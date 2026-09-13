@@ -24,6 +24,9 @@ import sys
 from collections import Counter, defaultdict
 from datetime import datetime, timezone
 from difflib import SequenceMatcher
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 import config
 
@@ -507,7 +510,7 @@ def write_manifest(
             f"{q['difficulty_flag']} | {q['validation_status']} | {q['metadata'].get('word_count', '')} |"
         )
     lines.append("")
-    config.PROJECT_ROOT.joinpath("questions_manifest.md").write_text("\n".join(lines), encoding="utf-8")
+    config.PROJECT_ROOT.joinpath("docs", "questions_manifest.md").write_text("\n".join(lines), encoding="utf-8")
 
 
 def main() -> int:
@@ -567,7 +570,7 @@ def main() -> int:
     write_manifest(dataset, stats, all_examples, args.seed, args.target)
 
     print(f"[build] dataset -> {config.DATASET_PATH} ({len(dataset)} questions)")
-    print(f"[build] manifest -> {config.PROJECT_ROOT / 'questions_manifest.md'}")
+    print(f"[build] manifest -> {config.PROJECT_ROOT / 'docs' / 'questions_manifest.md'}")
     print(f"[build] spot-check -> {config.SPOT_CHECK_PATH}")
     return 0
 
