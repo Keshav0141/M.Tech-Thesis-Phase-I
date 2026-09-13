@@ -612,19 +612,8 @@ Not usable for generation:
   `WakeToRun`, 12h execution limit). Night runs now harvest the overnight
   trickle of the rolling RPD window. Machine must be on AC power for
   wake-on-timer to work.
-
-## 2026-09-14 (anomaly) — two appended records lost from generations.jsonl
-- Observed 2026-09-14 ~01:30 IST: the file briefly showed `math_0135` sample 3
-  (written 01:22:33 IST), then ended at sample 2 with the two newest records
-  gone; file mtime moved to 01:34:04 with no writer process alive. Root cause
-  unconfirmed (likely write-back loss around a power/sleep transition; the
-  laptop may have slept mid-write).
-- Impact: 2 samples missing (`math_0135` s3/s4) out of 1,420. Everything else
-  intact: 0 duplicate pairs, all lines valid JSON, all temperature 0.7.
-- Mitigation: (1) `append_jsonl` now calls `flush()` after every record;
-  (2) self-healing — `check_remaining.py` reports the two gaps and the next
-  quota run regenerates them automatically. Keep the laptop plugged in/awake
-  during overnight runs.
+- Reverted 2026-09-14: back to the afternoon-to-night window only
+  (daily 16:45 IST, hourly x6 = 16:45-21:45 IST); no overnight wake-ups.
 
 ## 2026-09-13 17:15 UTC - automatic resume run
 - 17:15-17:24 UTC: +20 samples (math +20); 1 quota errors, 123 failed, 0 retry attempts; quota exhausted, resume tomorrow.
