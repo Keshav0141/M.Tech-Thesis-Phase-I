@@ -576,6 +576,14 @@ Not usable for generation:
 - Lesson: the rolling-quota cadence makes hourly overlap likely whenever the
   refill window starts while a previous run is still draining; the guard makes
   the scheduled task safe to run hourly.
+- Post-dedup verification (2026-09-13): all 67 affected `(question_id,
+  sample_id)` pairs exist exactly once; kept-first records are complete
+  ok-samples (non-empty, final-answer markers, `finish=stop`). The log only
+  ever contains `status=ok` records (failures live in `failures.jsonl`), so a
+  kept record can never be a failed/incomplete generation, and the dropped
+  copies were equally valid second draws. math_0090-0106 retain complete
+  5-sample sets; math_0107's 4/5 and 0108+ gaps are quota-pending state, not
+  over-removal.
 
 ## 2026-09-13 10:24 UTC - automatic resume run
 - 10:24-12:01 UTC: +169 samples (math +169); 1 quota errors, 224 failed, 94 retry attempts; quota exhausted, resume tomorrow.
