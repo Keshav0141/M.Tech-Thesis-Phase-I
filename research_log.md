@@ -562,3 +562,26 @@ Not usable for generation:
 > setting. Verified 2026-09-13: 1,039/1,039 records in `logs/generations.jsonl`
 > have `parameters.temperature == 0.7`; no non-0.7 samples exist (pilot-era
 > 0.8 runs are quarantined in `logs/pilot_run/` and excluded from the dataset).
+
+## 2026-09-13 (incident) — concurrent drivers produced 67 duplicate samples
+- Overlapping scheduled-task runs (10:24 and 11:15 UTC) raced and double-wrote
+  67 `(question_id, sample_id)` records into `logs/generations.jsonl`.
+  `IgnoreNew` on the task only protects against duplicate instances of the task
+  itself, not against manual+task concurrency.
+- Fixed:
+  1. Deduplicated the log (kept first write per sample; 1,284 records kept,
+     67 dropped).
+  2. Added a concurrency guard at the top of `daily_resume.ps1`: it exits if
+     another `generate.py` or `daily_resume.ps1` process is already running.
+- Lesson: the rolling-quota cadence makes hourly overlap likely whenever the
+  refill window starts while a previous run is still draining; the guard makes
+  the scheduled task safe to run hourly.
+
+## 2026-09-13 10:24 UTC - automatic resume run
+- 10:24-12:01 UTC: +169 samples (math +169); 1 quota errors, 224 failed, 94 retry attempts; quota exhausted, resume tomorrow.
+
+## 2026-09-13 11:15 UTC - automatic resume run
+- 11:15-12:02 UTC: +71 samples (math +71); 1 quota errors, 220 failed, 81 retry attempts; quota exhausted, resume tomorrow.
+
+## 2026-09-13 12:15 UTC - automatic resume run
+- 12:15-12:17 UTC: +4 samples (math +4); 1 quota errors, 216 failed, 5 retry attempts; quota exhausted, resume tomorrow.

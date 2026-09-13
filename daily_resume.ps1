@@ -18,6 +18,15 @@ $ErrorActionPreference = "Continue"
 $ProjectRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
 Set-Location -LiteralPath $ProjectRoot
 
+# Concurrency guard: refuse to run if another generation driver is active
+# (manual run vs scheduled task overlap once produced 67 duplicate samples).
+$otherDrivers = Get-CimInstance Win32_Process -Filter "Name='python.exe' or Name='powershell.exe'" |
+    Where-Object { $_.ProcessId -ne $PID -and ($_.CommandLine -match "generate\.py|daily_resume\.ps1") }
+if ($otherDrivers) {
+    Write-Host "another generation driver is already running (PID $($otherDrivers.ProcessId -join ', ')); exiting."
+    exit 0
+}
+
 $startUtc = (Get-Date).ToUniversalTime()
 $stamp = $startUtc.ToString("yyyyMMdd_HHmmss")
 $logsDir = Join-Path $ProjectRoot "logs"
