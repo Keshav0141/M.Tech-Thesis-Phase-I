@@ -61,6 +61,7 @@ def main() -> int:
     parser.add_argument("--threshold", type=float, default=0.5, help="bidirectional entailment threshold")
     parser.add_argument("--batch-size", type=int, default=32)
     parser.add_argument("--max-length", type=int, default=512)
+    parser.add_argument("--half", action="store_true", help="fp16 inference (faster on consumer GPUs)")
     parser.add_argument("--device", choices=["auto", "cpu", "cuda"], default="auto")
     parser.add_argument("--output", default=str(uq.RESULTS_DIR / "semantic_entropy.jsonl"))
     args = parser.parse_args()
@@ -90,6 +91,8 @@ def main() -> int:
     try:
         tokenizer = AutoTokenizer.from_pretrained(args.nli_model)
         nli_model = AutoModelForSequenceClassification.from_pretrained(args.nli_model)
+        if args.half:
+            nli_model = nli_model.half()
         nli_model.to(device)
         nli_model.eval()
     except Exception as error:

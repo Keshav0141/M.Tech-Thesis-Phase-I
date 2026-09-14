@@ -627,9 +627,30 @@ Not usable for generation:
 - Totals: 569,238 tokens logged; 53.9 hours wall-clock (2026-09-12 11:04 UTC
   -> 2026-09-14 16:58 UTC); all collection via free-tier quota with
   resumable scheduled harvests.
-- Next: run the full Week 1 scoring pipeline
-  (score_correctness -> score_lexical -> score_semantic_entropy ->
-  evaluate_methods) and regenerate results/.
+
+## 2026-09-14 (Week 1 evaluation) — n-gram + TF-IDF baselines per professor
+- Professor's requested methods implemented FIRST as the uncertainty
+  baselines: `scoring/score_ngram_tfidf.py` computes per-question bigram
+  Jaccard, trigram Jaccard, and TF-IDF cosine (global smoothed IDF over all
+  2,250 samples, pure Python) uncertainties. Unigram Jaccard kept from
+  `score_lexical.py` (--ngram 1); semantic entropy (NLI) kept as comparison.
+- Correctness on the full set (majority vote, 5 samples): factual 85 correct /
+  48 incorrect / 17 unresolved (29 questions have needs_review samples from
+  conservative alias matching); math 144 / 6; reasoning 108 / 42.
+- Full-data AUROC (uncertainty vs. majority-vote error), all categories:
+  tfidf_cosine **0.835**, unigram 0.812, bigram 0.804, trigram 0.801,
+  semantic_entropy 0.697. Best single category: factual tfidf **0.884**.
+  Math AUROCs are noisy (only 6 incorrect questions).
+- Report: `results/week1_auroc_report.md` (+ machine-readable
+  `results/auroc.json`); per-method tables ordered bigram -> trigram -> tfidf
+  first per the professor's preference.
+- Pipeline order for reproducibility: score_correctness -> score_lexical
+  (--ngram 1) -> score_ngram_tfidf -> score_semantic_entropy ->
+  evaluate_methods. Semantic entropy ran with `--batch-size 64 --half` on the
+  GTX 1650 (~50 min; the GPU is the bottleneck).
+- Open item for discussion with the professor: 29 factual questions carry
+  needs_review samples (`results/needs_review.jsonl`) and 17 factual questions
+  are "unresolved" and currently excluded from the factual AUROC.
 
 ## 2026-09-13 (scheduling change) — hourly around-the-clock harvest
 - `ThesisDailyResume` task extended from 16:45-21:45 IST only to **hourly,
@@ -654,3 +675,6 @@ Not usable for generation:
 
 ## 2026-09-14 11:15 UTC - automatic resume run
 - 11:15-16:38 UTC: +812 samples (math +62, reasoning +750); 0 quota errors, 0 failed, 14 retry attempts; all incomplete categories attempted.
+
+## 2026-09-14 17:15 UTC - automatic resume run
+- All 2250 samples collected; nothing left to generate.

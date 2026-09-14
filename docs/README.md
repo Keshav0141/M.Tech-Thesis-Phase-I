@@ -55,6 +55,16 @@ Start-ScheduledTask -TaskName "ThesisDailyResume"
 Get-ScheduledTask -TaskName "ThesisDailyResume" | Get-ScheduledTaskInfo
 ```
 
+## Scoring pipeline (Week 1 evaluation)
+
+```powershell
+python scoring/score_correctness.py        # per-sample labels + majority vote
+python scoring/score_lexical.py --ngram 1  # unigram Jaccard uncertainty
+python scoring/score_ngram_tfidf.py        # bigram / trigram / TF-IDF uncertainty
+python scoring/score_semantic_entropy.py   # NLI clustering entropy (GPU; --half for speed)
+python scoring/evaluate_methods.py         # AUROC report -> results/week1_auroc_report.md
+```
+
 ## Notes
 - Task Scheduler needs `python` on PATH; `daily_resume.ps1` resolves it and
   fails with a clear message if missing.

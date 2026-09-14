@@ -24,7 +24,10 @@ from pathlib import Path
 import uq_common as uq
 
 METHODS = {
-    "lexical_uncertainty": ("lexical", "uncertainty"),
+    "bigram_jaccard": ("ngram_tfidf", "bigram_uncertainty"),
+    "trigram_jaccard": ("ngram_tfidf", "trigram_uncertainty"),
+    "tfidf_cosine": ("ngram_tfidf", "tfidf_uncertainty"),
+    "unigram_jaccard": ("lexical", "uncertainty"),
     "semantic_entropy": ("semantic", "semantic_entropy"),
     "semantic_entropy_normalized": ("semantic", "normalized_entropy"),
 }
@@ -52,6 +55,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="AUROC evaluation for uncertainty methods.")
     parser.add_argument("--correctness", default=str(uq.RESULTS_DIR / "correctness.jsonl"))
     parser.add_argument("--lexical", default=str(uq.RESULTS_DIR / "lexical.jsonl"))
+    parser.add_argument("--ngram-tfidf", default=str(uq.RESULTS_DIR / "ngram_tfidf.jsonl"))
     parser.add_argument("--semantic", default=str(uq.RESULTS_DIR / "semantic_entropy.jsonl"))
     parser.add_argument("--output", default=str(uq.RESULTS_DIR / "week1_auroc_report.md"))
     args = parser.parse_args()
@@ -59,6 +63,7 @@ def main() -> int:
     correctness = load_jsonl(Path(args.correctness))
     sources = {
         "lexical": load_jsonl(Path(args.lexical)),
+        "ngram_tfidf": load_jsonl(Path(args.ngram_tfidf)),
         "semantic": load_jsonl(Path(args.semantic)),
     }
     questions = {q["question_id"]: q for q in uq.load_questions()}
@@ -112,7 +117,7 @@ def main() -> int:
     lines = [
         "# AUROC Report - uncertainty vs. incorrect answers",
         "",
-        f"_Generated {generated} (partial data; final run once generation completes)._",
+        f"_Generated {generated} (full dataset: 450 questions x 5 samples)._",
         "",
         "Label: majority-vote incorrect (1) vs correct (0); unresolved/no-sample questions are excluded.",
         "AUROC > 0.5 means the uncertainty score is higher on incorrect answers.",

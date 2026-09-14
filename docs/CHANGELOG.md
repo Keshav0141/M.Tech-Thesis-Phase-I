@@ -3,6 +3,12 @@
 Dated entries tied to git commits.
 
 ## 2026-09-14
+- Week 1 evaluation on the full dataset: added `scoring/score_ngram_tfidf.py`
+  (bigram/trigram Jaccard + TF-IDF cosine uncertainty, per professor's
+  requested baselines); `evaluate_methods.py` now reports
+  bigram/trigram/tfidf first, with unigram and semantic entropy as
+  comparison. Full-data AUROC: tfidf 0.835 / unigram 0.812 / bigram 0.804 /
+  trigram 0.801 / semantic entropy 0.697 (all categories).
 - **Generation complete: 2,250/2,250 samples** (750 factual, 750 math,
   750 reasoning; single model `groq/qwen/qwen3.8-27b`, temperature 0.7,
   569k tokens, ~54h wall clock, 0 duplicates).
