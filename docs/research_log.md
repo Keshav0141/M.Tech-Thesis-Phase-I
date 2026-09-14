@@ -619,6 +619,18 @@ Not usable for generation:
   check_remaining.py, and a manual daily_resume.ps1 run all work from their
   new folders; task re-enabled (state Ready, next run 16:45 IST).
 
+## 2026-09-14 — GENERATION COMPLETE: 2250/2250 samples
+- All three categories finished at 22:28 IST (last sample 16:58 UTC):
+  factual 750, math 750, reasoning 750.
+- Dataset integrity: 2,250 records, 0 duplicates, single model
+  `groq/qwen/qwen3.8-27b` everywhere, temperature 0.7 everywhere.
+- Totals: 569,238 tokens logged; 53.9 hours wall-clock (2026-09-12 11:04 UTC
+  -> 2026-09-14 16:58 UTC); all collection via free-tier quota with
+  resumable scheduled harvests.
+- Next: run the full Week 1 scoring pipeline
+  (score_correctness -> score_lexical -> score_semantic_entropy ->
+  evaluate_methods) and regenerate results/.
+
 ## 2026-09-13 (scheduling change) — hourly around-the-clock harvest
 - `ThesisDailyResume` task extended from 16:45-21:45 IST only to **hourly,
   24h/day** (daily trigger 00:05 IST, 60-min repetition, 24h duration,
@@ -636,3 +648,9 @@ Not usable for generation:
 
 ## 2026-09-13 19:35 UTC - automatic resume run
 - 19:35-19:53 UTC: +14 samples (math +14); 1 quota errors, 81 failed, 9 retry attempts; quota exhausted, resume tomorrow.
+
+## 2026-09-13 20:51 UTC - automatic resume run
+- 20:51-21:03 UTC: +19 samples (math +19); 1 quota errors, 62 failed, 3 retry attempts; quota exhausted, resume tomorrow.
+
+## 2026-09-14 11:15 UTC - automatic resume run
+- 11:15-16:38 UTC: +812 samples (math +62, reasoning +750); 0 quota errors, 0 failed, 14 retry attempts; all incomplete categories attempted.

@@ -3,6 +3,9 @@
 Dated entries tied to git commits.
 
 ## 2026-09-14
+- **Generation complete: 2,250/2,250 samples** (750 factual, 750 math,
+  750 reasoning; single model `groq/qwen/qwen3.8-27b`, temperature 0.7,
+  569k tokens, ~54h wall clock, 0 duplicates).
 - Reorganized project into `dataset/`, `generation/`, `scoring/`, `docs/`
   folders; `config.py` and `.env` remain at root. All references (Python
   imports via sys.path shims, `daily_resume.ps1` paths, Task Scheduler
