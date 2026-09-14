@@ -651,6 +651,10 @@ Not usable for generation:
 - Open item for discussion with the professor: 29 factual questions carry
   needs_review samples (`results/needs_review.jsonl`) and 17 factual questions
   are "unresolved" and currently excluded from the factual AUROC.
+- Figures (2026-09-14, `scoring/make_plots.py` -> `results/figures/`):
+  `auroc_bar.png` (AUROC per method, overall + per category, with
+  incorrect/correct counts) and `uncertainty_boxplots.png` (tfidf/bigram/
+  trigram/semantic distributions for incorrect vs correct questions).
 
 ## 2026-09-13 (scheduling change) — hourly around-the-clock harvest
 - `ThesisDailyResume` task extended from 16:45-21:45 IST only to **hourly,
