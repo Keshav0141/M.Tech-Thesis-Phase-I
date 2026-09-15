@@ -692,6 +692,24 @@ Not usable for generation:
   questions); the failure mode matches prediction (same reasoning shape,
   different final number, high NLI similarity). No fix applied yet, per plan.
 
+## 2026-09-14 (ensemble) — rank-averaged UQ ensembles vs. TF-IDF baseline
+- Built `scoring/ensemble_uq.py` -> `results/ensemble_report.md` (+
+  `results/ensemble_scores.jsonl`). 433 labeled questions with all 5 scores.
+- Polarity verified for all methods (no flips needed). Scores rank-normalized
+  per category; ensembles = rank averages. Weighted variants = logistic
+  regression on the ranks with 5-fold stratified CV (OOF predictions).
+- Results (AUROC all): tfidf 0.845 | unigram 0.825 | bigram 0.820 | trigram
+  0.817 | semantic 0.706 | ensemble-unweighted-5 0.747 | ensemble-weighted-5
+  0.745 | ensemble-unweighted-3 0.751 | ensemble-weighted-3 0.748.
+- Verdict: **no ensemble beats TF-IDF alone**. The rank average dilutes the
+  strong method with weaker, correlated ones. Per category the story differs:
+  math ensembles win (best 0.814 vs tfidf 0.756) and reasoning too (best 0.679
+  vs 0.630), but factual loses (best 0.884 vs tfidf 0.909). Logistic weights
+  add nothing (methods highly correlated).
+- Implication for the thesis: TF-IDF cosine is the strongest single signal;
+  ensembles only help in categories where it is weak. A per-category method
+  selector (or TF-IDF + numeric-agreement for math) is the natural next step.
+
 ## 2026-09-13 (scheduling change) — hourly around-the-clock harvest
 - `ThesisDailyResume` task extended from 16:45-21:45 IST only to **hourly,
   24h/day** (daily trigger 00:05 IST, 60-min repetition, 24h duration,

@@ -3,6 +3,11 @@
 Dated entries tied to git commits.
 
 ## 2026-09-14
+- Ensemble evaluation: `scoring/ensemble_uq.py` -> `results/ensemble_report.md`.
+  Rank-averaged ensembles (5-method and 3-method, unweighted + logistic-CV)
+  do not beat TF-IDF alone (0.845); they help math/reasoning but lose factual.
+
+## 2026-09-14
 - Week 1 evaluation on the full dataset: added `scoring/score_ngram_tfidf.py`
   (bigram/trigram Jaccard + TF-IDF cosine uncertainty, per professor's
   requested baselines); `evaluate_methods.py` now reports
