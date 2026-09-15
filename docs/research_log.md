@@ -768,6 +768,18 @@ Not usable for generation:
 - Extended report: `results/extended_methods_report.md`; evaluate_methods now
   takes --graph-methods and honors --output; selector_cv takes --output.
 
+## 2026-09-15 (write-up) — mid_review_draft TODOs filled
+- Base-paper citation finalized: Zhen Lin, Shubhendu Trivedi, Jimeng Sun,
+  "Generating with Confidence: Uncertainty Quantification for Black-box Large
+  Language Models", TMLR, May 2024, arXiv:2305.19187 (verified against
+  arXiv/OpenReview).
+- Review pass over docs/mid_review_draft.md: all numbers re-checked against
+  auroc.json (94/339 errors; 46/87 factual, 6/144 math, 42/108 reasoning),
+  ensemble_report.md, selector_cv_report.md, extended_methods_report.md,
+  semantic_entropy_math_diagnosis.md — no mismatches found.
+- Section 9 updated: 9-method Lin et al. set now complete (with findings),
+  and the mathb expansion generation noted as underway (results pending).
+
 ## 2026-09-13 (scheduling change) — hourly around-the-clock harvest
 - `ThesisDailyResume` task extended from 16:45-21:45 IST only to **hourly,
   24h/day** (daily trigger 00:05 IST, 60-min repetition, 24h duration,

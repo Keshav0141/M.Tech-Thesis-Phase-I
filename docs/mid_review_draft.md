@@ -10,9 +10,13 @@ Numbers pulled from `results/` and `docs/research_log.md`; nothing recomputed._
 - Goal: reliable LLM answers via **escalation gates** — a cheap uncertainty
   signal decides whether to accept the model's answer or escalate (retry,
   abstain, or call a stronger model).
-- Framing and base paper: **Lin et al., TMLR 2024** (escalation-gate design
-  for LLM inference). _TODO: fill in exact title/authors before final
-  submission._
+- Framing and base paper: **Zhen Lin, Shubhendu Trivedi, and Jimeng Sun,
+  "Generating with Confidence: Uncertainty Quantification for Black-box Large
+  Language Models", Transactions on Machine Learning Research (TMLR), May
+  2024, arXiv:2305.19187 (code: github.com/zlin7/UQ-NLG).** The paper studies
+  black-box UQ for selective NLG — the same escalation-gate setting used here
+  (an uncertainty/confidence measure decides whether a generation is accepted
+  or escalated for further assessment).
 - Pipeline under evaluation: one model generates N=5 samples per question at
   temperature 0.7; five uncertainty scores (n-gram Jaccard, TF-IDF cosine,
   NLI semantic entropy) predict whether the majority-vote answer is wrong;
@@ -130,9 +134,19 @@ reasoning 42).
 
 - Shrink the math noise problem: collect more math error signal (or accept
   the small-n caveat and report per-category numbers with n).
-- Add the remaining base-paper methods to the comparison (the escalation-gate
-  paper's other baselines beyond n-gram/TF-IDF/semantic entropy), and a
-  number-aware semantic clustering fix (numeric-equality precondition before
-  NLI merge, motivated by the math_0009 diagnosis).
+- The full method set from the base paper is now implemented: NumSets,
+  Degree matrix, EigV, and Eccentricity were added on top of the five Week 1
+  methods (see `results/extended_methods_report.md`). Findings so far:
+  NumSets ~ semantic entropy (0.710 vs 0.706 all-category); Degree/EigV are
+  inverted (agreement measures, flipped ~0.735) and identical by
+  construction; none of the four changed the CV selector's winners or its
+  macro-AUROC (still 0.805 vs 0.760 TF-IDF-CV).
+- Math noise expansion in progress: 150 fresh GSM8K questions
+  (`data/math_expansion.json`, ids mathb_0001..0150) are being generated
+  (5 samples each, same model/settings) to enlarge the 6-question incorrect
+  pool. Generation is underway via the scheduled quota harvester; the
+  incorrect-count report is pending — no results yet.
+- Add a number-aware semantic clustering fix (numeric-equality precondition
+  before NLI merge, motivated by the math_0009 diagnosis).
 - Decide the second model tier (if any) and run the same pipeline on it.
-- After the professor's review: finalize the write-up sections marked TODO.
+- After the professor's review: final proofread before submission.
