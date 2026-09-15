@@ -732,6 +732,24 @@ Not usable for generation:
   factual, and wins the macro-average; math remains noisy (6 incorrect
   questions, fold AUCs 0.69-0.97).
 
+## 2026-09-14 (math expansion) — set B to boost the incorrect-math pool
+- Goal: the math AUROC is unstable because only 6/150 math questions got
+  majority-wrong answers. Built a 150-question GSM8K expansion set B
+  (`dataset/build_math_expansion.py` -> `data/math_expansion.json`,
+  ids mathb_0001..0150, seed 100) with the same validation (check_math,
+  dedupe against the locked 454 entries: 6 near-duplicates + 10 overlength
+  rejected). NOT merged into data/dataset.json.
+- Tooling: `--dataset` flag added to generate.py, check_remaining.py and
+  score_correctness.py; `daily_resume.ps1` now generates set B automatically
+  after the main categories (same qwen3.8-27b / temp 0.7 / sleep 22 flags).
+- ETA: 750 samples x ~560 tokens ~ 420k tokens > 200k tokens/day, so
+  ~2-3 days of rolling quota (harvested by the scheduled 16:45-21:45 IST
+  runs plus manual trickles). Generation started 2026-09-14 03:05 IST
+  (log mathb_run_*).
+- Next: once 750/750, run score_correctness on set B only and report the
+  incorrect-math count before any AUROC rerun; main dataset and full
+  pipeline remain untouched until then.
+
 ## 2026-09-13 (scheduling change) — hourly around-the-clock harvest
 - `ThesisDailyResume` task extended from 16:45-21:45 IST only to **hourly,
   24h/day** (daily trigger 00:05 IST, 60-min repetition, 24h duration,

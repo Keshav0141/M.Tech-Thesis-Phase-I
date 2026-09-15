@@ -33,10 +33,11 @@ def utc_now() -> str:
     return datetime.now(timezone.utc).isoformat()
 
 
-def load_dataset(limit: int | None, categories: list[str]) -> list[dict]:
-    if not config.DATASET_PATH.exists():
-        raise SystemExit(f"{config.DATASET_PATH} not found. Run build_dataset.py first.")
-    dataset = json.loads(config.DATASET_PATH.read_text(encoding="utf-8"))
+def load_dataset(limit: int | None, categories: list[str], dataset_path) -> list[dict]:
+    dataset_path = Path(dataset_path)
+    if not dataset_path.exists():
+        raise SystemExit(f"{dataset_path} not found. Run build_dataset.py first.")
+    dataset = json.loads(dataset_path.read_text(encoding="utf-8"))
     selected = [
         q
         for q in dataset
@@ -273,6 +274,7 @@ def build_providers(args) -> list:
 def main() -> int:
     parser = argparse.ArgumentParser(description="Generate N samples per question, resumably.")
     parser.add_argument("--category", choices=config.CATEGORIES, help="restrict to one category")
+    parser.add_argument("--dataset", default=str(config.DATASET_PATH), help="dataset JSON path (default: locked dataset)")
     parser.add_argument("--limit", type=int, help="max questions to process this run")
     parser.add_argument("--n", type=int, default=config.N_SAMPLES_DEFAULT, help="samples per question")
     parser.add_argument("--temperature", type=float, default=config.TEMPERATURE_DEFAULT)
@@ -321,7 +323,7 @@ def main() -> int:
         return 0
 
     categories = [args.category] if args.category else list(config.CATEGORIES)
-    questions = load_dataset(args.limit, categories)
+    questions = load_dataset(args.limit, categories, args.dataset)
     providers = build_providers(args)
     completed = set() if args.force else load_completed()
     started_questions = set() if (args.force or not args.skip_started) else load_started_questions()

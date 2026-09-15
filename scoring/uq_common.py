@@ -52,8 +52,9 @@ def ensure_results_dir() -> Path:
     return RESULTS_DIR
 
 
-def load_questions() -> list[dict]:
-    dataset = json.loads(config.DATASET_PATH.read_text(encoding="utf-8"))
+def load_questions(path=None) -> list[dict]:
+    dataset_path = Path(path) if path else config.DATASET_PATH
+    dataset = json.loads(dataset_path.read_text(encoding="utf-8"))
     return [q for q in dataset if q.get("validation_status") != "rejected"]
 
 

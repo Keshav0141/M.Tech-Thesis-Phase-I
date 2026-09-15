@@ -87,12 +87,13 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Label sample correctness.")
     parser.add_argument("--model", help="only score samples from this model_name")
     parser.add_argument("--provider", help="only score samples from this provider")
+    parser.add_argument("--dataset", default=str(config.DATASET_PATH), help="dataset JSON path (default: locked dataset)")
     parser.add_argument("--limit", type=int, help="max questions to score")
     parser.add_argument("--output", default=str(uq.RESULTS_DIR / "correctness.jsonl"))
     args = parser.parse_args()
 
     uq.ensure_results_dir()
-    questions = uq.load_questions()
+    questions = uq.load_questions(args.dataset)
     samples, counts = uq.load_samples()
     model, provider = uq.resolve_filters(args, counts)
     if model or provider:

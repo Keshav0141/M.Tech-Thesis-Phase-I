@@ -49,12 +49,13 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Show how many samples are still missing.")
     parser.add_argument("--n", type=int, default=config.N_SAMPLES_DEFAULT, help="samples expected per question")
     parser.add_argument("--category", choices=config.CATEGORIES, help="restrict to one category")
+    parser.add_argument("--dataset", default=str(config.DATASET_PATH), help="dataset JSON path (default: locked dataset)")
     parser.add_argument("--model", help="count only samples from this model_name")
     parser.add_argument("--json", action="store_true", help="machine-readable output")
     parser.add_argument("--list-gaps", action="store_true", help="print each question still missing samples")
     args = parser.parse_args()
 
-    dataset = json.loads(config.DATASET_PATH.read_text(encoding="utf-8"))
+    dataset = json.loads(Path(args.dataset).read_text(encoding="utf-8"))
     categories = [args.category] if args.category else list(config.CATEGORIES)
     active = [
         question

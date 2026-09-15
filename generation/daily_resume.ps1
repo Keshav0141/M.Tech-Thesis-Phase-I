@@ -122,6 +122,32 @@ try {
             }
         }
     }
+
+    # --- expansion set B (math only, not part of the locked dataset) ---------
+    $expansionPath = Join-Path $ProjectRoot "data\math_expansion.json"
+    if (Test-Path -LiteralPath $expansionPath) {
+        $expText = & $python (Join-Path $ProjectRoot "generation\check_remaining.py") --json --dataset $expansionPath | Out-String
+        $exp = $expText | ConvertFrom-Json
+        if ($exp.math -and [int]$exp.math.samples_missing -gt 0) {
+            Write-RunLog "starting expansion math generation (set B)"
+            $outputExp = & $python (Join-Path $ProjectRoot "generation\generate.py") --category math --n 5 `
+                --temperature 0.7 --provider groq --model qwen/qwen3.8-27b `
+                --reasoning-effort none --sleep 22 --dataset $expansionPath 2>&1 |
+                Tee-Object -FilePath $runLog -Append | Out-String
+            $expCollected = 0
+            $expFailed = 0
+            if ($outputExp -match "calls completed\s*:\s*(\d+)") { $expCollected = [int]$Matches[1] }
+            if ($outputExp -match "failed samples\s*:\s*(\d+)") { $expFailed = [int]$Matches[1] }
+            if ($outputExp -match "retry attempts\s*:\s*(\d+)") { $totalRetries += [int]$Matches[1] }
+            $expQuota = ([regex]::Matches($outputExp, "daily quota exhausted")).Count
+            $totalCollected += $expCollected
+            $totalFailed += $expFailed
+            $quotaEvents += $expQuota
+            $perCategory += ("mathB +{0}" -f $expCollected)
+            Write-RunLog ("mathB: +{0} samples, {1} failed, {2} quota events" -f $expCollected, $expFailed, $expQuota)
+            if ($expQuota -gt 0) { $stoppedReason = "quota exhausted, resume tomorrow" }
+        }
+    }
 } finally {
     # --- 3. write the one-line summary to research_log.md -------------------
     $endUtc = (Get-Date).ToUniversalTime()
