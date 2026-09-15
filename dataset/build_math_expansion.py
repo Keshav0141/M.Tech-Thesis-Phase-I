@@ -33,7 +33,6 @@ def main() -> int:
     parser.add_argument("--output", default=str(config.DATA_DIR / "math_expansion.json"))
     args = parser.parse_args()
 
-    # seed the deduper with every locked question (active + rejected)
     deduper = build_dataset.Deduper()
     locked = json.loads(config.DATASET_PATH.read_text(encoding="utf-8"))
     for entry in locked:

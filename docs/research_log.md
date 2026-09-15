@@ -732,23 +732,24 @@ Not usable for generation:
   factual, and wins the macro-average; math remains noisy (6 incorrect
   questions, fold AUCs 0.69-0.97).
 
-## 2026-09-14 (math expansion) — set B to boost the incorrect-math pool
-- Goal: the math AUROC is unstable because only 6/150 math questions got
-  majority-wrong answers. Built a 150-question GSM8K expansion set B
-  (`dataset/build_math_expansion.py` -> `data/math_expansion.json`,
-  ids mathb_0001..0150, seed 100) with the same validation (check_math,
-  dedupe against the locked 454 entries: 6 near-duplicates + 10 overlength
-  rejected). NOT merged into data/dataset.json.
-- Tooling: `--dataset` flag added to generate.py, check_remaining.py and
-  score_correctness.py; `daily_resume.ps1` now generates set B automatically
-  after the main categories (same qwen3.8-27b / temp 0.7 / sleep 22 flags).
-- ETA: 750 samples x ~560 tokens ~ 420k tokens > 200k tokens/day, so
-  ~2-3 days of rolling quota (harvested by the scheduled 16:45-21:45 IST
-  runs plus manual trickles). Generation started 2026-09-14 03:05 IST
-  (log mathb_run_*).
-- Next: once 750/750, run score_correctness on set B only and report the
-  incorrect-math count before any AUROC rerun; main dataset and full
-  pipeline remain untouched until then.
+## 2026-09-15 (math expansion) — set B to fix the math noise problem
+- Motivation: only 6/150 math majority-vote errors made the math AUROC
+  unstable (CV fold AUCs 0.69-0.97). Expanding the incorrect-math pool with
+  fresh GSM8K questions.
+- Built `dataset/build_math_expansion.py` -> `data/math_expansion.json`:
+  **150 fresh GSM8K questions** (ids `mathb_0001..0150`, seed 100), validated
+  with the original `check_math` + dedupe against the locked 454 (16 rejected:
+  10 length, 6 near-duplicates). NOT merged into the main dataset.
+- Tooling: `generate.py`, `check_remaining.py`, `score_correctness.py` gained
+  a `--dataset` flag; `daily_resume.ps1` now runs the expansion set B after
+  the main categories (same qwen3.8-27b / temp 0.7 / n=5 / sleep 22 flags).
+- ETA: 750 samples ~ 420k tokens -> ~2-3 days of rolling free-tier quota
+  (evening harvest windows). The 2026-09-15 16:45 scheduled run picked up the
+  expansion automatically (13/750 samples in the first minutes) -- the
+  automation worked end-to-end without a manual launch.
+- Pending: once 750/750, run `score_correctness.py --dataset
+  data/math_expansion.json` and report the incorrect count before any full
+  AUROC rerun. Per plan, partial generation is not committed.
 
 ## 2026-09-13 (scheduling change) — hourly around-the-clock harvest
 - `ThesisDailyResume` task extended from 16:45-21:45 IST only to **hourly,
