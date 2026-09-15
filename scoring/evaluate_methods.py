@@ -30,6 +30,10 @@ METHODS = {
     "unigram_jaccard": ("lexical", "uncertainty"),
     "semantic_entropy": ("semantic", "semantic_entropy"),
     "semantic_entropy_normalized": ("semantic", "normalized_entropy"),
+    "num_sets": ("graph", "num_sets"),
+    "degree_matrix": ("graph", "degree_matrix"),
+    "eigv": ("graph", "eigv"),
+    "eccentricity": ("graph", "eccentricity"),
 }
 
 
@@ -57,6 +61,7 @@ def main() -> int:
     parser.add_argument("--lexical", default=str(uq.RESULTS_DIR / "lexical.jsonl"))
     parser.add_argument("--ngram-tfidf", default=str(uq.RESULTS_DIR / "ngram_tfidf.jsonl"))
     parser.add_argument("--semantic", default=str(uq.RESULTS_DIR / "semantic_entropy.jsonl"))
+    parser.add_argument("--graph-methods", default=str(uq.RESULTS_DIR / "graph_methods.jsonl"))
     parser.add_argument("--output", default=str(uq.RESULTS_DIR / "week1_auroc_report.md"))
     args = parser.parse_args()
 
@@ -65,6 +70,7 @@ def main() -> int:
         "lexical": load_jsonl(Path(args.lexical)),
         "ngram_tfidf": load_jsonl(Path(args.ngram_tfidf)),
         "semantic": load_jsonl(Path(args.semantic)),
+        "graph": load_jsonl(Path(args.graph_methods)),
     }
     questions = {q["question_id"]: q for q in uq.load_questions()}
     categories = ["factual", "math", "reasoning", "all"]
@@ -148,7 +154,7 @@ def main() -> int:
             lines.append(f"| {category} | {method} | {auc} | {pair} | {mean_error} | {mean_ok} |")
     lines.append("")
 
-    uq.RESULTS_DIR.joinpath("week1_auroc_report.md").write_text("\n".join(lines), encoding="utf-8")
+    Path(args.output).write_text("\n".join(lines), encoding="utf-8")
     uq.RESULTS_DIR.joinpath("auroc.json").write_text(
         json.dumps({"generated_utc": generated, "coverage": coverage, "results": results}, indent=2),
         encoding="utf-8",

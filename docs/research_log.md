@@ -751,6 +751,23 @@ Not usable for generation:
   data/math_expansion.json` and report the incorrect count before any full
   AUROC rerun. Per plan, partial generation is not committed.
 
+## 2026-09-15 (extended methods) — graph-based UQ measures from the base paper
+- Implemented the remaining Lin et al. (TMLR 2024) graph measures in
+  `scoring/score_graph_methods.py` on the ALREADY PERSISTED NLI pairwise
+  matrix (`results/semantic_entropy.jsonl` -- no new GPU/NLI work):
+  NumSets (connected components), Degree matrix (trace of Laplacian), EigV
+  (sum of Laplacian eigenvalues), Eccentricity (max shortest-path).
+- Full-data AUROC (all / factual / math / reasoning): num_sets 0.710 / 0.659 /
+  0.515 / 0.633; degree_matrix = eigv 0.265 / 0.272 / 0.264 / 0.362 (INVERTED:
+  they measure agreement, not uncertainty; flipped ~0.735 all);
+  eccentricity 0.408 (also inverted, flipped 0.592).
+- 9-method CV selector rerun (`results/selector_cv_report_9methods.md`):
+  winners unchanged (tfidf/unigram/bigram), none of the 4 new methods won a
+  single training fold, macro-AUROC unchanged at 0.8046. The new methods add
+  no selector value on this model/dataset.
+- Extended report: `results/extended_methods_report.md`; evaluate_methods now
+  takes --graph-methods and honors --output; selector_cv takes --output.
+
 ## 2026-09-13 (scheduling change) — hourly around-the-clock harvest
 - `ThesisDailyResume` task extended from 16:45-21:45 IST only to **hourly,
   24h/day** (daily trigger 00:05 IST, 60-min repetition, 24h duration,

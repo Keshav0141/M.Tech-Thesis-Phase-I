@@ -57,3 +57,29 @@ AUROC > 0.5 means the uncertainty score is higher on incorrect answers.
 | all | degree_matrix | 0.2650 | 94/339 | 3.8936 | 9.3746 |
 | all | eigv | 0.2650 | 94/339 | 3.8936 | 9.3746 |
 | all | eccentricity | 0.4084 | 94/339 | 0.9894 | 1.2566 |
+
+
+## Notes on the graph methods
+
+- `degree_matrix` and `eigv` are mathematically identical here (trace of the
+  graph Laplacian == sum of its eigenvalues == sum of degrees), so their rows
+  coincide. Both are **inverted polarity**: they measure semantic *agreement*
+  (correct answers have more equivalent pairs, e.g. degree 9.37 for correct
+  vs 3.89 for incorrect). Flipped (1 - AUROC) they become
+  0.735 all / 0.728 factual / 0.736 math / 0.636 reasoning -- still below the
+  n-gram/TF-IDF baselines.
+- `eccentricity` is also inverted (raw 0.408 all; flipped 0.592).
+- `num_sets` is the best of the four: 0.710 all (slightly better than semantic
+  entropy's 0.706) and 0.659 factual vs semantic's 0.639; the other categories
+  track semantic entropy closely.
+
+## CV selector with all 9 methods
+
+- Re-ran `selector_cv.py` with the 4 graph methods added to the candidate pool
+  (polarity auto-flipped where inverted).
+- **Fold winners unchanged**: factual tfidf 5/5, math unigram 4/5 (one
+  bigram), reasoning bigram 4/5 (one trigram). None of the 4 new methods won
+  a single training fold.
+- **Macro-AUROC unchanged at 0.8046** (vs 0.7595 for TF-IDF CV): the new
+  methods add no selector value on this dataset/model.
+- Full fold log: `results/selector_cv_report_9methods.md`.

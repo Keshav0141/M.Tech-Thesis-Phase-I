@@ -36,8 +36,12 @@ METHOD_SOURCES = {
     "trigram": ("ngram_tfidf", "trigram_uncertainty"),
     "unigram": ("lexical", "uncertainty"),
     "semantic": ("semantic", "semantic_entropy"),
+    "numsets": ("graph", "num_sets"),
+    "degree": ("graph", "degree_matrix"),
+    "eigv": ("graph", "eigv"),
+    "eccentricity": ("graph", "eccentricity"),
 }
-METHOD_ORDER = ["tfidf", "unigram", "bigram", "trigram", "semantic"]
+METHOD_ORDER = ["tfidf", "unigram", "bigram", "trigram", "semantic", "numsets", "degree", "eigv", "eccentricity"]
 
 CV_FOLDS = 5
 CV_SEED = 42
@@ -61,6 +65,12 @@ def load_jsonl(path: Path) -> dict[str, dict]:
 
 
 def main() -> int:
+    import argparse
+
+    parser = argparse.ArgumentParser(description="Cross-validated per-category method selector.")
+    parser.add_argument("--output", default="selector_cv_report.md")
+    parser.add_argument("--results-json", default="selector_cv_results.json")
+    args = parser.parse_args()
     uq.enable_utf8_stdout()
     uq.ensure_results_dir()
 
@@ -71,6 +81,7 @@ def main() -> int:
         "ngram_tfidf": load_jsonl(uq.RESULTS_DIR / "ngram_tfidf.jsonl"),
         "lexical": load_jsonl(uq.RESULTS_DIR / "lexical.jsonl"),
         "semantic": load_jsonl(uq.RESULTS_DIR / "semantic_entropy.jsonl"),
+        "graph": load_jsonl(uq.RESULTS_DIR / "graph_methods.jsonl"),
     }
 
     rows_by_category: dict[str, list[dict]] = defaultdict(list)
@@ -251,8 +262,8 @@ def main() -> int:
         "",
     ]
 
-    (uq.RESULTS_DIR / "selector_cv_report.md").write_text("\n".join(lines), encoding="utf-8")
-    uq.RESULTS_DIR.joinpath("selector_cv_results.json").write_text(
+    (uq.RESULTS_DIR / args.output).write_text("\n".join(lines), encoding="utf-8")
+    uq.RESULTS_DIR.joinpath(args.results_json).write_text(
         json.dumps(
             {
                 "selector": selector_results,
@@ -267,7 +278,7 @@ def main() -> int:
         encoding="utf-8",
     )
     print("\n".join(lines))
-    print(f"report -> {uq.RESULTS_DIR / 'selector_cv_report.md'}")
+    print(f"report -> {uq.RESULTS_DIR / args.output}")
     return 0
 
 

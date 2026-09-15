@@ -2,6 +2,12 @@
 
 Dated entries tied to git commits.
 
+## 2026-09-15
+- Graph-based UQ methods (NumSets, Degree matrix, EigV, Eccentricity) added
+  via `scoring/score_graph_methods.py`, reusing the persisted NLI matrix.
+  Extended report `results/extended_methods_report.md`; 9-method CV selector
+  unchanged (winners + macro-AUROC 0.8046).
+
 ## 2026-09-14
 - CV method selector: `scoring/selector_cv.py` -> `results/selector_cv_report.md`.
   Stable per-category winners (tfidf/unigram/bigram); selector beats TF-IDF on
