@@ -677,6 +677,21 @@ Not usable for generation:
   TF-IDF AUROCs improved slightly after label corrections (all: tfidf 0.845,
   unigram 0.825, bigram 0.820, trigram 0.817, semantic 0.706).
 
+## 2026-09-14 (hypothesis test) — does NLI semantic entropy merge different numbers on math?
+- Tested with `scoring/diagnose_math_semantic.py` ->
+  `results/semantic_entropy_math_diagnosis.md`. Bottom quartile of math
+  semantic entropy = 37 "confident" questions (entropy = 0).
+- Only 2/37 have different extracted final numbers across samples; one of
+  those (`math_0032`) is a unit-equivalence artifact of our extractor
+  (6.5 hours vs 390 minutes = same value).
+- The one genuine case, `math_0009` (12000 vs 7000 vs 2000): 4 of 7
+  differing-number pairs were merged by bidirectional entailment with
+  p up to 0.995 -- NLI cannot distinguish the different final numbers when
+  the reasoning text is nearly identical.
+- Verdict: hypothesis CONFIRMED but small incidence (~1/37 confident math
+  questions); the failure mode matches prediction (same reasoning shape,
+  different final number, high NLI similarity). No fix applied yet, per plan.
+
 ## 2026-09-13 (scheduling change) — hourly around-the-clock harvest
 - `ThesisDailyResume` task extended from 16:45-21:45 IST only to **hourly,
   24h/day** (daily trigger 00:05 IST, 60-min repetition, 24h duration,
