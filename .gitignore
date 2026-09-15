@@ -7,3 +7,5 @@ venv/
 data/raw/
 *.tmp
 *.log
+
+*.pid

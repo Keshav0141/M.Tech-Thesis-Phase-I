@@ -1,0 +1,42 @@
+[
+  {
+    "question_id": "reasoning_0001",
+    "finish_reason": "length",
+    "completion_tokens": 1024,
+    "total_tokens": 1090,
+    "has_final_answer": false,
+    "content_tail": "Peter Fonda's films include *Easy Rider*, *The Hired Hand*, *The Wild Bunch*, *Thief*, *Coming Home*, *The Corrupter*, *",
+    "latency_s": 2.43
+  },
+  {
+    "question_id": "reasoning_0002",
+    "finish_reason": "stop",
+    "completion_tokens": 386,
+    "total_tokens": 452,
+    "has_final_answer": true,
+    "content_tail": "urces, all aimed at making *Othello* more accessible to students who struggle with its writing style.\n\nFinal answer: yes",
+    "latency_s": 1.12
+  },
+  {
+    "question_id": "reasoning_0003",
+    "finish_reason": "stop",
+    "completion_tokens": 896,
+    "total_tokens": 962,
+    "has_final_answer": true,
+    "content_tail": "* completed two full rotations. It has likely completed less than one, or at most one, full rotation.\n\nFinal answer: yes",
+    "latency_s": 2.5
+  },
+  {
+    "question_id": "reasoning_0004",
+    "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `qwen/qwen3.8-27b` in organization `org_01m0jb553ce4qrrcw8wfejbq22` service tier `on_demand` on output tokens per minute (OTPM): Limit 1000, Used 105, Requested 896. Please try again in 60ms. Need more tokens? Upgrade to Dev Tier "
+  },
+  {
+    "question_id": "reasoning_0005",
+    "finish_reason": "stop",
+    "completion_tokens": 842,
+    "total_tokens": 909,
+    "has_final_answer": true,
+    "content_tail": "sting such events. Therefore, it is possible for a UNFCCC conference to be held at the Javits Center.\n\nFinal answer: yes",
+    "latency_s": 2.17
+  }
+]

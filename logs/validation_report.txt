@@ -8,7 +8,3 @@ Statuses        : auto_validated=432, rejected=4, spot_checked=18
 
 All structural checks passed.
 No duplicate/near-duplicate warnings.
-
-Generation coverage:
-  gemini/gemini-3.6-flash: 12/450 questions, 20 successful samples
-  groq/openai/gpt-oss-20b: 149/450 questions, 725 successful samples
