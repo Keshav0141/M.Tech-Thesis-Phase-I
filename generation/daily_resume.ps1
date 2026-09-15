@@ -56,13 +56,9 @@ $python = $pythonCommand.Source
 
 Write-RunLog "daily resume started"
 
-# --- 1. check remaining ------------------------------------------------------
+# --- 1. check remaining (main dataset AND math expansion set B) --------------
 $statusText = & $python (Join-Path $ProjectRoot "generation\check_remaining.py") --json | Out-String
-if ($LASTEXITCODE -eq 0) {
-    Write-RunLog "All samples collected. Nothing to do."
-    Append-ResearchLog "- All 2250 samples collected; nothing left to generate."
-    exit 0
-}
+$mainExit = $LASTEXITCODE
 
 try {
     $remaining = $statusText | ConvertFrom-Json
@@ -77,8 +73,20 @@ foreach ($category in $order) {
         $incomplete += $category
     }
 }
-if ($incomplete.Count -eq 0) {
-    Write-RunLog "check_remaining.py reported work, but no category is incomplete; stopping."
+
+$expansionPath = Join-Path $ProjectRoot "data\math_expansion.json"
+$expMissing = 0
+if (Test-Path -LiteralPath $expansionPath) {
+    $expText = & $python (Join-Path $ProjectRoot "generation\check_remaining.py") --json --dataset $expansionPath | Out-String
+    try { $exp = $expText | ConvertFrom-Json } catch { $exp = $null }
+    if ($exp -and $exp.math -and [int]$exp.math.samples_missing -gt 0) {
+        $expMissing = [int]$exp.math.samples_missing
+    }
+}
+
+if ($incomplete.Count -eq 0 -and $expMissing -eq 0) {
+    Write-RunLog "All samples collected (main + expansion). Nothing to do."
+    Append-ResearchLog "- All samples collected (main 2250 + expansion); nothing left to generate."
     exit 0
 }
 Write-RunLog ("incomplete categories: {0}" -f ($incomplete -join ", "))
@@ -124,28 +132,19 @@ try {
     }
 
     # --- math expansion set B (data/math_expansion.json) ---
-    $expansionPath = Join-Path $ProjectRoot "data\math_expansion.json"
-    if (Test-Path -LiteralPath $expansionPath) {
-        $expText = & $python (Join-Path $ProjectRoot "generation\check_remaining.py") --json --dataset $expansionPath | Out-String
-        try { $exp = $expText | ConvertFrom-Json } catch { $exp = $null }
-        $expMissing = 0
-        if ($exp -and $exp.math -and [int]$exp.math.samples_missing -gt 0) {
-            $expMissing = [int]$exp.math.samples_missing
-        }
-        if ($expMissing -gt 0) {
-            Write-RunLog "starting generate.py --category math (expansion set B) ..."
-            $outputExp = & $python (Join-Path $ProjectRoot "generation\generate.py") --category math --n 5 --temperature 0.7 `
-                --provider groq --model qwen/qwen3.8-27b --reasoning-effort none `
-                --sleep 22 --dataset $expansionPath 2>&1 |
-                Tee-Object -FilePath $runLog -Append | Out-String
-            $collectedExp = 0
-            if ($outputExp -match "calls completed\s*:\s*(\d+)") { $collectedExp = [int]$Matches[1] }
-            $quotaExp = ([regex]::Matches($outputExp, "daily quota exhausted")).Count
-            $totalCollected += $collectedExp
-            $quotaEvents += $quotaExp
-            $perCategory += ("mathB +{0}" -f $collectedExp)
-            Write-RunLog ("mathB: +{0} samples, {1} quota events" -f $collectedExp, $quotaExp)
-        }
+    if ($expMissing -gt 0) {
+        Write-RunLog "starting generate.py --category math (expansion set B) ..."
+        $outputExp = & $python (Join-Path $ProjectRoot "generation\generate.py") --category math --n 5 --temperature 0.7 `
+            --provider groq --model qwen/qwen3.8-27b --reasoning-effort none `
+            --sleep 22 --dataset $expansionPath 2>&1 |
+            Tee-Object -FilePath $runLog -Append | Out-String
+        $collectedExp = 0
+        if ($outputExp -match "calls completed\s*:\s*(\d+)") { $collectedExp = [int]$Matches[1] }
+        $quotaExp = ([regex]::Matches($outputExp, "daily quota exhausted")).Count
+        $totalCollected += $collectedExp
+        $quotaEvents += $quotaExp
+        $perCategory += ("mathB +{0}" -f $collectedExp)
+        Write-RunLog ("mathB: +{0} samples, {1} quota events" -f $collectedExp, $quotaExp)
     }
 } finally {
     # --- 3. write the one-line summary to research_log.md -------------------

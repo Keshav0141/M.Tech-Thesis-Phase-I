@@ -805,4 +805,13 @@ Not usable for generation:
 - 11:15-16:38 UTC: +812 samples (math +62, reasoning +750); 0 quota errors, 0 failed, 14 retry attempts; all incomplete categories attempted.
 
 ## 2026-09-14 17:15 UTC - automatic resume run
-- All 2250 samples collected; nothing left to generate.
+- All MAIN-dataset samples collected; expansion set B unchecked (driver exited on main-complete — bug, fixed in driver v2).
+
+## 2026-09-15 15:15 UTC - automatic resume run
+- All MAIN-dataset samples collected; expansion set B unchecked (driver exited on main-complete — bug, fixed in driver v2).
+
+## 2026-09-15 15:38 UTC - automatic resume run
+- All MAIN-dataset samples collected; expansion set B unchecked (driver exited on main-complete — bug, fixed in driver v2).
+
+## 2026-09-15 (driver bugfix) - expansion now checked before early exit
+- Fixed daily_resume.ps1: it exited as soon as the MAIN dataset was complete and never ran the mathb expansion block once main hit 2250/2250. The early-exit check now requires both main and expansion to be complete. Previous no-op runs (Sep 14 17:15 and Sep 15 15:15/15:38 UTC) left misleading 'all collected' lines; annotated above.
