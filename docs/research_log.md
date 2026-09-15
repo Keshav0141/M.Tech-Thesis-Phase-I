@@ -710,6 +710,28 @@ Not usable for generation:
   ensembles only help in categories where it is weak. A per-category method
   selector (or TF-IDF + numeric-agreement for math) is the natural next step.
 
+## 2026-09-14 (selector) — cross-validated per-category method selector
+- Built `scoring/selector_cv.py` -> `results/selector_cv_report.md` +
+  `results/selector_cv_results.json`. Per category, 5-fold stratified CV
+  (seed 42): winner chosen on the training split only (from tfidf, unigram,
+  bigram, trigram, semantic entropy raw scores), evaluated on the held-out
+  fold; averages over folds.
+- Bug caught during the run: first version passed scores/labels to
+  `uq.roc_auc` in swapped order, which silently produced garbage winners
+  (semantic entropy "won" everywhere because its scores can exceed 1.0).
+  Fixed; all numbers below are from the corrected run.
+- Fold winners (stability): factual tfidf 5/5; math unigram 4/5 (one bigram);
+  reasoning bigram 4/5 (one trigram).
+- CV selector AUROC per category: factual 0.910, math 0.836, reasoning 0.667.
+  Same-protocol TF-IDF CV: factual 0.910, math 0.740, reasoning 0.629.
+- Macro-average: selector 0.8046 vs TF-IDF 0.7595 (+0.045). Pooled OOF-rank
+  aggregate 0.7597 does not beat the in-sample full-data TF-IDF 0.8449
+  (protocol mismatch; per-category ranking removes TF-IDF's cross-category
+  scale advantage on factual).
+- Verdict: the CV selector beats TF-IDF on math and reasoning, ties on
+  factual, and wins the macro-average; math remains noisy (6 incorrect
+  questions, fold AUCs 0.69-0.97).
+
 ## 2026-09-13 (scheduling change) — hourly around-the-clock harvest
 - `ThesisDailyResume` task extended from 16:45-21:45 IST only to **hourly,
   24h/day** (daily trigger 00:05 IST, 60-min repetition, 24h duration,

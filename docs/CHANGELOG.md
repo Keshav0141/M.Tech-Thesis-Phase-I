@@ -3,6 +3,12 @@
 Dated entries tied to git commits.
 
 ## 2026-09-14
+- CV method selector: `scoring/selector_cv.py` -> `results/selector_cv_report.md`.
+  Stable per-category winners (tfidf/unigram/bigram); selector beats TF-IDF on
+  math (0.836 vs 0.740) and reasoning (0.667 vs 0.629), ties factual,
+  macro-average 0.805 vs 0.760.
+
+## 2026-09-14
 - Ensemble evaluation: `scoring/ensemble_uq.py` -> `results/ensemble_report.md`.
   Rank-averaged ensembles (5-method and 3-method, unweighted + logistic-CV)
   do not beat TF-IDF alone (0.845); they help math/reasoning but lose factual.

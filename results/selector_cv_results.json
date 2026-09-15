@@ -1,0 +1,241 @@
+{
+  "selector": {
+    "factual": {
+      "folds": [
+        {
+          "fold": 1,
+          "winner": "tfidf",
+          "winner_train_auc": 0.9162,
+          "winner_test_auc": 0.8827,
+          "train_aucs": {
+            "tfidf": 0.9162,
+            "unigram": 0.8443,
+            "bigram": 0.8506,
+            "trigram": 0.8615,
+            "semantic": 0.6596
+          }
+        },
+        {
+          "fold": 2,
+          "winner": "tfidf",
+          "winner_train_auc": 0.9127,
+          "winner_test_auc": 0.9321,
+          "train_aucs": {
+            "tfidf": 0.9127,
+            "unigram": 0.8363,
+            "bigram": 0.841,
+            "trigram": 0.8531,
+            "semantic": 0.6477
+          }
+        },
+        {
+          "fold": 3,
+          "winner": "tfidf",
+          "winner_train_auc": 0.9052,
+          "winner_test_auc": 0.9118,
+          "train_aucs": {
+            "tfidf": 0.9052,
+            "unigram": 0.8266,
+            "bigram": 0.8357,
+            "trigram": 0.8437,
+            "semantic": 0.6728
+          }
+        },
+        {
+          "fold": 4,
+          "winner": "tfidf",
+          "winner_train_auc": 0.8954,
+          "winner_test_auc": 0.9542,
+          "train_aucs": {
+            "tfidf": 0.8954,
+            "unigram": 0.8361,
+            "bigram": 0.8384,
+            "trigram": 0.8431,
+            "semantic": 0.6556
+          }
+        },
+        {
+          "fold": 5,
+          "winner": "tfidf",
+          "winner_train_auc": 0.9174,
+          "winner_test_auc": 0.8693,
+          "train_aucs": {
+            "tfidf": 0.9174,
+            "unigram": 0.8336,
+            "bigram": 0.8349,
+            "trigram": 0.8402,
+            "semantic": 0.6593
+          }
+        }
+      ],
+      "cv_auc": 0.91
+    },
+    "math": {
+      "folds": [
+        {
+          "fold": 1,
+          "winner": "unigram",
+          "winner_train_auc": 0.8557,
+          "winner_test_auc": 0.8276,
+          "train_aucs": {
+            "tfidf": 0.8052,
+            "unigram": 0.8557,
+            "bigram": 0.8383,
+            "trigram": 0.8417,
+            "semantic": 0.4296
+          }
+        },
+        {
+          "fold": 2,
+          "winner": "unigram",
+          "winner_train_auc": 0.8504,
+          "winner_test_auc": 0.931,
+          "train_aucs": {
+            "tfidf": 0.7478,
+            "unigram": 0.8504,
+            "bigram": 0.7983,
+            "trigram": 0.807,
+            "semantic": 0.5348
+          }
+        },
+        {
+          "fold": 3,
+          "winner": "unigram",
+          "winner_train_auc": 0.8157,
+          "winner_test_auc": 0.9655,
+          "train_aucs": {
+            "tfidf": 0.7409,
+            "unigram": 0.8157,
+            "bigram": 0.7861,
+            "trigram": 0.7791,
+            "semantic": 0.4496
+          }
+        },
+        {
+          "fold": 4,
+          "winner": "unigram",
+          "winner_train_auc": 0.873,
+          "winner_test_auc": 0.6897,
+          "train_aucs": {
+            "tfidf": 0.7217,
+            "unigram": 0.873,
+            "bigram": 0.8278,
+            "trigram": 0.8226,
+            "semantic": 0.5678
+          }
+        },
+        {
+          "fold": 5,
+          "winner": "bigram",
+          "winner_train_auc": 0.8341,
+          "winner_test_auc": 0.7679,
+          "train_aucs": {
+            "tfidf": 0.7586,
+            "unigram": 0.8319,
+            "bigram": 0.8341,
+            "trigram": 0.8211,
+            "semantic": 0.6121
+          }
+        }
+      ],
+      "cv_auc": 0.8363
+    },
+    "reasoning": {
+      "folds": [
+        {
+          "fold": 1,
+          "winner": "bigram",
+          "winner_train_auc": 0.6768,
+          "winner_test_auc": 0.6508,
+          "train_aucs": {
+            "tfidf": 0.6235,
+            "unigram": 0.6534,
+            "bigram": 0.6768,
+            "trigram": 0.6649,
+            "semantic": 0.6548
+          }
+        },
+        {
+          "fold": 2,
+          "winner": "trigram",
+          "winner_train_auc": 0.6628,
+          "winner_test_auc": 0.709,
+          "train_aucs": {
+            "tfidf": 0.6308,
+            "unigram": 0.6249,
+            "bigram": 0.6618,
+            "trigram": 0.6628,
+            "semantic": 0.5913
+          }
+        },
+        {
+          "fold": 3,
+          "winner": "bigram",
+          "winner_train_auc": 0.6601,
+          "winner_test_auc": 0.7386,
+          "train_aucs": {
+            "tfidf": 0.6306,
+            "unigram": 0.6361,
+            "bigram": 0.6601,
+            "trigram": 0.6577,
+            "semantic": 0.6223
+          }
+        },
+        {
+          "fold": 4,
+          "winner": "bigram",
+          "winner_train_auc": 0.7127,
+          "winner_test_auc": 0.5682,
+          "train_aucs": {
+            "tfidf": 0.6317,
+            "unigram": 0.6515,
+            "bigram": 0.7127,
+            "trigram": 0.7124,
+            "semantic": 0.6713
+          }
+        },
+        {
+          "fold": 5,
+          "winner": "bigram",
+          "winner_train_auc": 0.6737,
+          "winner_test_auc": 0.6705,
+          "train_aucs": {
+            "tfidf": 0.6324,
+            "unigram": 0.6566,
+            "bigram": 0.6737,
+            "trigram": 0.6659,
+            "semantic": 0.6228
+          }
+        }
+      ],
+      "cv_auc": 0.6674
+    }
+  },
+  "per_method_cv": {
+    "factual": {
+      "tfidf": 0.9100217864923748,
+      "unigram": 0.8418591140159768,
+      "bigram": 0.8447930283224402,
+      "trigram": 0.8549382716049383,
+      "semantic": 0.6617138707334785
+    },
+    "math": {
+      "tfidf": 0.7395320197044335,
+      "unigram": 0.8577586206896551,
+      "bigram": 0.808743842364532,
+      "trigram": 0.8194581280788178,
+      "semantic": 0.5538177339901477
+    },
+    "reasoning": {
+      "tfidf": 0.6288900913900914,
+      "unigram": 0.6333573833573833,
+      "bigram": 0.6737614237614238,
+      "trigram": 0.6715668590668591,
+      "semantic": 0.6224657287157287
+    }
+  },
+  "macro_auc": 0.8045666666666668,
+  "pooled_oof_rank_auc": 0.7596654741730998,
+  "n_pos": 94,
+  "n_neg": 339
+}
