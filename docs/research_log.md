@@ -656,6 +656,27 @@ Not usable for generation:
   incorrect/correct counts) and `uncertainty_boxplots.png` (tfidf/bigram/
   trigram/semantic distributions for incorrect vs correct questions).
 
+## 2026-09-14 (outlier analysis) — confidently-wrong cases + grader fixes
+- Ran `scoring/analyze_low_uncertainty.py` on the full data: questions with
+  majority-vote incorrect AND low lexical uncertainty (bigram < 0.4 OR
+  trigram < 0.5) -> `results/low_uncertainty_incorrect_cases.md`.
+- Initial 4 cases were ALL factual; inspection showed 2 were grader artifacts:
+  "George II" vs GT "GEORGE THE SECOND" and "Francois Hollande" vs
+  "Francois Hollande" (accent). Fixed `uq_common.normalize_factual`: accent
+  folding (NFKD) + Roman-numeral -> ordinal-word mapping ("ii" -> "the second").
+  factual majority labels corrected 85->87 correct / 48->46 incorrect.
+- Remaining 2 true confident-wrong cases:
+  - factual_0081 (Little Red-Haired Girl): model insists "Snoopy" 4/5,
+    "Peppermint Patty" 1/5 -- genuine confidently-wrong pattern (near-identical
+    wrong answers).
+  - factual_0059 (Dick Grayson "better known as who?"): model says "Nightwing"
+    4/5 vs GT "Robin" -- ground-truth ambiguity (he is both); flagged for
+    manual review rather than treated as model error.
+- Takeaway for the professor: after grader fixes, only ~2/450 questions show
+  the dangerous "confident wrong answer" pattern, both factual; n-gram and
+  TF-IDF AUROCs improved slightly after label corrections (all: tfidf 0.845,
+  unigram 0.825, bigram 0.820, trigram 0.817, semantic 0.706).
+
 ## 2026-09-13 (scheduling change) — hourly around-the-clock harvest
 - `ThesisDailyResume` task extended from 16:45-21:45 IST only to **hourly,
   24h/day** (daily trigger 00:05 IST, 60-min repetition, 24h duration,

@@ -9,6 +9,7 @@ from __future__ import annotations
 import json
 import re
 import sys
+import unicodedata
 from collections import Counter, defaultdict
 from pathlib import Path
 
@@ -26,6 +27,21 @@ IGNORED_EXTRA_TOKENS = {
     "of", "the", "a", "an", "in", "at", "on", "for", "and", "to", "by", "from",
     "with", "year", "years", "series", "film", "movie", "novel", "book",
 }
+
+ROMAN_TO_ORDINAL = {
+    "ii": "the second", "iii": "the third", "iv": "the fourth", "v": "the fifth",
+    "vi": "the sixth", "vii": "the seventh", "viii": "the eighth", "ix": "the ninth",
+    "x": "the tenth", "xi": "the eleventh", "xii": "the twelfth",
+    "xiii": "the thirteenth", "xiv": "the fourteenth", "xv": "the fifteenth",
+    "xvi": "the sixteenth", "xvii": "the seventeenth", "xviii": "the eighteenth",
+    "xix": "the nineteenth", "xx": "the twentieth",
+}
+ROMAN_RE = re.compile(r"\b(ii|iii|iv|v|vi|vii|viii|ix|x|xi|xii|xiii|xiv|xv|xvi|xvii|xviii|xix|xx)\b", re.IGNORECASE)
+
+
+def fold_accents(text: str) -> str:
+    decomposed = unicodedata.normalize("NFKD", text)
+    return "".join(char for char in decomposed if not unicodedata.combining(char))
 NUMBER_RE = re.compile(r"-?\d[\d,]*(?:\.\d+)?")
 FINAL_RE = re.compile(r"final answer\s*[:\-]?\s*(.+)", re.IGNORECASE | re.DOTALL)
 FINAL_YESNO_RE = re.compile(r"final answer\s*[:\-]?\s*\**\s*(yes|no)\b", re.IGNORECASE)
@@ -125,7 +141,8 @@ def extract_yes_no(text: str) -> str | None:
 def normalize_factual(text: str | None) -> str:
     if text is None:
         return ""
-    text = text.lower()
+    text = fold_accents(text.lower())
+    text = ROMAN_RE.sub(lambda match: ROMAN_TO_ORDINAL[match.group(1).lower()], text)
     text = PAREN_RE.sub(" ", text)
     text = TITLE_RE.sub(" ", text)
     text = PUNCT_RE.sub(" ", text)

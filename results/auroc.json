@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-09-14 19:42 UTC",
+  "generated_utc": "2026-09-15 07:48 UTC",
   "coverage": {
     "factual": {
       "dataset_questions": 150,
@@ -20,11 +20,11 @@
   "results": {
     "bigram_jaccard": {
       "factual": {
-        "auroc": 0.8125,
-        "n_incorrect": 48,
-        "n_correct": 85,
-        "mean_score_incorrect": 0.7918,
-        "mean_score_correct": 0.5351
+        "auroc": 0.8398,
+        "n_incorrect": 46,
+        "n_correct": 87,
+        "mean_score_incorrect": 0.8113,
+        "mean_score_correct": 0.5307
       },
       "math": {
         "auroc": 0.8171,
@@ -41,20 +41,20 @@
         "mean_score_correct": 0.7689
       },
       "all": {
-        "auroc": 0.8041,
-        "n_incorrect": 96,
-        "n_correct": 337,
-        "mean_score_incorrect": 0.8037,
-        "mean_score_correct": 0.596
+        "auroc": 0.8195,
+        "n_incorrect": 94,
+        "n_correct": 339,
+        "mean_score_incorrect": 0.8135,
+        "mean_score_correct": 0.5945
       }
     },
     "trigram_jaccard": {
       "factual": {
-        "auroc": 0.8199,
-        "n_incorrect": 48,
-        "n_correct": 85,
-        "mean_score_incorrect": 0.8572,
-        "mean_score_correct": 0.6053
+        "auroc": 0.8478,
+        "n_incorrect": 46,
+        "n_correct": 87,
+        "mean_score_incorrect": 0.8763,
+        "mean_score_correct": 0.601
       },
       "math": {
         "auroc": 0.8137,
@@ -71,20 +71,20 @@
         "mean_score_correct": 0.8487
       },
       "all": {
-        "auroc": 0.8011,
-        "n_incorrect": 96,
-        "n_correct": 337,
-        "mean_score_incorrect": 0.8713,
-        "mean_score_correct": 0.6869
+        "auroc": 0.8168,
+        "n_incorrect": 94,
+        "n_correct": 339,
+        "mean_score_incorrect": 0.881,
+        "mean_score_correct": 0.6853
       }
     },
     "tfidf_cosine": {
       "factual": {
-        "auroc": 0.8841,
-        "n_incorrect": 48,
-        "n_correct": 85,
-        "mean_score_incorrect": 0.6351,
-        "mean_score_correct": 0.2372
+        "auroc": 0.9093,
+        "n_incorrect": 46,
+        "n_correct": 87,
+        "mean_score_incorrect": 0.6573,
+        "mean_score_correct": 0.2346
       },
       "math": {
         "auroc": 0.7558,
@@ -101,20 +101,20 @@
         "mean_score_correct": 0.4745
       },
       "all": {
-        "auroc": 0.8352,
-        "n_incorrect": 96,
-        "n_correct": 337,
-        "mean_score_incorrect": 0.5643,
-        "mean_score_correct": 0.248
+        "auroc": 0.8449,
+        "n_incorrect": 94,
+        "n_correct": 339,
+        "mean_score_incorrect": 0.5737,
+        "mean_score_correct": 0.2473
       }
     },
     "unigram_jaccard": {
       "factual": {
-        "auroc": 0.8077,
-        "n_incorrect": 48,
-        "n_correct": 85,
-        "mean_score_incorrect": 0.6928,
-        "mean_score_correct": 0.4299
+        "auroc": 0.835,
+        "n_incorrect": 46,
+        "n_correct": 87,
+        "mean_score_incorrect": 0.7122,
+        "mean_score_correct": 0.4257
       },
       "math": {
         "auroc": 0.8449,
@@ -131,20 +131,20 @@
         "mean_score_correct": 0.5852
       },
       "all": {
-        "auroc": 0.8121,
-        "n_incorrect": 96,
-        "n_correct": 337,
-        "mean_score_incorrect": 0.6588,
-        "mean_score_correct": 0.4159
+        "auroc": 0.8247,
+        "n_incorrect": 94,
+        "n_correct": 339,
+        "mean_score_incorrect": 0.6676,
+        "mean_score_correct": 0.4149
       }
     },
     "semantic_entropy": {
       "factual": {
-        "auroc": 0.6385,
-        "n_incorrect": 48,
-        "n_correct": 85,
-        "mean_score_incorrect": 0.8974,
-        "mean_score_correct": 0.6221
+        "auroc": 0.6588,
+        "n_incorrect": 46,
+        "n_correct": 87,
+        "mean_score_incorrect": 0.9255,
+        "mean_score_correct": 0.6136
       },
       "math": {
         "auroc": 0.515,
@@ -161,20 +161,20 @@
         "mean_score_correct": 1.1065
       },
       "all": {
-        "auroc": 0.6973,
-        "n_incorrect": 96,
-        "n_correct": 337,
-        "mean_score_incorrect": 1.0614,
-        "mean_score_correct": 0.6367
+        "auroc": 0.7063,
+        "n_incorrect": 94,
+        "n_correct": 339,
+        "mean_score_incorrect": 1.0786,
+        "mean_score_correct": 0.6344
       }
     },
     "semantic_entropy_normalized": {
       "factual": {
-        "auroc": 0.6385,
-        "n_incorrect": 48,
-        "n_correct": 85,
-        "mean_score_incorrect": 0.5576,
-        "mean_score_correct": 0.3865
+        "auroc": 0.6588,
+        "n_incorrect": 46,
+        "n_correct": 87,
+        "mean_score_incorrect": 0.575,
+        "mean_score_correct": 0.3812
       },
       "math": {
         "auroc": 0.515,
@@ -191,11 +191,11 @@
         "mean_score_correct": 0.6875
       },
       "all": {
-        "auroc": 0.6973,
-        "n_incorrect": 96,
-        "n_correct": 337,
-        "mean_score_incorrect": 0.6595,
-        "mean_score_correct": 0.3956
+        "auroc": 0.7063,
+        "n_incorrect": 94,
+        "n_correct": 339,
+        "mean_score_incorrect": 0.6702,
+        "mean_score_correct": 0.3942
       }
     }
   }
