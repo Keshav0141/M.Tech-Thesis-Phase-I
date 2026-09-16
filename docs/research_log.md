@@ -751,6 +751,19 @@ Not usable for generation:
   data/math_expansion.json` and report the incorrect count before any full
   AUROC rerun. Per plan, partial generation is not committed.
 
+## 2026-09-16 (mathb complete) — expansion incorrect-count reported
+- mathb generation finished 750/750 (single model, temp 0.7, 0 dups).
+- Correctness on the 150 expansion questions: majority 147 correct / 3
+  incorrect (22 incorrect samples of 750). Combined math pool (main + mathb =
+  300 questions): 9 majority-incorrect (was 6), 62 incorrect samples.
+- Honest finding: GSM8K is too easy for qwen3.8-27b (98% majority accuracy),
+  so doubling the pool only grew the incorrect count 6 -> 9. The math noise
+  problem is reduced but NOT solved; per-category math AUROC will still be
+  dominated by a small positive set. Decision pending on whether to use the
+  combined pool or keep main only.
+- Artifacts: `results/mathb_correctness.jsonl`; mathb samples appended to
+  `logs/generations.jsonl` (now committed).
+
 ## 2026-09-15 (extended methods) — graph-based UQ measures from the base paper
 - Implemented the remaining Lin et al. (TMLR 2024) graph measures in
   `scoring/score_graph_methods.py` on the ALREADY PERSISTED NLI pairwise
@@ -815,3 +828,24 @@ Not usable for generation:
 
 ## 2026-09-15 (driver bugfix) - expansion now checked before early exit
 - Fixed daily_resume.ps1: it exited as soon as the MAIN dataset was complete and never ran the mathb expansion block once main hit 2250/2250. The early-exit check now requires both main and expansion to be complete. Previous no-op runs (Sep 14 17:15 and Sep 15 15:15/15:38 UTC) left misleading 'all collected' lines; annotated above.
+
+## 2026-09-15 15:42 UTC - automatic resume run
+- 15:42-15:52 UTC: +23 samples (mathB +23); 1 quota errors, 0 failed, 0 retry attempts; all incomplete categories attempted.
+
+## 2026-09-15 16:15 UTC - automatic resume run
+- 16:15-16:18 UTC: +8 samples (mathB +8); 1 quota errors, 0 failed, 0 retry attempts; all incomplete categories attempted.
+
+## 2026-09-15 17:15 UTC - automatic resume run
+- 17:15-17:24 UTC: +13 samples (mathB +13); 1 quota errors, 0 failed, 0 retry attempts; all incomplete categories attempted.
+
+## 2026-09-15 17:52 UTC - automatic resume run
+- 17:52-17:57 UTC: +10 samples (mathB +10); 1 quota errors, 0 failed, 0 retry attempts; all incomplete categories attempted.
+
+## 2026-09-15 20:41 UTC - automatic resume run
+- 20:41-21:14 UTC: +58 samples (mathB +58); 1 quota errors, 0 failed, 0 retry attempts; all incomplete categories attempted.
+
+## 2026-09-16 08:54 UTC - automatic resume run
+- 08:54-10:45 UTC: +238 samples (mathB +238); 0 quota errors, 0 failed, 0 retry attempts; all incomplete categories attempted.
+
+## 2026-09-16 11:15 UTC - automatic resume run
+- All samples collected (main 2250 + expansion); nothing left to generate.
