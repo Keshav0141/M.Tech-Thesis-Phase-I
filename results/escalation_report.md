@@ -54,3 +54,14 @@ _Unigram gate unchanged. Base error rate 0.030._
 - Conclusion: this is primarily a **data-volume problem** (9 positives in 300),
   not a threshold-tuning problem. Tuning cannot rescue the math gate; a
   better math uncertainty signal (or a harder math source) is needed.
+
+## Numeric-aware math signal (final-answer disagreement)
+
+_numeric_disagreement = 1 - (samples matching the majority final number)/n_extracted; scored on the combined math pool (300 questions, 9 errors). Unigram baseline recomputed on the same pool. Escalation at top-15%._
+
+| Pool | Signal | AUROC | top-15% precision | top-15% recall |
+|---|---|---:|---:|---:|
+| combined (300) | numeric_disagreement | 0.6510 | 0.20 | 0.33 |
+| combined (300) | unigram (baseline) | 0.7942 | 0.09 | 0.44 |
+| main only (150) | numeric_disagreement | 0.6487 | 0.22 | 0.33 |
+| main only (150) | unigram (baseline) | 0.8449 | 0.13 | 0.50 |

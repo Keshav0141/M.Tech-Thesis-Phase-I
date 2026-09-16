@@ -34,6 +34,7 @@ METHODS = {
     "degree_matrix": ("graph", "degree_matrix"),
     "eigv": ("graph", "eigv"),
     "eccentricity": ("graph", "eccentricity"),
+    "numeric_disagreement": ("numeric", "numeric_disagreement"),
 }
 
 
@@ -62,6 +63,7 @@ def main() -> int:
     parser.add_argument("--ngram-tfidf", default=str(uq.RESULTS_DIR / "ngram_tfidf.jsonl"))
     parser.add_argument("--semantic", default=str(uq.RESULTS_DIR / "semantic_entropy.jsonl"))
     parser.add_argument("--graph-methods", default=str(uq.RESULTS_DIR / "graph_methods.jsonl"))
+    parser.add_argument("--numeric-signal", default=str(uq.RESULTS_DIR / "math_numeric_signal.jsonl"))
     parser.add_argument("--output", default=str(uq.RESULTS_DIR / "week1_auroc_report.md"))
     args = parser.parse_args()
 
@@ -71,6 +73,7 @@ def main() -> int:
         "ngram_tfidf": load_jsonl(Path(args.ngram_tfidf)),
         "semantic": load_jsonl(Path(args.semantic)),
         "graph": load_jsonl(Path(args.graph_methods)),
+        "numeric": load_jsonl(Path(args.numeric_signal)),
     }
     questions = {q["question_id"]: q for q in uq.load_questions()}
     categories = ["factual", "math", "reasoning", "all"]

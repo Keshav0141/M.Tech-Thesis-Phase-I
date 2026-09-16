@@ -1,6 +1,6 @@
 # AUROC Report - uncertainty vs. incorrect answers
 
-_Generated 2026-09-15 11:45 UTC (full dataset: 450 questions x 5 samples)._
+_Generated 2026-09-16 12:31 UTC (full dataset: 450 questions x 5 samples)._
 
 Label: majority-vote incorrect (1) vs correct (0); unresolved/no-sample questions are excluded.
 AUROC > 0.5 means the uncertainty score is higher on incorrect answers.
@@ -27,6 +27,7 @@ AUROC > 0.5 means the uncertainty score is higher on incorrect answers.
 | factual | degree_matrix | 0.2796 | 46/87 | 5.1304 | 9.908 |
 | factual | eigv | 0.2796 | 46/87 | 5.1304 | 9.908 |
 | factual | eccentricity | 0.4959 | 46/87 | 1.1522 | 1.1724 |
+| factual | numeric_disagreement | n/a | 0/0 | n/a | n/a |
 | math | bigram_jaccard | 0.8171 | 6/144 | 0.6584 | 0.5023 |
 | math | trigram_jaccard | 0.8137 | 6/144 | 0.7593 | 0.6137 |
 | math | tfidf_cosine | 0.7558 | 6/144 | 0.1423 | 0.0845 |
@@ -37,6 +38,7 @@ AUROC > 0.5 means the uncertainty score is higher on incorrect answers.
 | math | degree_matrix | 0.3177 | 6/144 | 9.3333 | 13.3056 |
 | math | eigv | 0.3177 | 6/144 | 9.3333 | 13.3056 |
 | math | eccentricity | 0.6655 | 6/144 | 2.0 | 1.4931 |
+| math | numeric_disagreement | 0.6487 | 6/144 | 0.2 | 0.0139 |
 | reasoning | bigram_jaccard | 0.6772 | 42/108 | 0.838 | 0.7689 |
 | reasoning | trigram_jaccard | 0.6728 | 42/108 | 0.9035 | 0.8487 |
 | reasoning | tfidf_cosine | 0.6299 | 42/108 | 0.5436 | 0.4745 |
@@ -47,6 +49,7 @@ AUROC > 0.5 means the uncertainty score is higher on incorrect answers.
 | reasoning | degree_matrix | 0.3617 | 42/108 | 1.7619 | 3.7037 |
 | reasoning | eigv | 0.3617 | 42/108 | 1.7619 | 3.7037 |
 | reasoning | eccentricity | 0.3920 | 42/108 | 0.6667 | 1.0093 |
+| reasoning | numeric_disagreement | n/a | 0/0 | n/a | n/a |
 | all | bigram_jaccard | 0.8195 | 94/339 | 0.8135 | 0.5945 |
 | all | trigram_jaccard | 0.8168 | 94/339 | 0.881 | 0.6853 |
 | all | tfidf_cosine | 0.8449 | 94/339 | 0.5737 | 0.2473 |
@@ -57,3 +60,4 @@ AUROC > 0.5 means the uncertainty score is higher on incorrect answers.
 | all | degree_matrix | 0.2650 | 94/339 | 3.8936 | 9.3746 |
 | all | eigv | 0.2650 | 94/339 | 3.8936 | 9.3746 |
 | all | eccentricity | 0.4084 | 94/339 | 0.9894 | 1.2566 |
+| all | numeric_disagreement | 0.6487 | 6/144 | 0.2 | 0.0139 |

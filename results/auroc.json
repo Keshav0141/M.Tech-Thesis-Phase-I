@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-09-15 11:45 UTC",
+  "generated_utc": "2026-09-16 12:31 UTC",
   "coverage": {
     "factual": {
       "dataset_questions": 150,
@@ -316,6 +316,36 @@
         "n_correct": 339,
         "mean_score_incorrect": 0.9894,
         "mean_score_correct": 1.2566
+      }
+    },
+    "numeric_disagreement": {
+      "factual": {
+        "auroc": null,
+        "n_incorrect": 0,
+        "n_correct": 0,
+        "mean_score_incorrect": null,
+        "mean_score_correct": null
+      },
+      "math": {
+        "auroc": 0.6487,
+        "n_incorrect": 6,
+        "n_correct": 144,
+        "mean_score_incorrect": 0.2,
+        "mean_score_correct": 0.0139
+      },
+      "reasoning": {
+        "auroc": null,
+        "n_incorrect": 0,
+        "n_correct": 0,
+        "mean_score_incorrect": null,
+        "mean_score_correct": null
+      },
+      "all": {
+        "auroc": 0.6487,
+        "n_incorrect": 6,
+        "n_correct": 144,
+        "mean_score_incorrect": 0.2,
+        "mean_score_correct": 0.0139
       }
     }
   }

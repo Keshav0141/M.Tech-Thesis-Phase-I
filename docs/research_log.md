@@ -807,6 +807,24 @@ Not usable for generation:
   second-model call). Ends with the next step conditional on (a) and (b).
 - All numbers pulled from existing results files; nothing recomputed.
 
+## 2026-09-16 (numeric signal + prep rewrite) — math numeric-aware signal
+- Built `scoring/math_numeric_signal.py`: extracts the final number from each
+  sample (reusing the correctness extractor) and scores
+  `numeric_disagreement = 1 - mode_fraction` for all 300 math questions
+  (main + mathb). Output `results/math_numeric_signal.jsonl`; section appended
+  to `results/escalation_report.md`; also wired into `evaluate_methods.py`
+  (math-only row, AUROC 0.6487 on the main 150).
+- Combined-pool evaluation (300 q, 9 errors): numeric_disagreement AUROC
+  **0.651** vs unigram **0.794**; top-15% escalation precision **0.20** vs
+  0.09 (recall 0.33 vs 0.44). The numeric signal is a better precision gate
+  when it fires but a weaker standalone ranking signal (many consistent wrong
+  answers show zero disagreement).
+- Rewrote `docs/week3_meeting_prep.md`: only the model-tier item remains a
+  "decision needed"; the math item is now "decided and done" (numeric signal,
+  with the numbers above) and the escalation gate is "approved as designed".
+- Decision recorded: numeric-aware signal chosen over the harder-dataset
+  (MATH) route; combined numeric+unigram gate noted as the follow-up.
+
 ## 2026-09-16 (meeting prep) — week3 discussion agenda added
 - Wrote `docs/week3_meeting_prep.md` (one-page talking-points doc, separate
   from the formal `mid_review_draft.md`): recap paragraph + three decisions

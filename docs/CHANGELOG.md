@@ -6,6 +6,10 @@ Dated entries tied to git commits.
 - Math-only escalation threshold sweep (combined 300-question pool): best
   precision 0.13 at top 5-10%, recall plateaus at 0.44 -- data-volume
   problem, not threshold tuning. Section appended to escalation_report.md.
+- Numeric-aware math signal (`scoring/math_numeric_signal.py`): combined-pool
+  AUROC 0.651 vs unigram 0.794, but top-15% escalation precision 0.20 vs 0.09.
+  Wired into evaluate_methods; meeting prep rewritten (math = decided/done,
+  escalation gate = approved; only model tier remains a decision).
 
 ## 2026-09-16
 - Confidence-gated escalation pipeline (first pass): `scoring/escalate.py` ->

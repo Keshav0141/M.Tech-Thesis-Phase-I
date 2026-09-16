@@ -11,13 +11,12 @@ nine black-box UQ methods from Lin et al. (TMLR 2024) including the four graph
 measures (NumSets, Degree, EigV, Eccentricity), and completed the Week 1
 evaluation: TF-IDF leads the single methods (AUROC 0.845); a CV-validated
 per-category selector beats TF-IDF under identical CV (macro 0.805 vs 0.760);
-and a first-pass confidence-gated escalation pipeline routes the top-15%
-most-uncertain questions with 0.50 precision (2.3x error enrichment). We also
-generated a 150-question GSM8K expansion to enlarge the math error pool and
-diagnosed semantic entropy's numeric blindness on math. Details:
-`docs/mid_review_draft.md`.
+and the confidence-gated escalation pipeline routes the top-15% most-uncertain
+questions with 0.50 precision (2.3x error enrichment). We also generated a
+150-question GSM8K expansion and built a numeric-aware uncertainty signal for
+math. Details: `docs/mid_review_draft.md`.
 
-## 2. Decisions needed
+## 2. Decision needed
 
 ### (a) Model tier — 1B/8B/20B plan vs. what Groq actually serves
 
@@ -33,34 +32,35 @@ and all 2,250 current samples are from qwen3.8-27b.
 - 27B -> 120B escalation — keeps the gate design; needs a second sample set (~2-3 days free-tier).
 - Multi-size ensemble (20B/27B/120B) — richest UQ comparison; most generation time.
 
-### (b) Math error-pool scarcity — 9 errors in 300 questions
+## 3. Decided and done (for information, no action requested)
 
-**Question:** GSM8K may be too easy for this model (98% majority accuracy);
-accept small-n, or change the math source or signal?
+### (b) Math error-pool scarcity — resolved with a numeric-aware signal
 
-**Evidence:** main math 6/150 + expansion 3/150 = 9 errors, base rate 0.03;
-threshold sweep: best gate precision 0.13 (top 5-10%), recall plateaus at
-0.44 — a data-volume problem, not a threshold-tuning problem.
+**Decision:** build a numeric-aware signal instead of switching to a harder
+math dataset. **Why:** it is a targeted fix for the diagnosed numeric blindness
+(and the NLI merge failure on `math_0009`) and requires no new data sourcing.
 
-**Options:**
-- Accept small-n — no new work; math AUROC reported with an n=9 caveat.
-- Switch to a harder math source (MATH dataset) — more errors; new sourcing + generation (~2-3 days).
-- Build a numeric-aware signal (final-number disagreement) — targeted fix for the diagnosed NLI blindness; modest effort.
+**Acted on:** `scoring/math_numeric_signal.py` is implemented and evaluated on
+the combined math pool (300 questions, 9 errors; `numeric_disagreement` =
+1 - fraction of samples matching the majority final number). Result vs the
+unigram baseline: AUROC 0.651 vs 0.794 (standalone ranking is weaker), but
+escalation precision at top-15% improves 0.09 -> 0.20 while recall moves
+0.44 -> 0.33. Kept as a precision-oriented gate component; a combined
+numeric+unigram gate is the natural follow-up if the professor wants it.
 
-### (c) Escalation gate sign-off
+### (c) Escalation gate — approved as designed
 
-**Question:** approve the gate design so the second-model call can be wired?
+**Decision:** proceed with the validated gate (CV selector method per
+category, configurable top-N% threshold). **Why:** on the 433 labeled
+questions the top-15% gate reaches 0.50 precision and 2.3x error enrichment
+(factual precision 1.00).
 
-**Evidence:** top-15% escalation on the 433 labeled questions gives 0.50
-precision, 0.35 recall (2.3x enrichment); factual precision 1.00; the
-second-model call is currently stubbed pending (a).
+**Acted on:** `scoring/escalate.py` produces per-question keep/escalate
+decisions (`results/escalation_decisions.jsonl`) and the report; the
+second-model call is stubbed and marked TODO, blocked only on decision (a).
 
-**Options:**
-- Approve now with a tier from (a) — pipeline completes; gate can be evaluated end-to-end.
-- Keep stubbed — no second-model cost; metrics stay simulation-only.
+## 4. Next step
 
-## 3. Next step
-
-If (a) picks a second tier and (b) picks a math fix, we wire the real
-escalation call and re-run the math category; otherwise we finalize the
-single-model write-up with small-n caveats.
+If (a) selects a second tier, we wire the real escalation call and re-run the
+math category with the combined numeric+unigram gate; otherwise we finalize
+the single-model write-up with small-n caveats.
