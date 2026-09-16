@@ -764,6 +764,23 @@ Not usable for generation:
 - Artifacts: `results/mathb_correctness.jsonl`; mathb samples appended to
   `logs/generations.jsonl` (now committed).
 
+## 2026-09-16 (escalation) — confidence-gated escalation pipeline, first pass
+- Built `scoring/escalate.py` -> `results/escalation_report.md` +
+  `results/escalation_decisions.jsonl`. Gate = the CV selector's per-category
+  winner (factual tfidf, math unigram, reasoning bigram); the top-N%
+  most-uncertain questions are escalated; threshold configurable via
+  `--top-pct`.
+- Second-model call is a STUB (tier pending professor sign-off), marked TODO
+  in `escalate_to_larger_model`.
+- Results (top 15%): escalation rate 15% per category; precision
+  factual 1.00 / math 0.13 / reasoning 0.43; recall factual 0.43 / math 0.50
+  / reasoning 0.24. Overall: precision 0.50, recall 0.35 vs 0.22 base error
+  rate (2.3x error enrichment).
+- Honest read: the gate is clearly better than random overall and excellent on
+  factual (top-15% uncertainty == 100% errors), but weak on math (13%
+  precision — only 3 of 23 escalations are errors) because math has few
+  errors and the unigram gate fires on mostly-correct uncertain answers.
+
 ## 2026-09-15 (extended methods) — graph-based UQ measures from the base paper
 - Implemented the remaining Lin et al. (TMLR 2024) graph measures in
   `scoring/score_graph_methods.py` on the ALREADY PERSISTED NLI pairwise

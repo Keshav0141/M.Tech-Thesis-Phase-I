@@ -2,6 +2,12 @@
 
 Dated entries tied to git commits.
 
+## 2026-09-16
+- Confidence-gated escalation pipeline (first pass): `scoring/escalate.py` ->
+  `results/escalation_report.md` + `escalation_decisions.jsonl`. Top-15% gate:
+  overall precision 0.50 / recall 0.35; factual precision 1.00. Second-model
+  call stubbed pending tier decision.
+
 ## 2026-09-15
 - Graph-based UQ methods (NumSets, Degree matrix, EigV, Eccentricity) added
   via `scoring/score_graph_methods.py`, reusing the persisted NLI matrix.
