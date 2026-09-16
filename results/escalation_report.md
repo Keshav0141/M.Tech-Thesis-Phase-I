@@ -29,3 +29,28 @@ Precision = incorrect / escalated; recall = escalated-incorrect / all-incorrect;
 ## Second-model call
 
 - The escalation target is currently a STUB (`larger model (TBD: 70B/120B on Groq)`); no second model is called. The call site is marked TODO in `scoring/escalate.py:escalate_to_larger_model`.
+
+
+## Math threshold sweep (combined pool: main math + mathb = 300, 9 errors)
+
+_Unigram gate unchanged. Base error rate 0.030._
+
+| top-pct | escalated | precision (wrong/escalated) | recall (of 9 errors) |
+|---:|---:|---:|---:|
+| 5% | 15 | 0.13 | 0.22 |
+| 10% | 30 | 0.13 | 0.44 |
+| 15% | 45 | 0.09 | 0.44 |
+| 20% | 60 | 0.07 | 0.44 |
+| 25% | 75 | 0.07 | 0.56 |
+
+## Verdict (math sweep)
+
+- Precision across thresholds: 5%->0.13; 10%->0.13; 15%->0.09; 20%->0.07; 25%->0.07.
+- **Best precision is 0.13** (top 5-10%), which is ~4.3x the 0.03 base rate,
+  but absolute precision stays low and DEGRADES as the threshold widens.
+- Recall plateaus at 0.44 for 10-20% (only 4 of 9 errors caught) and reaches
+  0.56 only at 25% -- the remaining errors have LOW unigram uncertainty and
+  no threshold can surface them.
+- Conclusion: this is primarily a **data-volume problem** (9 positives in 300),
+  not a threshold-tuning problem. Tuning cannot rescue the math gate; a
+  better math uncertainty signal (or a harder math source) is needed.

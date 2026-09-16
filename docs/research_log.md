@@ -781,6 +781,22 @@ Not usable for generation:
   precision — only 3 of 23 escalations are errors) because math has few
   errors and the unigram gate fires on mostly-correct uncertain answers.
 
+## 2026-09-16 (escalation sweep) — math-only threshold diagnostic
+- Built `scoring/escalation_sweep_math.py`; computed unigram scores for mathb
+  (`results/mathb_lexical.jsonl`) and swept top-pct {5,10,15,20,25} on the
+  combined math pool (300 questions, 9 errors, base rate 0.03). Section
+  appended to `results/escalation_report.md`.
+- Results: precision 0.13 / 0.13 / 0.09 / 0.07 / 0.07; recall 0.22 / 0.44 /
+  0.44 / 0.44 / 0.56. Best precision at the smallest thresholds and it only
+  degrades from there; half the errors are low-uncertainty for unigram and
+  unreachable at any threshold.
+- Verdict: the math gate weakness is a DATA-VOLUME problem (9 positives), not
+  a threshold-tuning problem. Fixes to consider later: a math-specific
+  uncertainty signal (numeric disagreement) or a harder math source.
+- Bug caught during the sweep: the first version forgot the category filter
+  and pooled all 433 main questions with mathb (583/97); fixed, and the bogus
+  report section was removed before re-running.
+
 ## 2026-09-15 (extended methods) — graph-based UQ measures from the base paper
 - Implemented the remaining Lin et al. (TMLR 2024) graph measures in
   `scoring/score_graph_methods.py` on the ALREADY PERSISTED NLI pairwise

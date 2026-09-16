@@ -28,6 +28,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Lexical (n-gram Jaccard) uncertainty.")
     parser.add_argument("--model", help="only score samples from this model_name")
     parser.add_argument("--provider", help="only score samples from this provider")
+    parser.add_argument("--dataset", default=None, help="dataset file to score (default: main dataset)")
     parser.add_argument("--limit", type=int, help="max questions to score")
     parser.add_argument("--ngram", type=int, default=2, help="word n-gram size (default 2)")
     parser.add_argument("--min-samples", type=int, default=2, help="skip questions with fewer samples")
@@ -35,7 +36,7 @@ def main() -> int:
     args = parser.parse_args()
 
     uq.ensure_results_dir()
-    questions = uq.load_questions()
+    questions = uq.load_questions(args.dataset)
     samples, counts = uq.load_samples()
     model, provider = uq.resolve_filters(args, counts)
     if model or provider:
