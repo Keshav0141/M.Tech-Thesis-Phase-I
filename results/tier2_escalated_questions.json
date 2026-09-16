@@ -1,0 +1,478 @@
+{
+  "top_pct": 15.0,
+  "counts": {
+    "factual": 20,
+    "math": 9,
+    "reasoning": 23
+  },
+  "questions": [
+    {
+      "question_id": "factual_0008",
+      "category": "factual",
+      "gate_method": "tfidf",
+      "uncertainty": 0.853581,
+      "question_text": "This summer saw the appearance of which famous sportsman in Virgin Media ads?",
+      "ground_truth_answer": "USAIN BOLT",
+      "original_correct": null
+    },
+    {
+      "question_id": "factual_0010",
+      "category": "factual",
+      "gate_method": "tfidf",
+      "uncertainty": 0.82248,
+      "question_text": "What was Kevin Kline's first movie?",
+      "ground_truth_answer": "Sophie's Choice",
+      "original_correct": null
+    },
+    {
+      "question_id": "factual_0014",
+      "category": "factual",
+      "gate_method": "tfidf",
+      "uncertainty": 0.746111,
+      "question_text": "Who won the 2009 Australian men's tennis Open Championship?",
+      "ground_truth_answer": "Rafael Nadal",
+      "original_correct": null
+    },
+    {
+      "question_id": "factual_0016",
+      "category": "factual",
+      "gate_method": "tfidf",
+      "uncertainty": 0.804366,
+      "question_text": "Not counting the City of London, which is the smallest city in England by population?",
+      "ground_truth_answer": "Wells",
+      "original_correct": null
+    },
+    {
+      "question_id": "factual_0026",
+      "category": "factual",
+      "gate_method": "tfidf",
+      "uncertainty": 0.975479,
+      "question_text": "According to Elvis Presley, what do you find at the end of Lonely Street?",
+      "ground_truth_answer": "Heartbreak Hotel",
+      "original_correct": null
+    },
+    {
+      "question_id": "factual_0028",
+      "category": "factual",
+      "gate_method": "tfidf",
+      "uncertainty": 0.805984,
+      "question_text": "What creature is a slang word in French for a newspaper?",
+      "ground_truth_answer": "Canard",
+      "original_correct": null
+    },
+    {
+      "question_id": "factual_0029",
+      "category": "factual",
+      "gate_method": "tfidf",
+      "uncertainty": 0.781611,
+      "question_text": "\"Who has a series of weight-loss tapes called \"\"Sweatin' to the Oldies\"\"?\"",
+      "ground_truth_answer": "Richard Simmons",
+      "original_correct": null
+    },
+    {
+      "question_id": "factual_0034",
+      "category": "factual",
+      "gate_method": "tfidf",
+      "uncertainty": 0.944992,
+      "question_text": "Which poet, who died during World War One, wrote the poems 'Peace' and 'Tiare Tahiti'?",
+      "ground_truth_answer": "RUPERT BROOKE",
+      "original_correct": null
+    },
+    {
+      "question_id": "factual_0035",
+      "category": "factual",
+      "gate_method": "tfidf",
+      "uncertainty": 0.846508,
+      "question_text": "Which post-war Prime Minister was MP for Warwick and Leamington?",
+      "ground_truth_answer": "ANTHONY EDEN",
+      "original_correct": null
+    },
+    {
+      "question_id": "factual_0048",
+      "category": "factual",
+      "gate_method": "tfidf",
+      "uncertainty": 0.735945,
+      "question_text": "Who wrote the book Jo's Boys?",
+      "ground_truth_answer": "LOUISA M ALCOTT",
+      "original_correct": null
+    },
+    {
+      "question_id": "factual_0054",
+      "category": "factual",
+      "gate_method": "tfidf",
+      "uncertainty": 0.864192,
+      "question_text": "Who starred alongside Adam Faith in 'Love Hurts'?",
+      "ground_truth_answer": "Zoe Wanamaker",
+      "original_correct": null
+    },
+    {
+      "question_id": "factual_0068",
+      "category": "factual",
+      "gate_method": "tfidf",
+      "uncertainty": 0.997762,
+      "question_text": "Films - Russell Crowe and Christian Bale starred in a remake of which famous western?",
+      "ground_truth_answer": "3.10 TO YUMA",
+      "original_correct": null
+    },
+    {
+      "question_id": "factual_0078",
+      "category": "factual",
+      "gate_method": "tfidf",
+      "uncertainty": 0.797878,
+      "question_text": "\"The first number 1 of the 1960s was called \"\"Starry Eyed\"\", who sang it?\"",
+      "ground_truth_answer": "MICHAEL HOLLIDAY",
+      "original_correct": null
+    },
+    {
+      "question_id": "factual_0084",
+      "category": "factual",
+      "gate_method": "tfidf",
+      "uncertainty": 0.900134,
+      "question_text": "Which product was advertised on TV using the phrase 'Any time, any place, anywhere'?",
+      "ground_truth_answer": "Martini",
+      "original_correct": null
+    },
+    {
+      "question_id": "factual_0095",
+      "category": "factual",
+      "gate_method": "tfidf",
+      "uncertainty": 0.843119,
+      "question_text": "Suzette Charles of New Jersey became Miss America 1984 because of the resignation of the actual winner. Whom did she replace?",
+      "ground_truth_answer": "Vanessa Williams",
+      "original_correct": null
+    },
+    {
+      "question_id": "factual_0097",
+      "category": "factual",
+      "gate_method": "tfidf",
+      "uncertainty": 0.894215,
+      "question_text": "Lester and Carolyn Burnham are characters in which 1999 film?",
+      "ground_truth_answer": "American Beauty",
+      "original_correct": null
+    },
+    {
+      "question_id": "factual_0106",
+      "category": "factual",
+      "gate_method": "tfidf",
+      "uncertainty": 0.81797,
+      "question_text": "Which Neil Sedaka track was dedicated to an ex-girlfriend?",
+      "ground_truth_answer": "Oh Carol",
+      "original_correct": null
+    },
+    {
+      "question_id": "factual_0109",
+      "category": "factual",
+      "gate_method": "tfidf",
+      "uncertainty": 0.884389,
+      "question_text": "Who was the first man to appear on the cover of the American Vogue?",
+      "ground_truth_answer": "Richard Gere",
+      "original_correct": null
+    },
+    {
+      "question_id": "factual_0115",
+      "category": "factual",
+      "gate_method": "tfidf",
+      "uncertainty": 0.729194,
+      "question_text": "Knothead and Splinter are the nephew and niece of which cartoon character?",
+      "ground_truth_answer": "WOODY WOODPECKER",
+      "original_correct": null
+    },
+    {
+      "question_id": "factual_0143",
+      "category": "factual",
+      "gate_method": "tfidf",
+      "uncertainty": 0.995943,
+      "question_text": "Which British boxer bought one of the original \u2018Only Fools and Horses\u2019 Reliant Robins in 2004?",
+      "ground_truth_answer": "Ricky Hatton",
+      "original_correct": null
+    },
+    {
+      "question_id": "math_0009",
+      "category": "math",
+      "gate_method": "numeric_disagreement",
+      "uncertainty": 0.4,
+      "question_text": "New York recorded 5000 new coronavirus cases on a particular week. In the second week, half as many new coronaviruses cases as the first week was recorded by the state. In the third week, 2000 more cases were recorded in the state. What is the total number of recorded new coronaviruses in the state after the three weeks?",
+      "ground_truth_answer": "9500",
+      "original_correct": null
+    },
+    {
+      "question_id": "math_0014",
+      "category": "math",
+      "gate_method": "numeric_disagreement",
+      "uncertainty": 0.4,
+      "question_text": "Hank reads the newspaper every morning, 5 days a week for 30 minutes.  He reads part of a novel every evening, 5 days a week, for 1 hour.  He doubles his reading time on Saturday and Sundays.  How many minutes does Hank spend reading in 1 week?",
+      "ground_truth_answer": "810",
+      "original_correct": null
+    },
+    {
+      "question_id": "math_0032",
+      "category": "math",
+      "gate_method": "numeric_disagreement",
+      "uncertainty": 0.2,
+      "question_text": "Every 4 weeks, Helen hand washes her silk pillowcases.  It takes 30 minutes to hand wash all of them.  In 1 year, how much time does Helen spend hand washing her pillowcases?",
+      "ground_truth_answer": "390",
+      "original_correct": null
+    },
+    {
+      "question_id": "math_0061",
+      "category": "math",
+      "gate_method": "numeric_disagreement",
+      "uncertainty": 0.4,
+      "question_text": "Martin went to a store to buy a new television set. He decided to spend no more than $1,000 and the sales clerk offered him the TV for $100 less and an additional 20% off. How much lower was the price of the television than the amount Martin decided to spend?",
+      "ground_truth_answer": "280",
+      "original_correct": null
+    },
+    {
+      "question_id": "math_0072",
+      "category": "math",
+      "gate_method": "numeric_disagreement",
+      "uncertainty": 0.4,
+      "question_text": "The base of a hill located beside a river is 300m above the seabed. If this depth is a quarter of the vertical distance between the riverbed and the peak of the hill, how high is the hill?",
+      "ground_truth_answer": "900",
+      "original_correct": null
+    },
+    {
+      "question_id": "math_0077",
+      "category": "math",
+      "gate_method": "numeric_disagreement",
+      "uncertainty": 0.2,
+      "question_text": "A library cabinet houses five ancient scrolls. The first scroll is 4080 years old. If each scroll is older than the last by half as many years as the last scroll\u2019s age, how old is the fifth scroll?",
+      "ground_truth_answer": "20655",
+      "original_correct": null
+    },
+    {
+      "question_id": "math_0111",
+      "category": "math",
+      "gate_method": "numeric_disagreement",
+      "uncertainty": 0.2,
+      "question_text": "John watches a TV show and they announce they are going to do 1 more season.  Each season is 22 episodes except for the last season which is 4 episodes longer.  There were 9 seasons before the announcement.  If each episode is .5 hours how long will it take to watch them all after the last season finishes?",
+      "ground_truth_answer": "112",
+      "original_correct": null
+    },
+    {
+      "question_id": "math_0133",
+      "category": "math",
+      "gate_method": "numeric_disagreement",
+      "uncertainty": 0.8,
+      "question_text": "James injured his ankle and decides to slowly start working back up to his previous running goals and then surpass them.  Before the injury, he was able to run 100 miles per week.  He wants to get up to 20% more than that total in 280 days and each week he will increase miles walked in the week by the same amount.  How many miles does he need to add per week?",
+      "ground_truth_answer": "3",
+      "original_correct": null
+    },
+    {
+      "question_id": "math_0147",
+      "category": "math",
+      "gate_method": "numeric_disagreement",
+      "uncertainty": 0.2,
+      "question_text": "Jim is a maintenance worker at a pool. Every time someone jumps in the pool, they cause 400 ml of water to splash out and evaporate. Jim has to get everyone out of the pool, clean, and refill it when it gets below 80% full. If the pool holds 2000 L of water, how many times can people jump in the pool before Jim has to clean it?",
+      "ground_truth_answer": "1000",
+      "original_correct": null
+    },
+    {
+      "question_id": "reasoning_0001",
+      "category": "reasoning",
+      "gate_method": "bigram",
+      "uncertainty": 0.910968,
+      "question_text": "Did producer of Easy Rider ever star in a movie with Dean Cain's Princeton girlfriend?",
+      "ground_truth_answer": "yes",
+      "original_correct": null
+    },
+    {
+      "question_id": "reasoning_0003",
+      "category": "reasoning",
+      "gate_method": "bigram",
+      "uncertainty": 0.925729,
+      "question_text": "Has the Indian Ocean garbage patch not completed two full rotations of debris since its discovery?",
+      "ground_truth_answer": "yes",
+      "original_correct": null
+    },
+    {
+      "question_id": "reasoning_0006",
+      "category": "reasoning",
+      "gate_method": "bigram",
+      "uncertainty": 0.931206,
+      "question_text": "Can atheism surpass Christianity in American black communities by 2021?",
+      "ground_truth_answer": "no",
+      "original_correct": null
+    },
+    {
+      "question_id": "reasoning_0017",
+      "category": "reasoning",
+      "gate_method": "bigram",
+      "uncertainty": 0.936222,
+      "question_text": "Is Christianity better for global warming than Satanism?",
+      "ground_truth_answer": "yes",
+      "original_correct": null
+    },
+    {
+      "question_id": "reasoning_0021",
+      "category": "reasoning",
+      "gate_method": "bigram",
+      "uncertainty": 0.90433,
+      "question_text": "Did France win the French Revolution?",
+      "ground_truth_answer": "no",
+      "original_correct": null
+    },
+    {
+      "question_id": "reasoning_0025",
+      "category": "reasoning",
+      "gate_method": "bigram",
+      "uncertainty": 0.908924,
+      "question_text": "If he were poor, would Christopher Reeve have lived?",
+      "ground_truth_answer": "no",
+      "original_correct": null
+    },
+    {
+      "question_id": "reasoning_0043",
+      "category": "reasoning",
+      "gate_method": "bigram",
+      "uncertainty": 0.93587,
+      "question_text": "Did Native American tribes teach Spaniards how to cultivate maize?",
+      "ground_truth_answer": "yes",
+      "original_correct": null
+    },
+    {
+      "question_id": "reasoning_0047",
+      "category": "reasoning",
+      "gate_method": "bigram",
+      "uncertainty": 0.905904,
+      "question_text": "Could a giant squid fit aboard the deck of the titanic?",
+      "ground_truth_answer": "yes",
+      "original_correct": null
+    },
+    {
+      "question_id": "reasoning_0049",
+      "category": "reasoning",
+      "gate_method": "bigram",
+      "uncertainty": 0.905424,
+      "question_text": "Does 50 Cent get along with Jeffrey Atkins?",
+      "ground_truth_answer": "no",
+      "original_correct": null
+    },
+    {
+      "question_id": "reasoning_0051",
+      "category": "reasoning",
+      "gate_method": "bigram",
+      "uncertainty": 0.911066,
+      "question_text": "Could the Atlantic readers fill 500 battalions?",
+      "ground_truth_answer": "no",
+      "original_correct": null
+    },
+    {
+      "question_id": "reasoning_0063",
+      "category": "reasoning",
+      "gate_method": "bigram",
+      "uncertainty": 0.90926,
+      "question_text": "Is a watchmaker likely to be able to fix an Apple Watch?",
+      "ground_truth_answer": "no",
+      "original_correct": null
+    },
+    {
+      "question_id": "reasoning_0080",
+      "category": "reasoning",
+      "gate_method": "bigram",
+      "uncertainty": 0.948887,
+      "question_text": "Could Edward Snowden join MENSA?",
+      "ground_truth_answer": "yes",
+      "original_correct": null
+    },
+    {
+      "question_id": "reasoning_0084",
+      "category": "reasoning",
+      "gate_method": "bigram",
+      "uncertainty": 0.942372,
+      "question_text": "Is slitting your wrists an unreliable suicide method?",
+      "ground_truth_answer": "yes",
+      "original_correct": null
+    },
+    {
+      "question_id": "reasoning_0098",
+      "category": "reasoning",
+      "gate_method": "bigram",
+      "uncertainty": 0.934507,
+      "question_text": "Can a software engineer work during a power outage?",
+      "ground_truth_answer": "no",
+      "original_correct": null
+    },
+    {
+      "question_id": "reasoning_0100",
+      "category": "reasoning",
+      "gate_method": "bigram",
+      "uncertainty": 0.9214,
+      "question_text": "Would it be unusual to see frost in September in Texas?",
+      "ground_truth_answer": "yes",
+      "original_correct": null
+    },
+    {
+      "question_id": "reasoning_0104",
+      "category": "reasoning",
+      "gate_method": "bigram",
+      "uncertainty": 0.909609,
+      "question_text": "Was milliner in Alice in Wonderland (1951 film) likely in need of succimer?",
+      "ground_truth_answer": "yes",
+      "original_correct": null
+    },
+    {
+      "question_id": "reasoning_0108",
+      "category": "reasoning",
+      "gate_method": "bigram",
+      "uncertainty": 0.911522,
+      "question_text": "Did the first Duke of Valentinois play a key role in the Hundred Years' War?",
+      "ground_truth_answer": "no",
+      "original_correct": null
+    },
+    {
+      "question_id": "reasoning_0113",
+      "category": "reasoning",
+      "gate_method": "bigram",
+      "uncertainty": 0.913433,
+      "question_text": "Did Disney get most of Rudyard Kipling's The Jungle Book profits?",
+      "ground_truth_answer": "yes",
+      "original_correct": null
+    },
+    {
+      "question_id": "reasoning_0114",
+      "category": "reasoning",
+      "gate_method": "bigram",
+      "uncertainty": 0.925945,
+      "question_text": "If you have black hair and want red hair, do you need bleach?",
+      "ground_truth_answer": "yes",
+      "original_correct": null
+    },
+    {
+      "question_id": "reasoning_0129",
+      "category": "reasoning",
+      "gate_method": "bigram",
+      "uncertainty": 0.904633,
+      "question_text": "Could all of the 2008 Summer Olympics women find a hookup athlete partner?",
+      "ground_truth_answer": "yes",
+      "original_correct": null
+    },
+    {
+      "question_id": "reasoning_0132",
+      "category": "reasoning",
+      "gate_method": "bigram",
+      "uncertainty": 0.915192,
+      "question_text": "Was Donald Trump the target of Islamophobia?",
+      "ground_truth_answer": "no",
+      "original_correct": null
+    },
+    {
+      "question_id": "reasoning_0145",
+      "category": "reasoning",
+      "gate_method": "bigram",
+      "uncertainty": 0.904536,
+      "question_text": "Was Harry Truman's presidency unaffected by the twenty-third Amendment to the US Constitution?",
+      "ground_truth_answer": "yes",
+      "original_correct": null
+    },
+    {
+      "question_id": "reasoning_0147",
+      "category": "reasoning",
+      "gate_method": "bigram",
+      "uncertainty": 0.905067,
+      "question_text": "Would a Drow tower over The Hobbit's hero?",
+      "ground_truth_answer": "yes",
+      "original_correct": null
+    }
+  ]
+}

@@ -858,6 +858,19 @@ Not usable for generation:
   escalated question, ~55 samples — a single daily budget.
 - Report: `results/tier2_timeline_estimate.md`. No generation started.
 
+## 2026-09-16 (tier2 pilot) — wired, planned, awaiting go-ahead
+- Wired the real second-model call: `scoring/escalate.py:escalate_to_larger_model`
+  now calls `openai/gpt-oss-120b` via the reused `GroqProvider` from
+  generation/generate.py (1 sample, temp 0.7, OTPM pacing). Gate runs spend
+  no API calls; only `scoring/tier2_pilot.py` invokes the call.
+- **`reasoning_effort="none"` is rejected by gpt-oss-120b** (verified live:
+  low/medium/high only) — pilot uses `low`.
+- Exact escalated set exported (52 questions: 20 factual TF-IDF, 23 reasoning
+  bigram, 9 math numeric) -> `results/tier2_escalated_questions.json`.
+- Plan: `results/tier2_pilot_plan.md`. Budget: 52 requests (5.2% RPD),
+  ~21K tokens (10% TPD), ~24 min — comfortably fits one day's free quota.
+- NOT executed — awaiting go-ahead before spending API calls.
+
 ## 2026-09-16 (meeting prep) — week3 discussion agenda added
 - Wrote `docs/week3_meeting_prep.md` (one-page talking-points doc, separate
   from the formal `mid_review_draft.md`): recap paragraph + three decisions

@@ -82,11 +82,35 @@ def rank_normalize(values: list[float]) -> list[float]:
     return [rank / (n - 1) if n > 1 else 0.5 for rank in ranks]
 
 
-def escalate_to_larger_model(question_id: str, category: str) -> dict:
-    # TODO: wire the real second-model call here once the model tier is
-    # approved. Expected shape: call Groq with a larger model, return its
-    # answer. For now the escalation is logged but no second model is called.
-    return {"status": "stub", "tier": PLACEHOLDER_TIER, "answer": None, "question_id": question_id, "category": category}
+def escalate_to_larger_model(question_text: str, category: str, temperature: float = 0.7) -> dict:
+    """Real second-model call: openai/gpt-oss-120b on Groq (free plan, 200K TPD).
+
+    Reuses the API-call logic from generation/generate.py (GroqProvider),
+    including its rate-limit-safe client. NOTE: gpt-oss-120b only accepts
+    reasoning_effort in {low, medium, high} (verified live 2026-09-16, 'none'
+    is rejected), so 'low' is used as the closest instruct-mode setting.
+
+    Pacing: waits max(22s, completion_tokens/900*60 + 2s) to stay under the
+    Groq OTPM-style cap, matching the main pipeline's safeguards.
+    """
+    import time
+
+    from generation.generate import GroqProvider
+
+    provider = GroqProvider("openai/gpt-oss-120b", reasoning_effort="low")
+    system = config.CATEGORY_INSTRUCTIONS[category]
+    max_tokens = config.MAX_TOKENS_BY_CATEGORY.get(category, 1024)
+    text, usage, finish_reason = provider.generate(question_text, system, temperature, max_tokens)
+    completion_tokens = usage.get("completion_tokens") or 0
+    sleep_seconds = max(config.DEFAULT_SLEEP_SECONDS, completion_tokens * 60.0 / config.GROQ_OTPM_TARGET + 2.0)
+    time.sleep(sleep_seconds)
+    return {
+        "status": "ok",
+        "model": "openai/gpt-oss-120b",
+        "answer": text,
+        "finish_reason": finish_reason,
+        "token_usage": usage,
+    }
 
 
 def main() -> int:
@@ -154,7 +178,10 @@ def main() -> int:
             "was_incorrect": bool(row["error"]),
         }
         if row["escalate"]:
-            decision["escalation_target"] = escalate_to_larger_model(row["question_id"], row["category"])
+            decision["escalation_target"] = {
+                "tier": "openai/gpt-oss-120b",
+                "status": "handled by scoring/tier2_pilot.py (gate runs spend no API calls)",
+            }
         decisions.append(decision)
     uq.write_jsonl(args.output, decisions)
 
@@ -213,9 +240,10 @@ def main() -> int:
         "",
         "## Second-model call",
         "",
-        f"- The escalation target is currently a STUB (`{PLACEHOLDER_TIER}`); no "
-        "second model is called. The call site is marked TODO in "
-        "`scoring/escalate.py:escalate_to_larger_model`.",
+        f"- The escalation call is wired (`openai/gpt-oss-120b`, reasoning_effort "
+        f"low) in `scoring/escalate.py:escalate_to_larger_model`, but is executed "
+        f"only by `scoring/tier2_pilot.py` for the ~52 escalated questions; the "
+        f"gate itself never spends API calls.",
         "",
     ]
     Path(args.report).write_text("\n".join(lines), encoding="utf-8")
