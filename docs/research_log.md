@@ -891,6 +891,19 @@ Not usable for generation:
 - Report: `results/tier2_pilot_results.md`; raw answers in
   `logs/tier2_generations.jsonl`.
 
+## 2026-09-16 (regression analysis) — all 4 regressions are reasoning
+- Analyzed the 4 regressions (qwen right -> gpt-oss-120b wrong). ALL are
+  reasoning questions (no factual/math regressions); none are grader
+  artifacts (extracted yes/no matches gpt-oss's written answer every time).
+- Pattern: on nuanced StrategyQA yes/no items, gpt-oss-120b confidently
+  argues the opposite side — 3/4 with factual errors (squid vs Titanic deck,
+  Drow height, watchmaker scope) and 1/4 a defensible interpretation
+  (France/French Revolution) that contradicts the dataset GT.
+- Implication: bigger-model counter-argumentation can regress answers the
+  smaller model had right; reasoning escalations may need a second-model
+  confidence check, or accept the 4/52 (8%) regression rate against the
+  +14 recoveries. Section appended to results/tier2_pilot_results.md.
+
 ## 2026-09-16 (meeting prep) — week3 discussion agenda added
 - Wrote `docs/week3_meeting_prep.md` (one-page talking-points doc, separate
   from the formal `mid_review_draft.md`): recap paragraph + three decisions

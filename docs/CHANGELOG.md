@@ -28,6 +28,9 @@ Dated entries tied to git commits.
   13.4K tokens, 0 truncations. Escalation lifts accuracy on the escalated set
   0.31 -> 0.58 (+0.27); 14/32 qwen-errors recovered, 4 regressions.
   results/tier2_pilot_results.md.
+- Regression analysis: all 4 regressions are reasoning (bigger model
+  over-argues the opposite side, 3 with factual errors); no grader
+  artifacts. Section appended to results/tier2_pilot_results.md.
 - Tier-2/3 timeline estimate (`results/tier2_timeline_estimate.md`): free
   plan is 200K TPD (not 100K); llama-3.3-70b-versatile retired (use
   gpt-oss-120b); full second dataset ~3-7 days vs escalation-only <1 day.
