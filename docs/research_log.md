@@ -870,6 +870,13 @@ Not usable for generation:
 - Plan: `results/tier2_pilot_plan.md`. Budget: 52 requests (5.2% RPD),
   ~21K tokens (10% TPD), ~24 min — comfortably fits one day's free quota.
 - NOT executed — awaiting go-ahead before spending API calls.
+- Pre-run safety check (2026-09-16): `finish_reason` is logged for every
+  tier-2 response (propagated from GroqProvider and written to
+  logs/tier2_generations.jsonl). `max_tokens` raised to a fixed **1536** for
+  all tier-2 calls (the qwen truncation lesson: 1024 was not always enough
+  for reasoning-heavy answers; gpt-oss-120b emits hidden reasoning even at
+  effort=low). Truncated responses (`finish_reason=length`) will be flagged
+  in the pilot results.
 
 ## 2026-09-16 (meeting prep) — week3 discussion agenda added
 - Wrote `docs/week3_meeting_prep.md` (one-page talking-points doc, separate

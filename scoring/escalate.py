@@ -39,6 +39,12 @@ METHOD_SOURCES = {
 
 PLACEHOLDER_TIER = "larger model (TBD: 70B/120B on Groq)"
 
+# Reasoning-proof cap (the qwen pipeline lesson): reasoning answers truncated
+# at 512 and 1024; 1536 eliminated truncation. gpt-oss-120b is a reasoning
+# model (even at effort=low it emits hidden reasoning), so all tier-2 calls
+# use 1536 to avoid the same problem.
+TIER2_MAX_TOKENS = 1536
+
 
 def load_jsonl(path: Path) -> dict[str, dict]:
     rows = {}
@@ -99,7 +105,7 @@ def escalate_to_larger_model(question_text: str, category: str, temperature: flo
 
     provider = GroqProvider("openai/gpt-oss-120b", reasoning_effort="low")
     system = config.CATEGORY_INSTRUCTIONS[category]
-    max_tokens = config.MAX_TOKENS_BY_CATEGORY.get(category, 1024)
+    max_tokens = TIER2_MAX_TOKENS
     text, usage, finish_reason = provider.generate(question_text, system, temperature, max_tokens)
     completion_tokens = usage.get("completion_tokens") or 0
     sleep_seconds = max(config.DEFAULT_SLEEP_SECONDS, completion_tokens * 60.0 / config.GROQ_OTPM_TARGET + 2.0)
