@@ -797,6 +797,12 @@ Not usable for generation:
   and pooled all 433 main questions with mathb (583/97); fixed, and the bogus
   report section was removed before re-running.
 
+## 2026-09-16 (meeting prep) — week3 discussion agenda added
+- Wrote `docs/week3_meeting_prep.md` (one-page talking-points doc, separate
+  from the formal `mid_review_draft.md`): recap paragraph + three decisions
+  (model tiers, math error-pool scarcity, escalation gate approval) each with
+  evidence and options+tradeoffs, plus the conditional next step.
+
 ## 2026-09-15 (extended methods) — graph-based UQ measures from the base paper
 - Implemented the remaining Lin et al. (TMLR 2024) graph measures in
   `scoring/score_graph_methods.py` on the ALREADY PERSISTED NLI pairwise
@@ -881,4 +887,7 @@ Not usable for generation:
 - 08:54-10:45 UTC: +238 samples (mathB +238); 0 quota errors, 0 failed, 0 retry attempts; all incomplete categories attempted.
 
 ## 2026-09-16 11:15 UTC - automatic resume run
+- All samples collected (main 2250 + expansion); nothing left to generate.
+
+## 2026-09-16 12:15 UTC - automatic resume run
 - All samples collected (main 2250 + expansion); nothing left to generate.
