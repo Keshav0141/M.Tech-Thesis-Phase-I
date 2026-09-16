@@ -845,6 +845,19 @@ Not usable for generation:
   recall-priority alternative if the second model is cheap. This is recorded
   as decided-and-done, not an open question.
 
+## 2026-09-16 (tier timeline) — escalation-only generation is ~1 day
+- Checked current Groq free-plan limits (docs + live probe): 30 RPM / 1K RPD
+  / 8K TPM / **200K TPD** for gpt-oss-120b (the brief's 100K TPD is not
+  current). **`llama-3.3-70b-versatile` is retired (404)**; the available
+  larger tier is `openai/gpt-oss-120b`.
+- Token average from the qwen run: 569,238/2,250 = 253 tokens/sample.
+- Full second dataset (2,250 samples): ~3 days optimistic (790 samples/day at
+  200K TPD) to ~7 days pessimistic (120B reasoning-token overhead).
+- Escalation-only (gate: ~23 factual + 23 reasoning + 9 math = ~55 questions,
+  ~275 samples at N=5): **<1 day** at any realistic token rate; with N=1 per
+  escalated question, ~55 samples — a single daily budget.
+- Report: `results/tier2_timeline_estimate.md`. No generation started.
+
 ## 2026-09-16 (meeting prep) — week3 discussion agenda added
 - Wrote `docs/week3_meeting_prep.md` (one-page talking-points doc, separate
   from the formal `mid_review_draft.md`): recap paragraph + three decisions
