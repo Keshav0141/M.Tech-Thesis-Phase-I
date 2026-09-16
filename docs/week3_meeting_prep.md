@@ -45,8 +45,14 @@ the combined math pool (300 questions, 9 errors; `numeric_disagreement` =
 1 - fraction of samples matching the majority final number). Result vs the
 unigram baseline: AUROC 0.651 vs 0.794 (standalone ranking is weaker), but
 escalation precision at top-15% improves 0.09 -> 0.20 while recall moves
-0.44 -> 0.33. Kept as a precision-oriented gate component; a combined
-numeric+unigram gate is the natural follow-up if the professor wants it.
+0.44 -> 0.33.
+
+**Final math gate (decided):** the union (OR) of the two signals was tested
+and rejected — it added no recall (4/9 either way) and diluted precision
+(0.09 -> 0.08). Math uses the **numeric-disagreement signal alone** at
+top-15% (~5% effective rate): 0.20 precision / 0.33 recall, ~5 calls per
+caught error vs unigram's 0.09 / 0.44 and ~11 calls. Unigram remains the
+documented recall-priority alternative if the second model turns out cheap.
 
 ### (c) Escalation gate — approved as designed
 
@@ -62,5 +68,5 @@ second-model call is stubbed and marked TODO, blocked only on decision (a).
 ## 4. Next step
 
 If (a) selects a second tier, we wire the real escalation call and re-run the
-math category with the combined numeric+unigram gate; otherwise we finalize
-the single-model write-up with small-n caveats.
+math category with the decided numeric-disagreement gate; otherwise we
+finalize the single-model write-up with small-n caveats.

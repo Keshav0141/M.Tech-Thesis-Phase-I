@@ -825,6 +825,26 @@ Not usable for generation:
 - Decision recorded: numeric-aware signal chosen over the harder-dataset
   (MATH) route; combined numeric+unigram gate noted as the follow-up.
 
+## 2026-09-16 (combined math gate) — union tested and rejected; final math gate decided
+- Built `scoring/combined_math_gate.py`: union of the top-15% sets from
+  unigram and numeric-disagreement, evaluated on both pools; section appended
+  to `results/escalation_report.md`.
+- Results — combined pool (300 q, 9 errors): unigram alone 45 escalated
+  (15%), precision 0.09, recall 0.44 (4/9); numeric alone 15 escalated (5%,
+  ties shrink the set), precision 0.20, recall 0.33 (3/9); union 49 escalated
+  (16%), precision 0.08, recall 0.44 (4/9). Main pool (150, 6 errors):
+  unigram 23/0.13/0.50; numeric 9/0.22/0.33; union 26/0.12/0.50.
+- Verdict: the union **dilutes** — every error the numeric signal catches is
+  already in unigram's escalated set (numeric's 3 caught errors are a subset),
+  so OR adds 4 correct-answer escalations and no recall. Combining via OR is
+  rejected.
+- **DECIDED (final math gate): numeric-disagreement signal alone at top-15%**
+  (effective ~5% escalation rate). Reasoning: for the cost-bearing escalation
+  call, numeric has 2.2x unigram's precision (0.20 vs 0.09; ~5 calls per
+  caught error vs ~11) at 0.33 vs 0.44 recall. Unigram remains the documented
+  recall-priority alternative if the second model is cheap. This is recorded
+  as decided-and-done, not an open question.
+
 ## 2026-09-16 (meeting prep) — week3 discussion agenda added
 - Wrote `docs/week3_meeting_prep.md` (one-page talking-points doc, separate
   from the formal `mid_review_draft.md`): recap paragraph + three decisions

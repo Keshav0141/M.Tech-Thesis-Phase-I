@@ -65,3 +65,18 @@ _numeric_disagreement = 1 - (samples matching the majority final number)/n_extra
 | combined (300) | unigram (baseline) | 0.7942 | 0.09 | 0.44 |
 | main only (150) | numeric_disagreement | 0.6487 | 0.22 | 0.33 |
 | main only (150) | unigram (baseline) | 0.8449 | 0.13 | 0.50 |
+
+## Combined math gate (union of unigram OR numeric-disagreement)
+
+_Escalate if in the top-15% by EITHER signal (union, not intersection). Ties in the numeric signal make its top-15% set smaller in practice._
+
+| Pool | Gate | escalated (rate) | precision | recall | errors caught |
+|---|---|---:|---:|---:|---:|
+| combined (300) | unigram alone | 45 (15%) | 0.09 | 0.44 | 4/9 |
+| combined (300) | numeric alone | 15 (5%) | 0.20 | 0.33 | 3/9 |
+| combined (300) | union (OR) | 49 (16%) | 0.08 | 0.44 | 4/9 |
+| combined (300) | overlap (unigram ∩ numeric) | 11 | - | - | - |
+| main only (150) | unigram alone | 23 (15%) | 0.13 | 0.50 | 3/6 |
+| main only (150) | numeric alone | 9 (6%) | 0.22 | 0.33 | 2/6 |
+| main only (150) | union (OR) | 26 (17%) | 0.12 | 0.50 | 3/6 |
+| main only (150) | overlap (unigram ∩ numeric) | 6 | - | - | - |
