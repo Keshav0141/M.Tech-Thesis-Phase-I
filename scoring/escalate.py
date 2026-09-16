@@ -29,6 +29,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 import uq_common as uq
 
+import config
+
 METHOD_SOURCES = {
     "tfidf": ("ngram_tfidf", "tfidf_uncertainty"),
     "bigram": ("ngram_tfidf", "bigram_uncertainty"),

@@ -24,6 +24,10 @@ Dated entries tied to git commits.
   (reasoning_effort=low; 'none' rejected), tier2_pilot.py runner, escalated
   set exported (52 q). Plan + budget in results/tier2_pilot_plan.md.
   Awaiting go-ahead.
+- Tier-2 escalation pilot EXECUTED: 52 gpt-oss-120b calls in 20.5 min,
+  13.4K tokens, 0 truncations. Escalation lifts accuracy on the escalated set
+  0.31 -> 0.58 (+0.27); 14/32 qwen-errors recovered, 4 regressions.
+  results/tier2_pilot_results.md.
 - Tier-2/3 timeline estimate (`results/tier2_timeline_estimate.md`): free
   plan is 200K TPD (not 100K); llama-3.3-70b-versatile retired (use
   gpt-oss-120b); full second dataset ~3-7 days vs escalation-only <1 day.

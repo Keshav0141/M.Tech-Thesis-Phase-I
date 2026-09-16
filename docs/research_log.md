@@ -878,6 +878,19 @@ Not usable for generation:
   effort=low). Truncated responses (`finish_reason=length`) will be flagged
   in the pilot results.
 
+## 2026-09-16 (tier2 pilot executed) — escalation improves accuracy 0.31 -> 0.58
+- Ran `scoring/tier2_pilot.py` on the 52 escalated questions (gpt-oss-120b,
+  1 sample each, temp 0.7, reasoning_effort=low, max_tokens=1536).
+- First run attempt hit a NameError (`config` not imported in escalate.py);
+  all 52 failed BEFORE the API call (0 requests spent), fixed, re-ran clean.
+- Results: 52/52 answered in 20.5 min; 13,414 tokens; 0 truncations (all
+  finish_reason=stop).
+- Recovery matrix: 14 recovery (qwen wrong -> gpt-oss right), 18 still wrong,
+  16 kept right, 4 regressed. qwen accuracy on the escalated set 0.31 ->
+  **0.58 after escalation (+0.27)**; 44% of originally-wrong answers fixed.
+- Report: `results/tier2_pilot_results.md`; raw answers in
+  `logs/tier2_generations.jsonl`.
+
 ## 2026-09-16 (meeting prep) — week3 discussion agenda added
 - Wrote `docs/week3_meeting_prep.md` (one-page talking-points doc, separate
   from the formal `mid_review_draft.md`): recap paragraph + three decisions
@@ -971,4 +984,7 @@ Not usable for generation:
 - All samples collected (main 2250 + expansion); nothing left to generate.
 
 ## 2026-09-16 12:15 UTC - automatic resume run
+- All samples collected (main 2250 + expansion); nothing left to generate.
+
+## 2026-09-16 13:15 UTC - automatic resume run
 - All samples collected (main 2250 + expansion); nothing left to generate.
