@@ -797,6 +797,16 @@ Not usable for generation:
   and pooled all 433 main questions with mathb (583/97); fixed, and the bogus
   report section was removed before re-running.
 
+## 2026-09-16 (meeting prep) — week3 discussion agenda
+- Added `docs/week3_meeting_prep.md`: one-page talking-points doc (separate
+  from the formal mid_review_draft.md) with a one-paragraph "since last
+  meeting" summary and three decisions for the professor — (a) model tier
+  (1B/8B/20B plan vs available 27B/70B/120B), (b) math error-pool scarcity
+  (9/300; accept small-n vs MATH dataset vs numeric-aware signal), and
+  (c) escalation gate sign-off (0.50 precision, 2.3x enrichment, stubbed
+  second-model call). Ends with the next step conditional on (a) and (b).
+- All numbers pulled from existing results files; nothing recomputed.
+
 ## 2026-09-16 (meeting prep) — week3 discussion agenda added
 - Wrote `docs/week3_meeting_prep.md` (one-page talking-points doc, separate
   from the formal `mid_review_draft.md`): recap paragraph + three decisions
