@@ -904,6 +904,10 @@ Not usable for generation:
   confidence check, or accept the 4/52 (8%) regression rate against the
   +14 recoveries. Section appended to results/tier2_pilot_results.md.
 
+## 2026-09-16 (cleanup) — disabled ThesisDailyResume
+- All generation complete (main 2250/2250 + mathb 750/750); disabled the
+  ThesisDailyResume scheduled task (no further runs needed).
+
 ## 2026-09-16 (meeting prep) — week3 discussion agenda added
 - Wrote `docs/week3_meeting_prep.md` (one-page talking-points doc, separate
   from the formal `mid_review_draft.md`): recap paragraph + three decisions
@@ -1000,4 +1004,100 @@ Not usable for generation:
 - All samples collected (main 2250 + expansion); nothing left to generate.
 
 ## 2026-09-16 13:15 UTC - automatic resume run
+- All samples collected (main 2250 + expansion); nothing left to generate.
+
+## 2026-09-16 14:15 UTC - automatic resume run
+- All samples collected (main 2250 + expansion); nothing left to generate.
+
+## 2026-09-16 15:15 UTC - automatic resume run
+- All samples collected (main 2250 + expansion); nothing left to generate.
+
+## 2026-09-16 16:15 UTC - automatic resume run
+- All samples collected (main 2250 + expansion); nothing left to generate.
+
+## 2026-09-16 17:15 UTC - automatic resume run
+- All samples collected (main 2250 + expansion); nothing left to generate.
+
+## 2026-09-17 11:15 UTC - automatic resume run
+- All samples collected (main 2250 + expansion); nothing left to generate.
+
+## 2026-09-17 12:15 UTC - automatic resume run
+- All samples collected (main 2250 + expansion); nothing left to generate.
+
+## 2026-09-17 16:15 UTC - automatic resume run
+- All samples collected (main 2250 + expansion); nothing left to generate.
+
+## 2026-09-17 17:15 UTC - automatic resume run
+- All samples collected (main 2250 + expansion); nothing left to generate.
+
+## 2026-09-18 11:15 UTC - automatic resume run
+- All samples collected (main 2250 + expansion); nothing left to generate.
+
+## 2026-09-18 12:15 UTC - automatic resume run
+- All samples collected (main 2250 + expansion); nothing left to generate.
+
+## 2026-09-18 13:15 UTC - automatic resume run
+- All samples collected (main 2250 + expansion); nothing left to generate.
+
+## 2026-09-18 14:15 UTC - automatic resume run
+- All samples collected (main 2250 + expansion); nothing left to generate.
+
+## 2026-09-18 15:15 UTC - automatic resume run
+- All samples collected (main 2250 + expansion); nothing left to generate.
+
+## 2026-09-18 16:15 UTC - automatic resume run
+- All samples collected (main 2250 + expansion); nothing left to generate.
+
+## 2026-09-18 17:15 UTC - automatic resume run
+- All samples collected (main 2250 + expansion); nothing left to generate.
+
+## 2026-09-19 11:15 UTC - automatic resume run
+- All samples collected (main 2250 + expansion); nothing left to generate.
+
+## 2026-09-19 12:15 UTC - automatic resume run
+- All samples collected (main 2250 + expansion); nothing left to generate.
+
+## 2026-09-19 13:15 UTC - automatic resume run
+- All samples collected (main 2250 + expansion); nothing left to generate.
+
+## 2026-09-19 14:15 UTC - automatic resume run
+- All samples collected (main 2250 + expansion); nothing left to generate.
+
+## 2026-09-19 15:15 UTC - automatic resume run
+- All samples collected (main 2250 + expansion); nothing left to generate.
+
+## 2026-09-19 16:15 UTC - automatic resume run
+- All samples collected (main 2250 + expansion); nothing left to generate.
+
+## 2026-09-20 12:15 UTC - automatic resume run
+- All samples collected (main 2250 + expansion); nothing left to generate.
+
+## 2026-09-20 12:17 UTC - automatic resume run
+- All samples collected (main 2250 + expansion); nothing left to generate.
+
+## 2026-09-20 13:15 UTC - automatic resume run
+- All samples collected (main 2250 + expansion); nothing left to generate.
+
+## 2026-09-20 13:17 UTC - automatic resume run
+- All samples collected (main 2250 + expansion); nothing left to generate.
+
+## 2026-09-20 14:15 UTC - automatic resume run
+- All samples collected (main 2250 + expansion); nothing left to generate.
+
+## 2026-09-20 14:17 UTC - automatic resume run
+- All samples collected (main 2250 + expansion); nothing left to generate.
+
+## 2026-09-20 15:15 UTC - automatic resume run
+- All samples collected (main 2250 + expansion); nothing left to generate.
+
+## 2026-09-20 15:17 UTC - automatic resume run
+- All samples collected (main 2250 + expansion); nothing left to generate.
+
+## 2026-09-20 16:15 UTC - automatic resume run
+- All samples collected (main 2250 + expansion); nothing left to generate.
+
+## 2026-09-20 16:17 UTC - automatic resume run
+- All samples collected (main 2250 + expansion); nothing left to generate.
+
+## 2026-09-20 17:15 UTC - automatic resume run
 - All samples collected (main 2250 + expansion); nothing left to generate.
