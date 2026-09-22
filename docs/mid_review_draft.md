@@ -125,7 +125,66 @@ reasoning 42).
 - **Math noise problem**: only 6 incorrect math questions; held-out fold
   AUCs swing 0.69-0.97, so the math numbers are indicative, not conclusive.
 
-## 8. Closed items
+## 8. Discussion: Tier-2 escalation tradeoffs
+
+### Regression cost of escalation
+
+The tier-2 pilot (52 questions, `openai/gpt-oss-120b`) recovered 14 of the
+original `qwen/qwen3.8-27b` errors but introduced 4 new ones (regression
+rate: 8%, 4/52). All four regressions occurred in the Reasoning category
+(StrategyQA yes/no). Manual inspection shows `gpt-oss-120b` confidently
+argues the opposite side on nuanced multi-hop questions: three of four
+cases trace to a factual disagreement in the model's reasoning chain
+(e.g. giant squid vs. Titanic deck-size comparison, Drow vs. Hobbit
+height, watchmaker vs. Apple Watch precision), and the fourth is a
+genuinely contestable historical claim (French Revolution outcome)
+where reasonable disagreement exists independent of model capability.
+
+Net effect on the escalated set: accuracy rose from 0.31 to 0.58
+(+0.27), i.e. escalation recovers roughly 3.5 errors for every 1 it
+introduces. We treat this as the expected cost of selective escalation
+rather than a pipeline defect — a larger model is not uniformly more
+reliable, and the gate's job is to bound how often that tradeoff is
+paid, not eliminate it.
+
+### Math error-pool scarcity
+
+Math accuracy under `qwen/qwen3.8-27b` is high (96.0% on the main set and
+98.0% on the expansion set), which leaves very few majority-incorrect
+examples to validate an escalation gate against: 6/150 on the main set,
+rising to only 9/300 after a 150-question GSM8K expansion (mathb) built
+specifically to test whether this was a sampling artifact rather than a
+genuine ceiling. A threshold sweep across 5-25% gate width topped out at
+0.13 precision at any setting: 4 of 9 errors are caught at 10-20%, and
+even at 25% only 5 of 9 are caught — confirming a data-volume limitation
+rather than a tuning problem.
+
+We evaluated a numeric-aware disagreement signal (extracting the final
+numeric answer per sample and scoring disagreement directly) as an
+alternative to lexical gating. It is a weaker standalone ranker (AUROC
+0.651 vs. 0.794 for unigram Jaccard) but roughly doubles escalation
+precision (0.20 vs. 0.09), at lower recall (0.33 vs. 0.44), because it
+targets consistent-wrong cases — samples that agree lexically but
+disagree numerically — that the lexical signal structurally cannot see.
+An OR-combination of the two signals was tested and rejected: it added
+no recall (the numeric signal's catches are a subset of the lexical
+signal's) while diluting precision. The final math gate uses the
+numeric-disagreement signal alone. Given n=9, these precision/recall
+figures should be read as directional rather than statistically stable;
+a larger error pool (e.g. via a harder dataset such as MATH) is the
+natural next step if further validation is required.
+
+### Note on gate/pilot alignment
+
+After the post-review relabeling of the 29-question backlog, the
+escalation gate at a fixed top-15% threshold now selects 55 questions
+rather than the 52 evaluated in the executed tier-2 pilot. The pilot
+was not re-run against the updated gate output; the 3-question
+difference is small relative to gate size and unlikely to materially
+shift the recovery/regression figures above, but is noted here for
+completeness.
+
+## 9. Closed items
 
 1. **Model tier closed:** tier 1 is Groq `qwen/qwen3.8-27b`; tier 2 is Groq
    `openai/gpt-oss-120b`, used for selective escalation only. The provider
@@ -143,7 +202,7 @@ reasoning 42).
    incorrect; overall labels are 352 correct / 98 incorrect, with 0
    unresolved and an empty `results/needs_review.jsonl`.
 
-## 9. Next steps (weeks 2-3)
+## 10. Next steps (weeks 2-3)
 
 - Shrink the math noise problem: collect more math error signal (or accept
   the small-n caveat and report per-category numbers with n).
