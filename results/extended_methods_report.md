@@ -1,6 +1,6 @@
 # AUROC Report - uncertainty vs. incorrect answers
 
-_Generated 2026-09-16 12:31 UTC (full dataset: 450 questions x 5 samples)._
+_Generated 2026-09-22 21:58 UTC (full dataset: 450 questions x 5 samples)._
 
 Label: majority-vote incorrect (1) vs correct (0); unresolved/no-sample questions are excluded.
 AUROC > 0.5 means the uncertainty score is higher on incorrect answers.
@@ -17,16 +17,16 @@ AUROC > 0.5 means the uncertainty score is higher on incorrect answers.
 
 | Category | Method | AUROC | incorrect/correct | mean score (incorrect) | mean score (correct) |
 |---|---|---:|---|---:|---:|
-| factual | bigram_jaccard | 0.8398 | 46/87 | 0.8113 | 0.5307 |
-| factual | trigram_jaccard | 0.8478 | 46/87 | 0.8763 | 0.601 |
-| factual | tfidf_cosine | 0.9093 | 46/87 | 0.6573 | 0.2346 |
-| factual | unigram_jaccard | 0.8350 | 46/87 | 0.7122 | 0.4257 |
-| factual | semantic_entropy | 0.6588 | 46/87 | 0.9255 | 0.6136 |
-| factual | semantic_entropy_normalized | 0.6588 | 46/87 | 0.575 | 0.3812 |
-| factual | num_sets | 0.6728 | 46/87 | 3.087 | 2.2644 |
-| factual | degree_matrix | 0.2796 | 46/87 | 5.1304 | 9.908 |
-| factual | eigv | 0.2796 | 46/87 | 5.1304 | 9.908 |
-| factual | eccentricity | 0.4959 | 46/87 | 1.1522 | 1.1724 |
+| factual | bigram_jaccard | 0.8397 | 50/100 | 0.8095 | 0.5157 |
+| factual | trigram_jaccard | 0.8502 | 50/100 | 0.8772 | 0.5877 |
+| factual | tfidf_cosine | 0.9108 | 50/100 | 0.6549 | 0.2265 |
+| factual | unigram_jaccard | 0.8345 | 50/100 | 0.7081 | 0.4122 |
+| factual | semantic_entropy | 0.6560 | 50/100 | 0.9171 | 0.6096 |
+| factual | semantic_entropy_normalized | 0.6560 | 50/100 | 0.5698 | 0.3788 |
+| factual | num_sets | 0.6734 | 50/100 | 3.06 | 2.25 |
+| factual | degree_matrix | 0.2826 | 50/100 | 5.2 | 9.98 |
+| factual | eigv | 0.2826 | 50/100 | 5.2 | 9.98 |
+| factual | eccentricity | 0.5059 | 50/100 | 1.18 | 1.18 |
 | factual | numeric_disagreement | n/a | 0/0 | n/a | n/a |
 | math | bigram_jaccard | 0.8171 | 6/144 | 0.6584 | 0.5023 |
 | math | trigram_jaccard | 0.8137 | 6/144 | 0.7593 | 0.6137 |
@@ -50,14 +50,14 @@ AUROC > 0.5 means the uncertainty score is higher on incorrect answers.
 | reasoning | eigv | 0.3617 | 42/108 | 1.7619 | 3.7037 |
 | reasoning | eccentricity | 0.3920 | 42/108 | 0.6667 | 1.0093 |
 | reasoning | numeric_disagreement | n/a | 0/0 | n/a | n/a |
-| all | bigram_jaccard | 0.8195 | 94/339 | 0.8135 | 0.5945 |
-| all | trigram_jaccard | 0.8168 | 94/339 | 0.881 | 0.6853 |
-| all | tfidf_cosine | 0.8449 | 94/339 | 0.5737 | 0.2473 |
-| all | unigram_jaccard | 0.8247 | 94/339 | 0.6676 | 0.4149 |
-| all | semantic_entropy | 0.7063 | 94/339 | 1.0786 | 0.6344 |
-| all | semantic_entropy_normalized | 0.7063 | 94/339 | 0.6702 | 0.3942 |
-| all | num_sets | 0.7096 | 94/339 | 3.4894 | 2.3923 |
-| all | degree_matrix | 0.2650 | 94/339 | 3.8936 | 9.3746 |
-| all | eigv | 0.2650 | 94/339 | 3.8936 | 9.3746 |
-| all | eccentricity | 0.4084 | 94/339 | 0.9894 | 1.2566 |
+| all | bigram_jaccard | 0.8200 | 98/352 | 0.8125 | 0.5879 |
+| all | trigram_jaccard | 0.8188 | 98/352 | 0.8812 | 0.6784 |
+| all | tfidf_cosine | 0.8474 | 98/352 | 0.5758 | 0.2445 |
+| all | unigram_jaccard | 0.8254 | 98/352 | 0.6673 | 0.4115 |
+| all | semantic_entropy | 0.7036 | 98/352 | 1.0681 | 0.6326 |
+| all | semantic_entropy_normalized | 0.7036 | 98/352 | 0.6637 | 0.393 |
+| all | num_sets | 0.7079 | 98/352 | 3.4592 | 2.3835 |
+| all | degree_matrix | 0.2676 | 98/352 | 3.9796 | 9.4148 |
+| all | eigv | 0.2676 | 98/352 | 3.9796 | 9.4148 |
+| all | eccentricity | 0.4163 | 98/352 | 1.0102 | 1.2557 |
 | all | numeric_disagreement | 0.6487 | 6/144 | 0.2 | 0.0139 |

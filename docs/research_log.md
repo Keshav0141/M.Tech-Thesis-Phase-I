@@ -1101,3 +1101,24 @@ Not usable for generation:
 
 ## 2026-09-20 17:15 UTC - automatic resume run
 - All samples collected (main 2250 + expansion); nothing left to generate.
+
+## 2026-09-22 (model tier closed; manual-review backlog cleared)
+- Closed tier 2 as Groq `openai/gpt-oss-120b`, escalation-only. HuggingFace
+  Inference Providers was evaluated and rejected: its router works, but it is
+  credit-metered and has no capability advantage over Groq for the same model
+  class. `docs/fallback_models.md` now records the router result.
+- Manually reviewed all 29 `needs_review` factual questions: 87 per-sample
+  decisions (69 correct, 18 incorrect) in
+  `results/manual_review_overrides.json`. All 17 unresolved questions now have
+  final labels (13 correct, 4 incorrect); `results/needs_review.jsonl` is
+  empty.
+- `scoring/score_correctness.py` applies the ledger while preserving each
+  overridden sample’s automatic label as `auto_label`.
+- Regenerated label-dependent results: correctness, AUROC/extended reports,
+  ensemble, 5- and 9-method selectors, escalation decisions/report, tier-2
+  recommended set, low-uncertainty analysis, and figures. Final labels are 98
+  incorrect / 352 correct; TF-IDF is 0.8474 overall and 0.9108 factual; CV
+  selector macro is 0.8042; top-15% gate is 0.51 precision / 0.36 recall.
+- The executed tier-2 pilot remains the pre-review 52-question set. The
+  post-review recommended set expands to 55 by adding `factual_0001`,
+  `factual_0113`, and `factual_0117`; pilot statistics are unchanged.

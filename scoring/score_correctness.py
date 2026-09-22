@@ -11,6 +11,9 @@ Outputs:
     results/correctness.jsonl    one row per question with per-sample labels
     results/needs_review.jsonl   questions with at least one needs_review sample
 
+Manual factual review is applied from results/manual_review_overrides.json when
+present. Overridden samples retain their automatic label as `auto_label`.
+
 Usage:
     python score_correctness.py
     python score_correctness.py --limit 20 --model qwen/qwen3.8-27b
@@ -26,12 +29,49 @@ from collections import Counter
 import uq_common as uq
 
 
+MANUAL_REVIEW_PATH = uq.RESULTS_DIR / "manual_review_overrides.json"
+_MANUAL_REVIEW_CACHE = None
+VALID_MANUAL_LABELS = {"correct", "incorrect", "needs_review", "no_extraction"}
+
+
+def load_manual_review() -> dict:
+    """Load curated factual review decisions once; return {} when absent."""
+    global _MANUAL_REVIEW_CACHE
+    if _MANUAL_REVIEW_CACHE is None:
+        if MANUAL_REVIEW_PATH.exists():
+            payload = json.loads(MANUAL_REVIEW_PATH.read_text(encoding="utf-8"))
+            _MANUAL_REVIEW_CACHE = payload.get("overrides", {})
+        else:
+            _MANUAL_REVIEW_CACHE = {}
+    return _MANUAL_REVIEW_CACHE
+
+
+def apply_manual_review(question_id: str, per_sample: list[dict]) -> tuple[int, str]:
+    """Replace automatic labels with curated decisions and preserve provenance."""
+    overrides = load_manual_review().get(question_id)
+    if not overrides:
+        return 0, ""
+    decisions = overrides.get("samples", {})
+    applied = 0
+    for sample in per_sample:
+        decision = decisions.get(str(sample.get("sample_id")))
+        if not decision:
+            continue
+        manual_label = decision.get("manual_label")
+        if manual_label not in VALID_MANUAL_LABELS:
+            raise ValueError(f"Invalid manual label for {question_id}: {manual_label!r}")
+        if sample["label"] != manual_label:
+            sample["auto_label"] = sample["label"]
+            sample["label"] = manual_label
+            sample["manual_reason"] = decision.get("reason", "")
+            applied += 1
+    return applied, overrides.get("reason", "")
+
+
 def score_question(question: dict, samples: list[dict]) -> dict:
     category = question["category"]
     ground_truth = question["ground_truth_answer"]
     per_sample = []
-    counts: Counter = Counter()
-
     for record in samples:
         text = record.get("response_text") or ""
         if category == "factual":
@@ -42,7 +82,6 @@ def score_question(question: dict, samples: list[dict]) -> dict:
             label, extracted = uq.classify_math(text, ground_truth)
         else:
             label, extracted = uq.classify_reasoning(text, ground_truth)
-        counts[label] += 1
         per_sample.append(
             {
                 "sample_id": record.get("sample_id"),
@@ -53,6 +92,8 @@ def score_question(question: dict, samples: list[dict]) -> dict:
         )
 
     n = len(samples)
+    n_manual_overrides, manual_reason = apply_manual_review(question["question_id"], per_sample)
+    counts = Counter(sample["label"] for sample in per_sample)
     n_correct = counts["correct"]
     n_incorrect = counts["incorrect"]
     n_needs_review = counts["needs_review"]
@@ -78,6 +119,9 @@ def score_question(question: dict, samples: list[dict]) -> dict:
         "n_no_extraction": n_no_extraction,
         "majority_label": majority,
         "overall_correct": overall,
+        "manual_review_applied": n_manual_overrides > 0,
+        "n_manual_overrides": n_manual_overrides,
+        "manual_review_reason": manual_reason,
         "per_sample": per_sample,
     }
 

@@ -7,29 +7,28 @@ Precision = incorrect / escalated; recall = escalated-incorrect / all-incorrect;
 
 | Category | pct | labeled | escalated (rate) | incorrect-escalated | precision | recall | error rate |
 |---|---|---:|---:|---:|---:|---:|---:|
-| factual | 10% | 133 | 14 (11%) | 14 | 1.00 | 0.30 | 0.35 |
+| factual | 10% | 150 | 15 (10%) | 15 | 1.00 | 0.30 | 0.33 |
 | math | 10% | 150 | 15 (10%) | 3 | 0.20 | 0.50 | 0.04 |
 | reasoning | 10% | 150 | 15 (10%) | 9 | 0.60 | 0.21 | 0.28 |
-| **all** | 10% | 433 | 44 (10%) | 26 | 0.59 | 0.28 | 0.22 |
-| factual | 15% | 133 | 20 (15%) | 20 | 1.00 | 0.43 | 0.35 |
+| **all** | 10% | 450 | 45 (10%) | 27 | 0.60 | 0.28 | 0.22 |
+| factual | 15% | 150 | 23 (15%) | 22 | 0.96 | 0.44 | 0.33 |
 | math | 15% | 150 | 23 (15%) | 3 | 0.13 | 0.50 | 0.04 |
 | reasoning | 15% | 150 | 23 (15%) | 10 | 0.43 | 0.24 | 0.28 |
-| **all** | 15% | 433 | 66 (15%) | 33 | 0.50 | 0.35 | 0.22 |
-| factual | 20% | 133 | 27 (20%) | 25 | 0.93 | 0.54 | 0.35 |
+| **all** | 15% | 450 | 69 (15%) | 35 | 0.51 | 0.36 | 0.22 |
+| factual | 20% | 150 | 30 (20%) | 27 | 0.90 | 0.54 | 0.33 |
 | math | 20% | 150 | 30 (20%) | 3 | 0.10 | 0.50 | 0.04 |
 | reasoning | 20% | 150 | 30 (20%) | 14 | 0.47 | 0.33 | 0.28 |
-| **all** | 20% | 433 | 87 (20%) | 42 | 0.48 | 0.45 | 0.22 |
+| **all** | 20% | 450 | 90 (20%) | 44 | 0.49 | 0.45 | 0.22 |
 
 ## Summary
 
-- top 10%: escalate 44/433 (10%), precision 0.59, recall 0.28
-- top 15%: escalate 66/433 (15%), precision 0.50, recall 0.35
-- top 20%: escalate 87/433 (20%), precision 0.48, recall 0.45
+- top 10%: escalate 45/450 (10%), precision 0.60, recall 0.28
+- top 15%: escalate 69/450 (15%), precision 0.51, recall 0.36
+- top 20%: escalate 90/450 (20%), precision 0.49, recall 0.45
 
 ## Second-model call
 
-- The escalation target is currently a STUB (`larger model (TBD: 70B/120B on Groq)`); no second model is called. The call site is marked TODO in `scoring/escalate.py:escalate_to_larger_model`.
-
+- The escalation call is wired (`openai/gpt-oss-120b`, reasoning_effort low) in `scoring/escalate.py:escalate_to_larger_model`, but is executed only by `scoring/tier2_pilot.py` for the ~52 escalated questions; the gate itself never spends API calls.
 
 ## Math threshold sweep (combined pool: main math + mathb = 300, 9 errors)
 

@@ -2,6 +2,16 @@
 
 Dated entries tied to git commits.
 
+## 2026-09-22
+- Closed model-tier decision: Groq `qwen/qwen3.8-27b` → Groq
+  `openai/gpt-oss-120b`, escalation-only. HuggingFace Inference Providers
+  documented as evaluated but not adopted (credit-metered; same model class).
+- Cleared manual-review backlog: 87 decisions across 29 questions;
+  all 17 unresolved questions finalized; final labels 98 incorrect /
+  352 correct. Regenerated AUROC, ensemble, selector, escalation, figures,
+  and expanded the recommended escalation set from 52 to 55 while preserving
+  the executed pre-review pilot.
+
 ## 2026-09-16
 - Math-only escalation threshold sweep (combined 300-question pool): best
   precision 0.13 at top 5-10%, recall plateaus at 0.44 -- data-volume

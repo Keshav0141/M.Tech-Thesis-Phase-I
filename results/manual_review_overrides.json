@@ -1,0 +1,500 @@
+{
+  "schema_version": 1,
+  "review_scope": "All 29 main-dataset factual questions with at least one needs_review sample.",
+  "review_policy": "Judge the complete response_text, not only the extracted substring, against the dataset ground truth. Accept exact-name expansions, standard spelling variants, and unambiguous shortened names supported by response context. Reject restated clues, overbroad categories, wrong places/entities, wrong adaptations, anachronistic product variants, monastery-or-hill answers to town questions, and truncated responses with no usable final answer.",
+  "overrides": {
+    "factual_0001": {
+      "reason": "Beetle / water-beetle answers identify the requested creature. Bare 'Whirligig' restates the clue and bare 'Insect' is too broad.",
+      "samples": {
+        "0": {
+          "manual_label": "correct",
+          "reason": "Final answer is the requested creature type."
+        },
+        "1": {
+          "manual_label": "correct",
+          "reason": "Response identifies a small iridescent beetle and answers 'beetle'."
+        },
+        "3": {
+          "manual_label": "correct",
+          "reason": "Explicitly answers 'a type of water beetle'."
+        }
+      }
+    },
+    "factual_0021": {
+      "reason": "All responses name the Battle of the Little Bighorn using standard naming/spelling variants.",
+      "samples": {
+        "0": {
+          "manual_label": "correct",
+          "reason": "Standard battle-name variant."
+        },
+        "1": {
+          "manual_label": "correct",
+          "reason": "Standard battle-name variant."
+        },
+        "2": {
+          "manual_label": "correct",
+          "reason": "Standard battle-name variant."
+        },
+        "3": {
+          "manual_label": "correct",
+          "reason": "Standard battle-name variant."
+        },
+        "4": {
+          "manual_label": "correct",
+          "reason": "Standard battle-name variant."
+        }
+      }
+    },
+    "factual_0023": {
+      "reason": "All responses give the formal island name, Caldey Island.",
+      "samples": {
+        "0": {
+          "manual_label": "correct",
+          "reason": "Formal island-name expansion."
+        },
+        "1": {
+          "manual_label": "correct",
+          "reason": "Formal island-name expansion."
+        },
+        "2": {
+          "manual_label": "correct",
+          "reason": "Formal island-name expansion."
+        },
+        "3": {
+          "manual_label": "correct",
+          "reason": "Formal island-name expansion."
+        },
+        "4": {
+          "manual_label": "correct",
+          "reason": "Formal island-name expansion."
+        }
+      }
+    },
+    "factual_0031": {
+      "reason": "'Au gratin' names the requested browned-crust preparation.",
+      "samples": {
+        "2": {
+          "manual_label": "correct",
+          "reason": "Accepted culinary synonym/technique name."
+        }
+      }
+    },
+    "factual_0039": {
+      "reason": "The four reviewed responses name the official Great Smoky Mountains National Park. Grand Canyon remains wrong.",
+      "samples": {
+        "1": {
+          "manual_label": "correct",
+          "reason": "Official park-name expansion."
+        },
+        "2": {
+          "manual_label": "correct",
+          "reason": "Official park-name expansion."
+        },
+        "3": {
+          "manual_label": "correct",
+          "reason": "Official park-name expansion."
+        },
+        "4": {
+          "manual_label": "correct",
+          "reason": "Official park-name expansion."
+        }
+      }
+    },
+    "factual_0046": {
+      "reason": "In this bartender/knockout-drink context, 'Mickey' unambiguously means Mickey Finn; sample 4 names Finn explicitly.",
+      "samples": {
+        "3": {
+          "manual_label": "correct",
+          "reason": "Unambiguous shortened form in context."
+        },
+        "4": {
+          "manual_label": "correct",
+          "reason": "Response text explicitly gives 'Mickey Finn'."
+        }
+      }
+    },
+    "factual_0047": {
+      "reason": "A small, flat-bottomed boat is a valid subtype of the requested boat.",
+      "samples": {
+        "4": {
+          "manual_label": "correct",
+          "reason": "Valid descriptive subtype."
+        }
+      }
+    },
+    "factual_0048": {
+      "reason": "Sample 4 gives the canonical author, Louisa May Alcott, despite the dataset's abbreviated 'M' form.",
+      "samples": {
+        "4": {
+          "manual_label": "correct",
+          "reason": "Canonical author name."
+        }
+      }
+    },
+    "factual_0050": {
+      "reason": "All reviewed responses name the Labour Party.",
+      "samples": {
+        "0": {
+          "manual_label": "correct",
+          "reason": "Exact party-name expansion."
+        },
+        "1": {
+          "manual_label": "correct",
+          "reason": "Exact party-name expansion."
+        },
+        "2": {
+          "manual_label": "correct",
+          "reason": "Final answer is the requested party."
+        },
+        "3": {
+          "manual_label": "correct",
+          "reason": "Exact party-name expansion."
+        },
+        "4": {
+          "manual_label": "correct",
+          "reason": "Exact party-name expansion."
+        }
+      }
+    },
+    "factual_0053": {
+      "reason": "Samples 1-4 name the Glendale branch where Michael Jackson was buried. Sample 0 names the wrong Hollywood Hills branch, so its parenthetical location makes it incorrect.",
+      "samples": {
+        "0": {
+          "manual_label": "incorrect",
+          "reason": "Names the wrong Forest Lawn branch."
+        },
+        "1": {
+          "manual_label": "correct",
+          "reason": "Correct memorial-park branch."
+        },
+        "2": {
+          "manual_label": "correct",
+          "reason": "Correct memorial-park branch."
+        },
+        "3": {
+          "manual_label": "correct",
+          "reason": "Correct memorial-park branch."
+        },
+        "4": {
+          "manual_label": "correct",
+          "reason": "Correct memorial-park name."
+        }
+      }
+    },
+    "factual_0065": {
+      "reason": "'Richard O'Brian' is a one-letter misspelling of the same writer.",
+      "samples": {
+        "1": {
+          "manual_label": "correct",
+          "reason": "Same-person spelling variant."
+        }
+      }
+    },
+    "factual_0066": {
+      "reason": "Sample 4 has no usable final answer; it equivocates between Kula and Molokai and is truncated at the factual-output cap.",
+      "samples": {
+        "4": {
+          "manual_label": "incorrect",
+          "reason": "No committed final answer under the final-answer protocol."
+        }
+      }
+    },
+    "factual_0069": {
+      "reason": "'Forth and Tyne' does not match the requested Tyne shipping-forecast area.",
+      "samples": {
+        "0": {
+          "manual_label": "incorrect",
+          "reason": "Wrong compound area name."
+        }
+      }
+    },
+    "factual_0079": {
+      "reason": "All reviewed responses name the Milwaukee Brewers.",
+      "samples": {
+        "0": {
+          "manual_label": "correct",
+          "reason": "Official team-name expansion."
+        },
+        "1": {
+          "manual_label": "correct",
+          "reason": "Official team-name expansion."
+        },
+        "2": {
+          "manual_label": "correct",
+          "reason": "Official team-name expansion."
+        },
+        "3": {
+          "manual_label": "correct",
+          "reason": "Official team-name expansion."
+        }
+      }
+    },
+    "factual_0085": {
+      "reason": "'Francisco de Goya' is the same painter with the standard noble particle.",
+      "samples": {
+        "0": {
+          "manual_label": "correct",
+          "reason": "Same-person name variant."
+        }
+      }
+    },
+    "factual_0088": {
+      "reason": "'Sandford and Son' is the U.S. adaptation, not the requested original U.K. series 'Steptoe and Son'.",
+      "samples": {
+        "4": {
+          "manual_label": "incorrect",
+          "reason": "Names the adaptation rather than the original."
+        }
+      }
+    },
+    "factual_0091": {
+      "reason": "Only sample 1 names the Order of the Garter. Bath and Thistle are different orders.",
+      "samples": {
+        "0": {
+          "manual_label": "incorrect",
+          "reason": "Names a different order of knighthood."
+        },
+        "2": {
+          "manual_label": "incorrect",
+          "reason": "Names a different order of knighthood."
+        },
+        "3": {
+          "manual_label": "incorrect",
+          "reason": "Names a different order of knighthood."
+        },
+        "4": {
+          "manual_label": "incorrect",
+          "reason": "Names a different order of knighthood."
+        }
+      }
+    },
+    "factual_0092": {
+      "reason": "The reviewed responses name Kindle Fire, a later Fire-tablet variant, rather than the Kindle product that could have been Amazon's biggest seller at the end of 2010.",
+      "samples": {
+        "0": {
+          "manual_label": "incorrect",
+          "reason": "Anachronistic Kindle Fire variant."
+        },
+        "1": {
+          "manual_label": "incorrect",
+          "reason": "Anachronistic Kindle Fire variant."
+        },
+        "2": {
+          "manual_label": "incorrect",
+          "reason": "Anachronistic Kindle Fire variant."
+        },
+        "4": {
+          "manual_label": "incorrect",
+          "reason": "Anachronistic Kindle Fire variant."
+        }
+      }
+    },
+    "factual_0093": {
+      "reason": "Sample 2 connects 0.0648 grams to one grain and answers 'grains'. Sample 0 is truncated with no usable final answer.",
+      "samples": {
+        "0": {
+          "manual_label": "incorrect",
+          "reason": "Truncated reasoning with no committed final answer."
+        },
+        "2": {
+          "manual_label": "correct",
+          "reason": "Explicitly answers 'grains' and explains the mass clue."
+        }
+      }
+    },
+    "factual_0094": {
+      "reason": "In the Eve-creation context, 'a rib' unambiguously means Adam's rib.",
+      "samples": {
+        "0": {
+          "manual_label": "correct",
+          "reason": "Unambiguous shortened form in context."
+        }
+      }
+    },
+    "factual_0103": {
+      "reason": "Sample 3 names the Roman amphitheatre. The other samples name baths, walls, temples, or bathhouses.",
+      "samples": {
+        "3": {
+          "manual_label": "correct",
+          "reason": "Exact structure, aside from capitalization."
+        }
+      }
+    },
+    "factual_0111": {
+      "reason": "All responses name the Indian Ocean.",
+      "samples": {
+        "0": {
+          "manual_label": "correct",
+          "reason": "Exact ocean-name expansion."
+        },
+        "1": {
+          "manual_label": "correct",
+          "reason": "Exact ocean-name expansion."
+        },
+        "2": {
+          "manual_label": "correct",
+          "reason": "Exact ocean-name expansion."
+        },
+        "3": {
+          "manual_label": "correct",
+          "reason": "Exact ocean-name expansion."
+        },
+        "4": {
+          "manual_label": "correct",
+          "reason": "Exact ocean-name expansion."
+        }
+      }
+    },
+    "factual_0113": {
+      "reason": "The question asks for the Italian town, Cassino. Montecassino/Monte Cassino name the monastery/hill complex, not the town.",
+      "samples": {
+        "1": {
+          "manual_label": "incorrect",
+          "reason": "Names the monastery/hill rather than the town."
+        },
+        "4": {
+          "manual_label": "incorrect",
+          "reason": "Names the monastery/hill rather than the town."
+        }
+      }
+    },
+    "factual_0117": {
+      "reason": "None of the reviewed responses gives R.E.M. as its final answer. Samples 0, 1, and 4 also lack a usable final answer; samples 2 and 3 were already marked incorrect.",
+      "samples": {
+        "0": {
+          "manual_label": "incorrect",
+          "reason": "No R.E.M. final answer."
+        },
+        "1": {
+          "manual_label": "incorrect",
+          "reason": "No R.E.M. final answer."
+        },
+        "4": {
+          "manual_label": "incorrect",
+          "reason": "No usable final answer."
+        }
+      }
+    },
+    "factual_0119": {
+      "reason": "All responses name the Isle of Bute.",
+      "samples": {
+        "0": {
+          "manual_label": "correct",
+          "reason": "Formal island-name expansion."
+        },
+        "1": {
+          "manual_label": "correct",
+          "reason": "Formal island-name expansion."
+        },
+        "2": {
+          "manual_label": "correct",
+          "reason": "Formal island-name expansion."
+        },
+        "3": {
+          "manual_label": "correct",
+          "reason": "Formal island-name expansion."
+        },
+        "4": {
+          "manual_label": "correct",
+          "reason": "Formal island-name expansion."
+        }
+      }
+    },
+    "factual_0126": {
+      "reason": "All responses name a web browser.",
+      "samples": {
+        "0": {
+          "manual_label": "correct",
+          "reason": "Exact category-name expansion."
+        },
+        "1": {
+          "manual_label": "correct",
+          "reason": "Exact category-name expansion."
+        },
+        "2": {
+          "manual_label": "correct",
+          "reason": "Exact category-name expansion."
+        },
+        "3": {
+          "manual_label": "correct",
+          "reason": "Exact category-name expansion."
+        },
+        "4": {
+          "manual_label": "correct",
+          "reason": "Exact category-name expansion."
+        }
+      }
+    },
+    "factual_0141": {
+      "reason": "All responses identify Charles de Gaulle; omitting the title 'General' does not change the person.",
+      "samples": {
+        "0": {
+          "manual_label": "correct",
+          "reason": "Same person without honorific."
+        },
+        "1": {
+          "manual_label": "correct",
+          "reason": "Same person without honorific."
+        },
+        "2": {
+          "manual_label": "correct",
+          "reason": "Same person without honorific."
+        },
+        "3": {
+          "manual_label": "correct",
+          "reason": "Same person without honorific."
+        },
+        "4": {
+          "manual_label": "correct",
+          "reason": "Same person without honorific."
+        }
+      }
+    },
+    "factual_0145": {
+      "reason": "All responses identify Nero; omitting the full imperial name does not change the person.",
+      "samples": {
+        "0": {
+          "manual_label": "correct",
+          "reason": "Same person without full imperial name."
+        },
+        "1": {
+          "manual_label": "correct",
+          "reason": "Same person without full imperial name."
+        },
+        "2": {
+          "manual_label": "correct",
+          "reason": "Same person without full imperial name."
+        },
+        "3": {
+          "manual_label": "correct",
+          "reason": "Same person without full imperial name."
+        },
+        "4": {
+          "manual_label": "correct",
+          "reason": "Same person without full imperial name."
+        }
+      }
+    },
+    "factual_0153": {
+      "reason": "The four reviewed responses name John Keats. Shelley is the elegy's author, not its subject.",
+      "samples": {
+        "0": {
+          "manual_label": "correct",
+          "reason": "Exact subject-name expansion."
+        },
+        "1": {
+          "manual_label": "correct",
+          "reason": "Exact subject-name expansion."
+        },
+        "2": {
+          "manual_label": "correct",
+          "reason": "Exact subject-name expansion."
+        },
+        "3": {
+          "manual_label": "correct",
+          "reason": "Exact subject-name expansion."
+        }
+      }
+    }
+  }
+}

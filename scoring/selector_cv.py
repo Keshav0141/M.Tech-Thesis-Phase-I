@@ -229,8 +229,8 @@ def main() -> int:
         "",
         "| Method | AUROC all | factual | math | reasoning |",
         "|---|---:|---:|---:|---:|",
-        "| TF-IDF alone (full-data) | 0.8449 | 0.9093 | 0.7558 | 0.6299 |",
-        "| ensemble unweighted-3 (full-data) | 0.7514 | 0.8822 | 0.8079 | 0.6679 |",
+        "| TF-IDF alone (full-data) | 0.8474 | 0.9108 | 0.7558 | 0.6299 |",
+        "| ensemble unweighted-3 (full-data) | 0.7571 | 0.8810 | 0.8079 | 0.6679 |",
         f"| CV selector (macro-avg) | {macro_auc:.4f} | {selector_results['factual']['cv_auc']} | {selector_results['math']['cv_auc']} | {selector_results['reasoning']['cv_auc']} |",
         f"| CV selector (pooled OOF rank) | {pooled_auc:.4f} | - | - | - |",
     ]
@@ -253,7 +253,7 @@ def main() -> int:
         f"- Macro-average over categories: selector **{macro_auc:.4f}** vs TF-IDF "
         f"{tfidf_macro:.4f} (+{macro_auc - tfidf_macro:.4f}).",
         f"- Pooled OOF-rank aggregate: **{pooled_auc:.4f}** -- does NOT beat the full-data "
-        "TF-IDF headline (0.8449), but that headline is in-sample; TF-IDF's own CV macro "
+        "TF-IDF headline (0.8474), but that headline is in-sample; TF-IDF's own CV macro "
         f"({tfidf_macro:.4f}) is the comparable number, and the selector's pooling gains vanish "
         "because per-category ranking discards TF-IDF's cross-category scale advantage on "
         "factual, where most errors are.",

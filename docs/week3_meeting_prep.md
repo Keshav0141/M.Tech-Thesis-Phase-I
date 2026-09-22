@@ -9,28 +9,43 @@ We finished the dataset (450 questions x 5 samples = 2,250 samples on Groq
 `qwen3.8-27b`, temperature 0.7, 569k tokens, 0 duplicates), implemented all
 nine black-box UQ methods from Lin et al. (TMLR 2024) including the four graph
 measures (NumSets, Degree, EigV, Eccentricity), and completed the Week 1
-evaluation: TF-IDF leads the single methods (AUROC 0.845); a CV-validated
-per-category selector beats TF-IDF under identical CV (macro 0.805 vs 0.760);
+evaluation: TF-IDF leads the single methods (AUROC 0.847); a CV-validated
+per-category selector beats TF-IDF under identical CV (macro 0.804 vs 0.759);
 and the confidence-gated escalation pipeline routes the top-15% most-uncertain
-questions with 0.50 precision (2.3x error enrichment). We also generated a
+questions with 0.51 precision (2.3x error enrichment). We also generated a
 150-question GSM8K expansion and built a numeric-aware uncertainty signal for
 math. Details: `docs/mid_review_draft.md`.
 
-## 2. Decision needed
+## 2. Decision closed
 
-### (a) Model tier — 1B/8B/20B plan vs. what Groq actually serves
+### (a) Model tier — standardized on 27B → 120B escalation-only
 
-**Question:** does the escalation design need a second, larger tier, or should
-the thesis commit to a single 27B model?
+**Decision:** keep Groq `qwen/qwen3.8-27b` as tier 1 and use Groq
+`openai/gpt-oss-120b` as the tier-2 escalation model. **Scale:** selective
+escalation only — no full second-dataset generation.
 
-**Evidence:** the original plan targeted 1B/8B/20B with escalation to a bigger
-model; Groq's catalog now offers qwen3.x-27B, gpt-oss-20B/120B (Llama retired),
-and all 2,250 current samples are from qwen3.8-27b.
+**Why:** the provider/model search covered Groq, Gemini, OpenCode Zen,
+OpenRouter, Cerebras, and HuggingFace. HuggingFace’s current Inference
+Providers router works, but it is credit-metered and offers the same model
+class with no capability advantage over Groq, so it was not adopted.
+The alternatives were therefore rejected for availability, quota/cost, or
+capability reasons; `gpt-oss-120b` was the viable larger Groq tier.
 
-**Options:**
-- Single 27B model — simplest, matches existing data; loses the escalation story.
-- 27B -> 120B escalation — keeps the gate design; needs a second sample set (~2-3 days free-tier).
-- Multi-size ensemble (20B/27B/120B) — richest UQ comparison; most generation time.
+**Evidence:** the 52-question tier-2 pilot moved accuracy on the escalated
+subset from **0.31 to 0.58 (+0.27)**. Of 32 originally wrong answers,
+gpt-oss-120b recovered **14 (44%)**; there were 4 regressions (**8%**), all
+in reasoning (`results/tier2_pilot_results.md`). The pilot used the
+pre-review 52-question gate; after manual review, the recommended escalation
+set expands to 55 by adding `factual_0001`, `factual_0113`, and
+`factual_0117`. Pilot statistics are unchanged because the only overlapping
+reviewed question, `factual_0048`, retained its incorrect majority label.
+
+**Options rejected:**
+- Single 27B model — simplest, but loses the escalation story.
+- Full second dataset on 120B — unnecessary for selective escalation and far
+  more expensive in quota/time.
+- Multi-size ensemble (20B/27B/120B) — richest comparison, but inconsistent
+  with the thesis’s selective-escalation framing and quota constraints.
 
 ## 3. Decided and done (for information, no action requested)
 
@@ -57,16 +72,19 @@ documented recall-priority alternative if the second model turns out cheap.
 ### (c) Escalation gate — approved as designed
 
 **Decision:** proceed with the validated gate (CV selector method per
-category, configurable top-N% threshold). **Why:** on the 433 labeled
-questions the top-15% gate reaches 0.50 precision and 2.3x error enrichment
-(factual precision 1.00).
+category, configurable top-N% threshold). **Why:** on the 450 labeled
+questions the top-15% gate reaches 0.51 precision, 0.36 recall, and 2.3x error
+enrichment (factual precision 0.96).
 
 **Acted on:** `scoring/escalate.py` produces per-question keep/escalate
-decisions (`results/escalation_decisions.jsonl`) and the report; the
-second-model call is stubbed and marked TODO, blocked only on decision (a).
+decisions (`results/escalation_decisions.jsonl`) and the report. The tier-2
+call to `openai/gpt-oss-120b` is wired in
+`scoring/escalate.py:escalate_to_larger_model` and was executed by
+`scoring/tier2_pilot.py` for the 52 escalated questions. The routine gate
+itself spends no API calls.
 
 ## 4. Next step
 
-If (a) selects a second tier, we wire the real escalation call and re-run the
-math category with the decided numeric-disagreement gate; otherwise we
-finalize the single-model write-up with small-n caveats.
+With tier 2 closed, finalize the post-manual-review evaluation numbers, keep
+the escalation-only design, and complete the single-model write-up with the
+documented small-n caveats.

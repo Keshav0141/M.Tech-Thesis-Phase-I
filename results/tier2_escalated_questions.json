@@ -1,11 +1,20 @@
 {
   "top_pct": 15.0,
   "counts": {
-    "factual": 20,
+    "factual": 23,
     "math": 9,
     "reasoning": 23
   },
   "questions": [
+    {
+      "question_id": "factual_0001",
+      "category": "factual",
+      "gate_method": "tfidf",
+      "uncertainty": 0.789878,
+      "question_text": "What sort of creature is a whirligig?",
+      "ground_truth_answer": "A WATER BEETLE",
+      "original_correct": null
+    },
     {
       "question_id": "factual_0008",
       "category": "factual",
@@ -169,12 +178,30 @@
       "original_correct": null
     },
     {
+      "question_id": "factual_0113",
+      "category": "factual",
+      "gate_method": "tfidf",
+      "uncertainty": 0.922935,
+      "question_text": "Which Italian town, at the foot of a hill containing a Benedictine Monastery was destroyed during heavy fighting in 1944?",
+      "ground_truth_answer": "CASSINO",
+      "original_correct": null
+    },
+    {
       "question_id": "factual_0115",
       "category": "factual",
       "gate_method": "tfidf",
       "uncertainty": 0.729194,
       "question_text": "Knothead and Splinter are the nephew and niece of which cartoon character?",
       "ground_truth_answer": "WOODY WOODPECKER",
+      "original_correct": null
+    },
+    {
+      "question_id": "factual_0117",
+      "category": "factual",
+      "gate_method": "tfidf",
+      "uncertainty": 0.773414,
+      "question_text": "Released in 1989, 'Orange Crush' was the first UK top 40 hit for which rock group?",
+      "ground_truth_answer": "'REM'",
       "original_correct": null
     },
     {

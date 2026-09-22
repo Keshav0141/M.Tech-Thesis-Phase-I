@@ -1,20 +1,20 @@
 # Cross-validated per-category method selector
 
-_Generated 2026-09-14. 5-fold stratified CV (seed 42) per category; the winner is chosen on the training split only, then evaluated on the held-out fold. n = 433 labeled questions._
+_Generated 2026-09-14. 5-fold stratified CV (seed 42) per category; the winner is chosen on the training split only, then evaluated on the held-out fold. n = 450 labeled questions._
 
 ## Per-category fold log (winner stability)
 
-### factual (n=133, incorrect=46)
+### factual (n=150, incorrect=50)
 
 | fold | winner | winner train AUC | winner held-out AUC | runner-up note |
 |---|---|---|---:|---|
-| 1 | tfidf | 0.9162 | 0.8827 | tfidf 0.916, trigram 0.862, bigram 0.851 |
-| 2 | tfidf | 0.9127 | 0.9321 | tfidf 0.913, trigram 0.853, bigram 0.841 |
-| 3 | tfidf | 0.9052 | 0.9118 | tfidf 0.905, trigram 0.844, bigram 0.836 |
-| 4 | tfidf | 0.8954 | 0.9542 | tfidf 0.895, trigram 0.843, bigram 0.838 |
-| 5 | tfidf | 0.9174 | 0.8693 | tfidf 0.917, trigram 0.840, bigram 0.835 |
+| 1 | tfidf | 0.9369 | 0.81 | tfidf 0.937, trigram 0.862, bigram 0.848 |
+| 2 | tfidf | 0.9025 | 0.95 | tfidf 0.902, trigram 0.851, bigram 0.840 |
+| 3 | tfidf | 0.9034 | 0.94 | tfidf 0.903, trigram 0.843, bigram 0.834 |
+| 4 | tfidf | 0.91 | 0.91 | tfidf 0.910, trigram 0.855, bigram 0.851 |
+| 5 | tfidf | 0.9006 | 0.935 | tfidf 0.901, trigram 0.842, bigram 0.828 |
 
-Selector CV AUROC (factual): **0.91**
+Selector CV AUROC (factual): **0.909**
 
 ### math (n=150, incorrect=6)
 
@@ -44,34 +44,34 @@ Selector CV AUROC (reasoning): **0.6674**
 
 | Method | factual | math | reasoning |
 |---|---:|---:|---:|
-| tfidf | 0.9100 | 0.7395 | 0.6289 |
-| unigram | 0.8419 | 0.8578 | 0.6334 |
-| bigram | 0.8448 | 0.8087 | 0.6738 |
-| trigram | 0.8549 | 0.8195 | 0.6716 |
-| semantic | 0.6617 | 0.5538 | 0.6225 |
-| numsets | 0.6729 | 0.5573 | 0.6248 |
-| degree | 0.2791 | 0.2675 | 0.3703 |
-| eigv | 0.2791 | 0.2675 | 0.3703 |
-| eccentricity | 0.4932 | 0.7038 | 0.3956 |
+| tfidf | 0.9090 | 0.7395 | 0.6289 |
+| unigram | 0.8380 | 0.8578 | 0.6334 |
+| bigram | 0.8490 | 0.8087 | 0.6738 |
+| trigram | 0.8505 | 0.8195 | 0.6716 |
+| semantic | 0.6580 | 0.5538 | 0.6225 |
+| numsets | 0.6765 | 0.5573 | 0.6248 |
+| degree | 0.2810 | 0.2675 | 0.3703 |
+| eigv | 0.2810 | 0.2675 | 0.3703 |
+| eccentricity | 0.5035 | 0.7038 | 0.3956 |
 
 ## Aggregate selector numbers
 
-- Macro-average of per-category selector CV AUCs: **0.8046**
-- Pooled OOF AUROC (ranks within category, then pooled across categories): **0.7597** (94 incorrect / 339 correct)
+- Macro-average of per-category selector CV AUCs: **0.8042**
+- Pooled OOF AUROC (ranks within category, then pooled across categories): **0.7671** (98 incorrect / 352 correct)
 
 ## Comparison with previous baselines (full-data protocol)
 
 | Method | AUROC all | factual | math | reasoning |
 |---|---:|---:|---:|---:|
-| TF-IDF alone (full-data) | 0.8449 | 0.9093 | 0.7558 | 0.6299 |
-| ensemble unweighted-3 (full-data) | 0.7514 | 0.8822 | 0.8079 | 0.6679 |
-| CV selector (macro-avg) | 0.8046 | 0.91 | 0.8363 | 0.6674 |
-| CV selector (pooled OOF rank) | 0.7597 | - | - | - |
+| TF-IDF alone (full-data) | 0.8474 | 0.9108 | 0.7558 | 0.6299 |
+| ensemble unweighted-3 (full-data) | 0.7571 | 0.8810 | 0.8079 | 0.6679 |
+| CV selector (macro-avg) | 0.8042 | 0.909 | 0.8363 | 0.6674 |
+| CV selector (pooled OOF rank) | 0.7671 | - | - | - |
 
 ## Verdict
 
 - Selection is **stable**: factual picks tfidf 5/5 folds; math picks unigram 4/5 (one bigram flip); reasoning picks bigram 4/5 (one trigram flip).
-- Under the identical CV protocol the selector beats TF-IDF on **math (0.8363 vs 0.7395)** and **reasoning (0.6674 vs 0.6289)**, and ties on factual (0.91 vs 0.9100).
-- Macro-average over categories: selector **0.8046** vs TF-IDF 0.7595 (+0.0451).
-- Pooled OOF-rank aggregate: **0.7597** -- does NOT beat the full-data TF-IDF headline (0.8449), but that headline is in-sample; TF-IDF's own CV macro (0.7595) is the comparable number, and the selector's pooling gains vanish because per-category ranking discards TF-IDF's cross-category scale advantage on factual, where most errors are.
+- Under the identical CV protocol the selector beats TF-IDF on **math (0.8363 vs 0.7395)** and **reasoning (0.6674 vs 0.6289)**, and ties on factual (0.909 vs 0.9090).
+- Macro-average over categories: selector **0.8042** vs TF-IDF 0.7591 (+0.0451).
+- Pooled OOF-rank aggregate: **0.7671** -- does NOT beat the full-data TF-IDF headline (0.8474), but that headline is in-sample; TF-IDF's own CV macro (0.7591) is the comparable number, and the selector's pooling gains vanish because per-category ranking discards TF-IDF's cross-category scale advantage on factual, where most errors are.
 - Math caution: with only 6 incorrect questions, held-out fold AUCs swing 0.69-0.97; the category's selection is indicative, not conclusive.

@@ -5,90 +5,90 @@
         {
           "fold": 1,
           "winner": "tfidf",
-          "winner_train_auc": 0.9162,
-          "winner_test_auc": 0.8827,
+          "winner_train_auc": 0.9369,
+          "winner_test_auc": 0.81,
           "train_aucs": {
-            "tfidf": 0.9162,
-            "unigram": 0.8443,
-            "bigram": 0.8506,
-            "trigram": 0.8615,
-            "semantic": 0.6596,
-            "numsets": 0.6735,
-            "degree": 0.2736,
-            "eigv": 0.2736,
-            "eccentricity": 0.4853
+            "tfidf": 0.9369,
+            "unigram": 0.8422,
+            "bigram": 0.8483,
+            "trigram": 0.8616,
+            "semantic": 0.6672,
+            "numsets": 0.6809,
+            "degree": 0.2681,
+            "eigv": 0.2681,
+            "eccentricity": 0.5122
           }
         },
         {
           "fold": 2,
           "winner": "tfidf",
-          "winner_train_auc": 0.9127,
-          "winner_test_auc": 0.9321,
+          "winner_train_auc": 0.9025,
+          "winner_test_auc": 0.95,
           "train_aucs": {
-            "tfidf": 0.9127,
-            "unigram": 0.8363,
-            "bigram": 0.841,
-            "trigram": 0.8531,
-            "semantic": 0.6477,
-            "numsets": 0.6627,
-            "degree": 0.2881,
-            "eigv": 0.2881,
-            "eccentricity": 0.5213
+            "tfidf": 0.9025,
+            "unigram": 0.8364,
+            "bigram": 0.8398,
+            "trigram": 0.8506,
+            "semantic": 0.6609,
+            "numsets": 0.6805,
+            "degree": 0.2727,
+            "eigv": 0.2727,
+            "eccentricity": 0.5223
           }
         },
         {
           "fold": 3,
           "winner": "tfidf",
-          "winner_train_auc": 0.9052,
-          "winner_test_auc": 0.9118,
+          "winner_train_auc": 0.9034,
+          "winner_test_auc": 0.94,
           "train_aucs": {
-            "tfidf": 0.9052,
-            "unigram": 0.8266,
-            "bigram": 0.8357,
-            "trigram": 0.8437,
-            "semantic": 0.6728,
-            "numsets": 0.6917,
-            "degree": 0.2736,
-            "eigv": 0.2736,
-            "eccentricity": 0.4792
+            "tfidf": 0.9034,
+            "unigram": 0.823,
+            "bigram": 0.8342,
+            "trigram": 0.8427,
+            "semantic": 0.6694,
+            "numsets": 0.6883,
+            "degree": 0.2777,
+            "eigv": 0.2777,
+            "eccentricity": 0.5077
           }
         },
         {
           "fold": 4,
           "winner": "tfidf",
-          "winner_train_auc": 0.8954,
-          "winner_test_auc": 0.9542,
+          "winner_train_auc": 0.91,
+          "winner_test_auc": 0.91,
           "train_aucs": {
-            "tfidf": 0.8954,
-            "unigram": 0.8361,
-            "bigram": 0.8384,
-            "trigram": 0.8431,
-            "semantic": 0.6556,
-            "numsets": 0.6625,
-            "degree": 0.2863,
-            "eigv": 0.2863,
-            "eccentricity": 0.5133
+            "tfidf": 0.91,
+            "unigram": 0.8495,
+            "bigram": 0.8509,
+            "trigram": 0.8545,
+            "semantic": 0.6705,
+            "numsets": 0.6808,
+            "degree": 0.2798,
+            "eigv": 0.2798,
+            "eccentricity": 0.4769
           }
         },
         {
           "fold": 5,
           "winner": "tfidf",
-          "winner_train_auc": 0.9174,
-          "winner_test_auc": 0.8693,
+          "winner_train_auc": 0.9006,
+          "winner_test_auc": 0.935,
           "train_aucs": {
-            "tfidf": 0.9174,
-            "unigram": 0.8336,
-            "bigram": 0.8349,
-            "trigram": 0.8402,
-            "semantic": 0.6593,
-            "numsets": 0.6736,
-            "degree": 0.2763,
-            "eigv": 0.2763,
-            "eccentricity": 0.4793
+            "tfidf": 0.9006,
+            "unigram": 0.8225,
+            "bigram": 0.8281,
+            "trigram": 0.8417,
+            "semantic": 0.6127,
+            "numsets": 0.6375,
+            "degree": 0.3142,
+            "eigv": 0.3142,
+            "eccentricity": 0.5097
           }
         }
       ],
-      "cv_auc": 0.91
+      "cv_auc": 0.909
     },
     "math": {
       "folds": [
@@ -273,15 +273,15 @@
   },
   "per_method_cv": {
     "factual": {
-      "tfidf": 0.9100217864923748,
-      "unigram": 0.8418591140159768,
-      "bigram": 0.8447930283224402,
-      "trigram": 0.8549382716049383,
-      "semantic": 0.6617138707334785,
-      "numsets": 0.6729048656499638,
-      "degree": 0.27912854030501094,
-      "eigv": 0.27912854030501094,
-      "eccentricity": 0.49320261437908497
+      "tfidf": 0.909,
+      "unigram": 0.8379999999999999,
+      "bigram": 0.849,
+      "trigram": 0.8505,
+      "semantic": 0.658,
+      "numsets": 0.6765000000000001,
+      "degree": 0.28099999999999997,
+      "eigv": 0.28099999999999997,
+      "eccentricity": 0.5035000000000001
     },
     "math": {
       "tfidf": 0.7395320197044335,
@@ -306,8 +306,8 @@
       "eccentricity": 0.39561988936988934
     }
   },
-  "macro_auc": 0.8045666666666668,
-  "pooled_oof_rank_auc": 0.7596654741730998,
-  "n_pos": 94,
-  "n_neg": 339
+  "macro_auc": 0.8042333333333334,
+  "pooled_oof_rank_auc": 0.7670744434137291,
+  "n_pos": 98,
+  "n_neg": 352
 }

@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-09-16 12:31 UTC",
+  "generated_utc": "2026-09-22 21:58 UTC",
   "coverage": {
     "factual": {
       "dataset_questions": 150,
@@ -20,11 +20,11 @@
   "results": {
     "bigram_jaccard": {
       "factual": {
-        "auroc": 0.8398,
-        "n_incorrect": 46,
-        "n_correct": 87,
-        "mean_score_incorrect": 0.8113,
-        "mean_score_correct": 0.5307
+        "auroc": 0.8397,
+        "n_incorrect": 50,
+        "n_correct": 100,
+        "mean_score_incorrect": 0.8095,
+        "mean_score_correct": 0.5157
       },
       "math": {
         "auroc": 0.8171,
@@ -41,20 +41,20 @@
         "mean_score_correct": 0.7689
       },
       "all": {
-        "auroc": 0.8195,
-        "n_incorrect": 94,
-        "n_correct": 339,
-        "mean_score_incorrect": 0.8135,
-        "mean_score_correct": 0.5945
+        "auroc": 0.82,
+        "n_incorrect": 98,
+        "n_correct": 352,
+        "mean_score_incorrect": 0.8125,
+        "mean_score_correct": 0.5879
       }
     },
     "trigram_jaccard": {
       "factual": {
-        "auroc": 0.8478,
-        "n_incorrect": 46,
-        "n_correct": 87,
-        "mean_score_incorrect": 0.8763,
-        "mean_score_correct": 0.601
+        "auroc": 0.8502,
+        "n_incorrect": 50,
+        "n_correct": 100,
+        "mean_score_incorrect": 0.8772,
+        "mean_score_correct": 0.5877
       },
       "math": {
         "auroc": 0.8137,
@@ -71,20 +71,20 @@
         "mean_score_correct": 0.8487
       },
       "all": {
-        "auroc": 0.8168,
-        "n_incorrect": 94,
-        "n_correct": 339,
-        "mean_score_incorrect": 0.881,
-        "mean_score_correct": 0.6853
+        "auroc": 0.8188,
+        "n_incorrect": 98,
+        "n_correct": 352,
+        "mean_score_incorrect": 0.8812,
+        "mean_score_correct": 0.6784
       }
     },
     "tfidf_cosine": {
       "factual": {
-        "auroc": 0.9093,
-        "n_incorrect": 46,
-        "n_correct": 87,
-        "mean_score_incorrect": 0.6573,
-        "mean_score_correct": 0.2346
+        "auroc": 0.9108,
+        "n_incorrect": 50,
+        "n_correct": 100,
+        "mean_score_incorrect": 0.6549,
+        "mean_score_correct": 0.2265
       },
       "math": {
         "auroc": 0.7558,
@@ -101,20 +101,20 @@
         "mean_score_correct": 0.4745
       },
       "all": {
-        "auroc": 0.8449,
-        "n_incorrect": 94,
-        "n_correct": 339,
-        "mean_score_incorrect": 0.5737,
-        "mean_score_correct": 0.2473
+        "auroc": 0.8474,
+        "n_incorrect": 98,
+        "n_correct": 352,
+        "mean_score_incorrect": 0.5758,
+        "mean_score_correct": 0.2445
       }
     },
     "unigram_jaccard": {
       "factual": {
-        "auroc": 0.835,
-        "n_incorrect": 46,
-        "n_correct": 87,
-        "mean_score_incorrect": 0.7122,
-        "mean_score_correct": 0.4257
+        "auroc": 0.8345,
+        "n_incorrect": 50,
+        "n_correct": 100,
+        "mean_score_incorrect": 0.7081,
+        "mean_score_correct": 0.4122
       },
       "math": {
         "auroc": 0.8449,
@@ -131,20 +131,20 @@
         "mean_score_correct": 0.5852
       },
       "all": {
-        "auroc": 0.8247,
-        "n_incorrect": 94,
-        "n_correct": 339,
-        "mean_score_incorrect": 0.6676,
-        "mean_score_correct": 0.4149
+        "auroc": 0.8254,
+        "n_incorrect": 98,
+        "n_correct": 352,
+        "mean_score_incorrect": 0.6673,
+        "mean_score_correct": 0.4115
       }
     },
     "semantic_entropy": {
       "factual": {
-        "auroc": 0.6588,
-        "n_incorrect": 46,
-        "n_correct": 87,
-        "mean_score_incorrect": 0.9255,
-        "mean_score_correct": 0.6136
+        "auroc": 0.656,
+        "n_incorrect": 50,
+        "n_correct": 100,
+        "mean_score_incorrect": 0.9171,
+        "mean_score_correct": 0.6096
       },
       "math": {
         "auroc": 0.515,
@@ -161,20 +161,20 @@
         "mean_score_correct": 1.1065
       },
       "all": {
-        "auroc": 0.7063,
-        "n_incorrect": 94,
-        "n_correct": 339,
-        "mean_score_incorrect": 1.0786,
-        "mean_score_correct": 0.6344
+        "auroc": 0.7036,
+        "n_incorrect": 98,
+        "n_correct": 352,
+        "mean_score_incorrect": 1.0681,
+        "mean_score_correct": 0.6326
       }
     },
     "semantic_entropy_normalized": {
       "factual": {
-        "auroc": 0.6588,
-        "n_incorrect": 46,
-        "n_correct": 87,
-        "mean_score_incorrect": 0.575,
-        "mean_score_correct": 0.3812
+        "auroc": 0.656,
+        "n_incorrect": 50,
+        "n_correct": 100,
+        "mean_score_incorrect": 0.5698,
+        "mean_score_correct": 0.3788
       },
       "math": {
         "auroc": 0.515,
@@ -191,20 +191,20 @@
         "mean_score_correct": 0.6875
       },
       "all": {
-        "auroc": 0.7063,
-        "n_incorrect": 94,
-        "n_correct": 339,
-        "mean_score_incorrect": 0.6702,
-        "mean_score_correct": 0.3942
+        "auroc": 0.7036,
+        "n_incorrect": 98,
+        "n_correct": 352,
+        "mean_score_incorrect": 0.6637,
+        "mean_score_correct": 0.393
       }
     },
     "num_sets": {
       "factual": {
-        "auroc": 0.6728,
-        "n_incorrect": 46,
-        "n_correct": 87,
-        "mean_score_incorrect": 3.087,
-        "mean_score_correct": 2.2644
+        "auroc": 0.6734,
+        "n_incorrect": 50,
+        "n_correct": 100,
+        "mean_score_incorrect": 3.06,
+        "mean_score_correct": 2.25
       },
       "math": {
         "auroc": 0.5168,
@@ -221,20 +221,20 @@
         "mean_score_correct": 3.537
       },
       "all": {
-        "auroc": 0.7096,
-        "n_incorrect": 94,
-        "n_correct": 339,
-        "mean_score_incorrect": 3.4894,
-        "mean_score_correct": 2.3923
+        "auroc": 0.7079,
+        "n_incorrect": 98,
+        "n_correct": 352,
+        "mean_score_incorrect": 3.4592,
+        "mean_score_correct": 2.3835
       }
     },
     "degree_matrix": {
       "factual": {
-        "auroc": 0.2796,
-        "n_incorrect": 46,
-        "n_correct": 87,
-        "mean_score_incorrect": 5.1304,
-        "mean_score_correct": 9.908
+        "auroc": 0.2826,
+        "n_incorrect": 50,
+        "n_correct": 100,
+        "mean_score_incorrect": 5.2,
+        "mean_score_correct": 9.98
       },
       "math": {
         "auroc": 0.3177,
@@ -251,20 +251,20 @@
         "mean_score_correct": 3.7037
       },
       "all": {
-        "auroc": 0.265,
-        "n_incorrect": 94,
-        "n_correct": 339,
-        "mean_score_incorrect": 3.8936,
-        "mean_score_correct": 9.3746
+        "auroc": 0.2676,
+        "n_incorrect": 98,
+        "n_correct": 352,
+        "mean_score_incorrect": 3.9796,
+        "mean_score_correct": 9.4148
       }
     },
     "eigv": {
       "factual": {
-        "auroc": 0.2796,
-        "n_incorrect": 46,
-        "n_correct": 87,
-        "mean_score_incorrect": 5.1304,
-        "mean_score_correct": 9.908
+        "auroc": 0.2826,
+        "n_incorrect": 50,
+        "n_correct": 100,
+        "mean_score_incorrect": 5.2,
+        "mean_score_correct": 9.98
       },
       "math": {
         "auroc": 0.3177,
@@ -281,20 +281,20 @@
         "mean_score_correct": 3.7037
       },
       "all": {
-        "auroc": 0.265,
-        "n_incorrect": 94,
-        "n_correct": 339,
-        "mean_score_incorrect": 3.8936,
-        "mean_score_correct": 9.3746
+        "auroc": 0.2676,
+        "n_incorrect": 98,
+        "n_correct": 352,
+        "mean_score_incorrect": 3.9796,
+        "mean_score_correct": 9.4148
       }
     },
     "eccentricity": {
       "factual": {
-        "auroc": 0.4959,
-        "n_incorrect": 46,
-        "n_correct": 87,
-        "mean_score_incorrect": 1.1522,
-        "mean_score_correct": 1.1724
+        "auroc": 0.5059,
+        "n_incorrect": 50,
+        "n_correct": 100,
+        "mean_score_incorrect": 1.18,
+        "mean_score_correct": 1.18
       },
       "math": {
         "auroc": 0.6655,
@@ -311,11 +311,11 @@
         "mean_score_correct": 1.0093
       },
       "all": {
-        "auroc": 0.4084,
-        "n_incorrect": 94,
-        "n_correct": 339,
-        "mean_score_incorrect": 0.9894,
-        "mean_score_correct": 1.2566
+        "auroc": 0.4163,
+        "n_incorrect": 98,
+        "n_correct": 352,
+        "mean_score_incorrect": 1.0102,
+        "mean_score_correct": 1.2557
       }
     },
     "numeric_disagreement": {
