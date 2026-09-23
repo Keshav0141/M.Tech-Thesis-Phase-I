@@ -1,0 +1,106 @@
+{
+  "coverage": {
+    "factual": {
+      "dataset_questions": 150,
+      "scored_questions": 150
+    },
+    "math": {
+      "dataset_questions": 150,
+      "scored_questions": 150
+    },
+    "reasoning": {
+      "dataset_questions": 150,
+      "scored_questions": 150
+    }
+  },
+  "results": {
+    "tfidf_cosine": {
+      "factual": {
+        "auroc": 0.839,
+        "n_incorrect": 106,
+        "n_correct": 29
+      },
+      "math": {
+        "auroc": 0.6291,
+        "n_incorrect": 28,
+        "n_correct": 122
+      },
+      "reasoning": {
+        "auroc": 0.5123,
+        "n_incorrect": 59,
+        "n_correct": 91
+      },
+      "all": {
+        "auroc": 0.6682,
+        "n_incorrect": 193,
+        "n_correct": 242
+      }
+    },
+    "unigram_jaccard": {
+      "factual": {
+        "auroc": 0.8414,
+        "n_incorrect": 106,
+        "n_correct": 29
+      },
+      "math": {
+        "auroc": 0.6127,
+        "n_incorrect": 28,
+        "n_correct": 122
+      },
+      "reasoning": {
+        "auroc": 0.5373,
+        "n_incorrect": 59,
+        "n_correct": 91
+      },
+      "all": {
+        "auroc": 0.6345,
+        "n_incorrect": 193,
+        "n_correct": 242
+      }
+    },
+    "bigram_jaccard": {
+      "factual": {
+        "auroc": 0.8452,
+        "n_incorrect": 106,
+        "n_correct": 29
+      },
+      "math": {
+        "auroc": 0.6259,
+        "n_incorrect": 28,
+        "n_correct": 122
+      },
+      "reasoning": {
+        "auroc": 0.5243,
+        "n_incorrect": 59,
+        "n_correct": 91
+      },
+      "all": {
+        "auroc": 0.5814,
+        "n_incorrect": 193,
+        "n_correct": 242
+      }
+    },
+    "trigram_jaccard": {
+      "factual": {
+        "auroc": 0.8487,
+        "n_incorrect": 106,
+        "n_correct": 29
+      },
+      "math": {
+        "auroc": 0.6303,
+        "n_incorrect": 28,
+        "n_correct": 122
+      },
+      "reasoning": {
+        "auroc": 0.5289,
+        "n_incorrect": 59,
+        "n_correct": 91
+      },
+      "all": {
+        "auroc": 0.544,
+        "n_incorrect": 193,
+        "n_correct": 242
+      }
+    }
+  }
+}
