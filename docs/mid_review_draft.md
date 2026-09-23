@@ -58,7 +58,7 @@ and the 52-question tier-2 escalation pilot is complete. Numbers pulled from
 - **Result: 2,250/2,250 samples**, single model, temperature 0.7 on every
   record, 0 duplicates, 569,238 tokens, 53.9 hours wall-clock.
 
-## 4. Week 1 baseline results (post-grader-fix)
+## 4. Week 1 baseline results (post-manual-review)
 
 AUROC of uncertainty vs. majority-vote error (450 labeled questions;
 post-manual-review protocol; grader fixed for accents and Roman ordinals):
@@ -124,6 +124,8 @@ reasoning 42).
   factual, where most errors are.
 - **Math noise problem**: only 6 incorrect math questions; held-out fold
   AUCs swing 0.69-0.97, so the math numbers are indicative, not conclusive.
+- **Overall escalation gate (top-15%, all categories):** 69/450 escalated,
+  precision 0.51, recall 0.36 (`results/escalation_report.md`).
 
 ## 8. Discussion: Tier-2 escalation tradeoffs
 
@@ -204,8 +206,6 @@ completeness.
 
 ## 10. Next steps (weeks 2-3)
 
-- Shrink the math noise problem: collect more math error signal (or accept
-  the small-n caveat and report per-category numbers with n).
 - The full method set from the base paper is now implemented: NumSets,
   Degree matrix, EigV, and Eccentricity were added on top of the five Week 1
   methods (see `results/extended_methods_report.md`). Findings so far:
@@ -213,11 +213,11 @@ completeness.
   inverted (agreement measures, flipped ~0.735) and identical by
   construction; none of the four changed the CV selector's winners or its
    macro-AUROC (still 0.804 vs 0.759 TF-IDF-CV).
-- Math noise expansion in progress: 150 fresh GSM8K questions
-  (`data/math_expansion.json`, ids mathb_0001..0150) are being generated
-  (5 samples each, same model/settings) to enlarge the 6-question incorrect
-  pool. Generation is underway via the scheduled quota harvester; the
-  incorrect-count report is pending — no results yet.
+- Mathb expansion complete: 150/150 questions generated
+  (`data/math_expansion.json`, ids mathb_0001..0150, 5 samples each, same
+  model/settings), 3 majority-incorrect; combined math pool is now 9/300
+  errors (main 6/150 + expansion 3/150). Gate evaluation uses this combined
+  pool where noted.
 - Add a number-aware semantic clustering fix (numeric-equality precondition
   before NLI merge, motivated by the math_0009 diagnosis).
 - Keep the escalation-only tier-2 design; do not collect a full second-model
