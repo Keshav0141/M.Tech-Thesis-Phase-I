@@ -118,14 +118,19 @@ reasoning 42).
 | reasoning | **0.667** | 0.629 |
 | **macro-average** | **0.804** | 0.759 (+0.045) |
 
+- Selector gain of +0.045: bootstrap 95% CI −0.024 to +0.105, so not yet
+  significant.
+
 - Caveat: the pooled OOF-rank aggregate (0.767) does not beat the in-sample
   full-data TF-IDF 0.847; TF-IDF's own CV macro (0.759) is the comparable
   number. Per-category ranking discards TF-IDF's raw-scale advantage on
   factual, where most errors are.
 - **Math noise problem**: only 6 incorrect math questions; held-out fold
   AUCs swing 0.69-0.97, so the math numbers are indicative, not conclusive.
-- **Overall escalation gate (top-15%, all categories):** 69/450 escalated,
-  precision 0.51, recall 0.36 (`results/escalation_report.md`).
+- Final gate (TF-IDF factual, numeric-disagreement math, bigram reasoning;
+  top-15% per category): 55/450 escalated, 34 wrong, precision 0.62 (95% CI
+  0.49–0.74), recall 0.35. Random escalation with the same per-category
+  counts gives 0.26 (`results/baselines_report.md`).
 
 ## 8. Discussion: Tier-2 escalation tradeoffs
 
@@ -209,9 +214,10 @@ completeness.
 - The full method set from the base paper is now implemented: NumSets,
   Degree matrix, EigV, and Eccentricity were added on top of the five Week 1
   methods (see `results/extended_methods_report.md`). Findings so far:
-  NumSets ~ semantic entropy (0.710 vs 0.706 all-category); Degree/EigV are
-  inverted (agreement measures, flipped ~0.735) and identical by
-  construction; none of the four changed the CV selector's winners or its
+  NumSets ~ semantic entropy (0.708 vs 0.704 all-category); Degree/EigV are
+  inverted (agreement measures, flipped ~0.73) and identical in our
+  simplified binary-graph version (the paper's weighted, normalised versions
+  differ); none of the four changed the CV selector's winners or its
    macro-AUROC (still 0.804 vs 0.759 TF-IDF-CV).
 - Mathb expansion complete: 150/150 questions generated
   (`data/math_expansion.json`, ids mathb_0001..0150, 5 samples each, same
