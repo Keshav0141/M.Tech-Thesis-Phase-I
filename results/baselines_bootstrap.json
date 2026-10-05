@@ -1,0 +1,191 @@
+{
+  "seed": 42,
+  "n_random": 10000,
+  "n_boot": 2000,
+  "n_questions": 450,
+  "n_wrong": 98,
+  "part1_random_baseline": {
+    "gate": {
+      "factual": {
+        "escalated": 23,
+        "wrong_caught": 22,
+        "wrong_total": 50,
+        "precision": 0.9565217391304348,
+        "recall": 0.44
+      },
+      "math": {
+        "escalated": 9,
+        "wrong_caught": 2,
+        "wrong_total": 6,
+        "precision": 0.2222222222222222,
+        "recall": 0.3333333333333333
+      },
+      "reasoning": {
+        "escalated": 23,
+        "wrong_caught": 10,
+        "wrong_total": 42,
+        "precision": 0.43478260869565216,
+        "recall": 0.23809523809523808
+      },
+      "all": {
+        "escalated": 55,
+        "wrong_caught": 34,
+        "wrong_total": 98,
+        "precision": 0.6181818181818182,
+        "recall": 0.3469387755102041
+      }
+    },
+    "random": {
+      "factual": {
+        "precision_mean": 0.33238260869565217,
+        "precision_ci": [
+          0.17391304347826086,
+          0.5217391304347826
+        ],
+        "recall_mean": 0.15289600000000003,
+        "recall_ci": [
+          0.08,
+          0.24
+        ],
+        "p_value_precision": 0.0
+      },
+      "math": {
+        "precision_mean": 0.0401,
+        "precision_ci": [
+          0.0,
+          0.2222222222222222
+        ],
+        "recall_mean": 0.06015,
+        "recall_ci": [
+          0.0,
+          0.3333333333333333
+        ],
+        "p_value_precision": 0.0419
+      },
+      "reasoning": {
+        "precision_mean": 0.2795695652173913,
+        "precision_ci": [
+          0.13043478260869565,
+          0.43478260869565216
+        ],
+        "recall_mean": 0.15309761904761904,
+        "recall_ci": [
+          0.07142857142857142,
+          0.23809523809523808
+        ],
+        "p_value_precision": 0.064
+      },
+      "all": {
+        "precision_mean": 0.26246909090909093,
+        "precision_ci": [
+          0.16363636363636364,
+          0.36363636363636365
+        ],
+        "recall_mean": 0.14730408163265307,
+        "recall_ci": [
+          0.09183673469387756,
+          0.20408163265306123
+        ],
+        "p_value_precision": 0.0
+      }
+    }
+  },
+  "part2a_gate_ci": {
+    "precision": 0.6181818181818182,
+    "precision_ci": [
+      0.49056603773584906,
+      0.7358490566037735
+    ],
+    "recall": 0.3469387755102041,
+    "recall_ci": [
+      0.25434815486993345,
+      0.44329896907216493
+    ]
+  },
+  "part2b_tfidf_auroc_ci": {
+    "factual": {
+      "auroc": 0.9108,
+      "ci": [
+        0.8634490891173745,
+        0.9524087310079746
+      ],
+      "valid_resamples": 2000
+    },
+    "math": {
+      "auroc": 0.7557870370370371,
+      "ci": [
+        0.5547945205479452,
+        0.9433106575963719
+      ],
+      "valid_resamples": 1996
+    },
+    "reasoning": {
+      "auroc": 0.6298500881834215,
+      "ci": [
+        0.5356853989347743,
+        0.7244211986402507
+      ],
+      "valid_resamples": 2000
+    },
+    "all": {
+      "auroc": 0.8474025974025974,
+      "ci": [
+        0.8102315272005923,
+        0.8847476083617367
+      ],
+      "valid_resamples": 2000
+    }
+  },
+  "part2c_selector_vs_tfidf": {
+    "fold_winners": {
+      "factual": [
+        "tfidf",
+        "tfidf",
+        "tfidf",
+        "tfidf",
+        "tfidf"
+      ],
+      "math": [
+        "unigram",
+        "unigram",
+        "unigram",
+        "unigram",
+        "bigram"
+      ],
+      "reasoning": [
+        "bigram",
+        "trigram",
+        "bigram",
+        "bigram",
+        "bigram"
+      ]
+    },
+    "selector_per_category": {
+      "factual": 0.909,
+      "math": 0.8363300492610838,
+      "reasoning": 0.6674122174122175
+    },
+    "tfidf_per_category": {
+      "factual": 0.909,
+      "math": 0.7395320197044335,
+      "reasoning": 0.6288900913900914
+    },
+    "selector_macro": 0.8042474222244337,
+    "tfidf_macro": 0.7591407036981751,
+    "difference": 0.04510671852625858,
+    "difference_ci": [
+      -0.024255591567611572,
+      0.10499415026028308
+    ],
+    "selector_macro_ci": [
+      0.7353462685294582,
+      0.8608944294134587
+    ],
+    "tfidf_macro_ci": [
+      0.6807314411045671,
+      0.8312115487592645
+    ],
+    "fraction_difference_le_0": 0.08521303258145363,
+    "valid_resamples": 1995
+  }
+}
