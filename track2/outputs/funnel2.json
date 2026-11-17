@@ -1,0 +1,511 @@
+{
+ "label": "first answer wrong = 1",
+ "n": 450,
+ "n_wrong": 103,
+ "auroc_all": {
+  "Word overlap (TF-IDF), 5 answers": {
+   "factual": 0.871,
+   "math": 0.767,
+   "reasoning": 0.615,
+   "all": 0.82
+  },
+  "Semantic Entropy, 5 answers": {
+   "factual": 0.63,
+   "math": 0.551,
+   "reasoning": 0.61,
+   "all": 0.683
+  },
+  "NumSets (Lin et al.), 5 answers": {
+   "factual": 0.646,
+   "math": 0.553,
+   "reasoning": 0.606,
+   "all": 0.686
+  },
+  "Kev verifier, 1 answer": {
+   "factual": 0.662,
+   "math": 0.503,
+   "reasoning": 0.573,
+   "all": 0.569
+  }
+ },
+ "step1": {
+  "bank_size": {
+   "factual": 1000,
+   "math": 1000,
+   "reasoning": 1000
+  },
+  "k": 5,
+  "thresholds": {
+   "factual": 0.27,
+   "math": 0.468,
+   "reasoning": 0.295
+  },
+  "threshold_pooled": 0.288,
+  "bank_score_median": {
+   "factual": 0.384,
+   "math": 0.622,
+   "reasoning": 0.419
+  },
+  "threshold_rule": "per domain: 2th percentile of that domain's bank leave-one-out scores (keeps 98% of the domain)",
+  "removed_by_domain": {
+   "factual": 1,
+   "math": 3,
+   "reasoning": 3
+  },
+  "removed_wrong": 1,
+  "kept": 443,
+  "removed": 7,
+  "routing_confusion": {
+   "factual": {
+    "factual": 126,
+    "math": 1,
+    "reasoning": 23
+   },
+   "math": {
+    "factual": 0,
+    "math": 150,
+    "reasoning": 0
+   },
+   "reasoning": {
+    "factual": 14,
+    "math": 0,
+    "reasoning": 136
+   }
+  },
+  "routing_accuracy": 91.6,
+  "examples_in": [
+   {
+    "q": "Who won the 2009 Australian men's tennis Open Championship?",
+    "true": "factual",
+    "pred": "factual",
+    "score": 0.547,
+    "thr": 0.27,
+    "first_correct": true,
+    "by_domain": {
+     "factual": 0.547,
+     "math": 0.284,
+     "reasoning": 0.37
+    }
+   },
+   {
+    "q": "John's neighbor tells him to walk his dog for 1 hour each day for a total of $10. He does this for April, save for the 4 Sundays in April. He later spent $50 on books and gave his sister Kaylee the same amount. How much money did John have left?",
+    "true": "math",
+    "pred": "math",
+    "score": 0.758,
+    "thr": 0.468,
+    "first_correct": true,
+    "by_domain": {
+     "factual": 0.254,
+     "math": 0.758,
+     "reasoning": 0.258
+    }
+   },
+   {
+    "q": "Will Dustin Hoffman likely vote for Trump in 2020?",
+    "true": "reasoning",
+    "pred": "reasoning",
+    "score": 0.586,
+    "thr": 0.295,
+    "first_correct": true,
+    "by_domain": {
+     "factual": 0.29,
+     "math": 0.182,
+     "reasoning": 0.586
+    }
+   }
+  ],
+  "examples_out": [
+   {
+    "q": "What name is given to the software program needed to access the Web?",
+    "true": "factual",
+    "pred": "factual",
+    "score": 0.265,
+    "thr": 0.27,
+    "first_correct": true,
+    "by_domain": {
+     "factual": 0.265,
+     "math": 0.129,
+     "reasoning": 0.246
+    }
+   },
+   {
+    "q": "New York is two-thirds as populated as all of New England. If New England has 2100000 people, calculate the combined population of both states.",
+    "true": "math",
+    "pred": "math",
+    "score": 0.434,
+    "thr": 0.468,
+    "first_correct": true,
+    "by_domain": {
+     "factual": 0.371,
+     "math": 0.434,
+     "reasoning": 0.323
+    }
+   },
+   {
+    "q": "Gertrude Baines, the world's oldest person, died earlier this week. How old was she?",
+    "true": "factual",
+    "pred": "math",
+    "score": 0.45,
+    "thr": 0.468,
+    "first_correct": false,
+    "by_domain": {
+     "factual": 0.355,
+     "math": 0.45,
+     "reasoning": 0.363
+    }
+   },
+   {
+    "q": "When Jason plays the video game, Duty for Ashes, his mission to slay the dragon hoard requires that he fire his weapon on average every 15 seconds.   And each time he fires his weapon, his power-fire setting allows him to shoot a flame for 5 seconds.  On average, how many seconds per minute does Jason shoot flames at the dragon hoard?",
+    "true": "math",
+    "pred": "math",
+    "score": 0.451,
+    "thr": 0.468,
+    "first_correct": true,
+    "by_domain": {
+     "factual": 0.261,
+     "math": 0.451,
+     "reasoning": 0.227
+    }
+   },
+   {
+    "q": "Can a software engineer work during a power outage?",
+    "true": "reasoning",
+    "pred": "reasoning",
+    "score": 0.265,
+    "thr": 0.295,
+    "first_correct": true,
+    "by_domain": {
+     "factual": 0.16,
+     "math": 0.134,
+     "reasoning": 0.265
+    }
+   },
+   {
+    "q": "Is a watchmaker likely to be able to fix an Apple Watch?",
+    "true": "reasoning",
+    "pred": "reasoning",
+    "score": 0.268,
+    "thr": 0.295,
+    "first_correct": true,
+    "by_domain": {
+     "factual": 0.197,
+     "math": 0.148,
+     "reasoning": 0.268
+    }
+   },
+   {
+    "q": "Are tampons a good 24 hour solution for mentruation?",
+    "true": "reasoning",
+    "pred": "reasoning",
+    "score": 0.283,
+    "thr": 0.295,
+    "first_correct": true,
+    "by_domain": {
+     "factual": 0.18,
+     "math": 0.191,
+     "reasoning": 0.283
+    }
+   }
+  ],
+  "misrouted": [
+   {
+    "q": "Which South Atlantic island suffered a volcanic eruption in 1963, forcing the inhabitants to be evacuated to Britain?",
+    "true": "factual",
+    "pred": "reasoning",
+    "score": 0.36,
+    "thr": 0.295,
+    "first_correct": false,
+    "by_domain": {
+     "factual": 0.352,
+     "math": 0.153,
+     "reasoning": 0.36
+    }
+   },
+   {
+    "q": "What was Kevin Kline's first movie?",
+    "true": "factual",
+    "pred": "reasoning",
+    "score": 0.381,
+    "thr": 0.295,
+    "first_correct": false,
+    "by_domain": {
+     "factual": 0.364,
+     "math": 0.258,
+     "reasoning": 0.381
+    }
+   },
+   {
+    "q": "What is the more common name for the species Panthera Onca?",
+    "true": "factual",
+    "pred": "reasoning",
+    "score": 0.461,
+    "thr": 0.295,
+    "first_correct": true,
+    "by_domain": {
+     "factual": 0.447,
+     "math": 0.298,
+     "reasoning": 0.461
+    }
+   },
+   {
+    "q": "Who hid in the Boscobel Oak?",
+    "true": "factual",
+    "pred": "reasoning",
+    "score": 0.39,
+    "thr": 0.295,
+    "first_correct": true,
+    "by_domain": {
+     "factual": 0.363,
+     "math": 0.288,
+     "reasoning": 0.39
+    }
+   },
+   {
+    "q": "Who was Britain\u2019s Defence Secretary at the time of the Falklands War?",
+    "true": "factual",
+    "pred": "reasoning",
+    "score": 0.387,
+    "thr": 0.295,
+    "first_correct": true,
+    "by_domain": {
+     "factual": 0.382,
+     "math": 0.167,
+     "reasoning": 0.387
+    }
+   },
+   {
+    "q": "\"Who has a series of weight-loss tapes called \"\"Sweatin' to the Oldies\"\"?\"",
+    "true": "factual",
+    "pred": "reasoning",
+    "score": 0.301,
+    "thr": 0.295,
+    "first_correct": false,
+    "by_domain": {
+     "factual": 0.267,
+     "math": 0.197,
+     "reasoning": 0.301
+    }
+   }
+  ],
+  "acc_in": 77.0,
+  "acc_out": 85.7
+ },
+ "step2": {
+  "thresholds": {
+   "factual": 3.157,
+   "math": 0.372,
+   "reasoning": 4.106
+  },
+  "easy": 231,
+  "hard": 212,
+  "acc_easy": 80.1,
+  "acc_hard": 73.6,
+  "by_domain": {
+   "factual": {
+    "easy": 75,
+    "hard": 64,
+    "acc_easy": 70.7,
+    "acc_hard": 62.5
+   },
+   "math": {
+    "easy": 75,
+    "hard": 73,
+    "acc_easy": 96.0,
+    "acc_hard": 93.2
+   },
+   "reasoning": {
+    "easy": 81,
+    "hard": 75,
+    "acc_easy": 74.1,
+    "acc_hard": 64.0
+   }
+  },
+  "nll_auroc": {
+   "factual": 0.561,
+   "math": 0.563,
+   "reasoning": 0.531
+  },
+  "examples": {
+   "factual": {
+    "easy": [
+     "Who was Theodore Roosevelt's Vice President between 1905 and 1909?",
+     1.59,
+     true
+    ],
+    "hard": [
+     "Did the Paramount leader produce Titanic?",
+     7.35,
+     true
+    ]
+   },
+   "math": {
+    "easy": [
+     "Abigail is trying a new recipe for a cold drink. It uses 1/4 of a cup of iced tea and 1 and 1/4 of a cup of lemonade to make one drink. If she fills a pitcher with 18 total cups of this drink, how many cups of lemonade are in the pitcher?",
+     0.22,
+     true
+    ],
+    "hard": [
+     "The base of a hill located beside a river is 300m above the seabed. If this depth is a quarter of the vertical distance between the riverbed and the peak of the hill, how high is the hill?",
+     1.35,
+     true
+    ]
+   },
+   "reasoning": {
+    "easy": [
+     "Did the 23rd amendment give Puerto Ricans the right to vote for president?",
+     1.95,
+     true
+    ],
+    "hard": [
+     "Would Cuba Libre consumption help with insomnia?",
+     6.49,
+     true
+    ]
+   }
+  }
+ },
+ "step3": {
+  "hard_math": 73,
+  "checkable": 42,
+  "steps": 131,
+  "steps_wrong": 0
+ },
+ "step4": {
+  "agree": 153,
+  "disagree": 59,
+  "acc_agree": 86.9,
+  "acc_disagree": 39.0
+ },
+ "step5": {
+  "accepted": 384,
+  "acc_accepted": 82.8,
+  "flagged": 59,
+  "acc_flagged": 39.0,
+  "cells": {
+   "easy": [
+    231,
+    80.1
+   ],
+   "hard_agree": [
+    153,
+    86.9
+   ],
+   "hard_disagree": [
+    59,
+    39.0
+   ]
+  }
+ },
+ "compare_step2": {
+  "Framework": {
+   "flagged": 212,
+   "caught_wrong": 56,
+   "false_alarm": 156,
+   "missed_wrong": 46,
+   "accepted_right": 185,
+   "accepted_accuracy": 80.1,
+   "calls": 443
+  },
+  "Word overlap (TF-IDF), 5 answers": {
+   "flagged": 212,
+   "caught_wrong": 89,
+   "false_alarm": 123,
+   "missed_wrong": 13,
+   "accepted_right": 218,
+   "accepted_accuracy": 94.4,
+   "calls": 2215
+  },
+  "Semantic Entropy, 5 answers": {
+   "flagged": 212,
+   "caught_wrong": 72,
+   "false_alarm": 140,
+   "missed_wrong": 30,
+   "accepted_right": 201,
+   "accepted_accuracy": 87.0,
+   "calls": 2215
+  },
+  "NumSets (Lin et al.), 5 answers": {
+   "flagged": 212,
+   "caught_wrong": 74,
+   "false_alarm": 138,
+   "missed_wrong": 28,
+   "accepted_right": 203,
+   "accepted_accuracy": 87.9,
+   "calls": 2215
+  },
+  "Kev verifier, 1 answer": {
+   "flagged": 212,
+   "caught_wrong": 58,
+   "false_alarm": 154,
+   "missed_wrong": 44,
+   "accepted_right": 187,
+   "accepted_accuracy": 81.0,
+   "calls": 443
+  },
+  "No check (trust all)": {
+   "flagged": 0,
+   "caught_wrong": 0,
+   "false_alarm": 0,
+   "missed_wrong": 102,
+   "accepted_right": 341,
+   "accepted_accuracy": 77.0,
+   "calls": 443
+  }
+ },
+ "compare_final": {
+  "Framework": {
+   "flagged": 59,
+   "caught_wrong": 36,
+   "false_alarm": 23,
+   "missed_wrong": 66,
+   "accepted_right": 318,
+   "accepted_accuracy": 82.8,
+   "calls": 1291
+  },
+  "Word overlap (TF-IDF), 5 answers": {
+   "flagged": 59,
+   "caught_wrong": 38,
+   "false_alarm": 21,
+   "missed_wrong": 64,
+   "accepted_right": 320,
+   "accepted_accuracy": 83.3,
+   "calls": 2215
+  },
+  "Semantic Entropy, 5 answers": {
+   "flagged": 59,
+   "caught_wrong": 22,
+   "false_alarm": 37,
+   "missed_wrong": 80,
+   "accepted_right": 304,
+   "accepted_accuracy": 79.2,
+   "calls": 2215
+  },
+  "NumSets (Lin et al.), 5 answers": {
+   "flagged": 59,
+   "caught_wrong": 22,
+   "false_alarm": 37,
+   "missed_wrong": 80,
+   "accepted_right": 304,
+   "accepted_accuracy": 79.2,
+   "calls": 2215
+  },
+  "Kev verifier, 1 answer": {
+   "flagged": 59,
+   "caught_wrong": 21,
+   "false_alarm": 38,
+   "missed_wrong": 81,
+   "accepted_right": 303,
+   "accepted_accuracy": 78.9,
+   "calls": 443
+  },
+  "No check (trust all)": {
+   "flagged": 0,
+   "caught_wrong": 0,
+   "false_alarm": 0,
+   "missed_wrong": 102,
+   "accepted_right": 341,
+   "accepted_accuracy": 77.0,
+   "calls": 443
+  }
+ }
+}

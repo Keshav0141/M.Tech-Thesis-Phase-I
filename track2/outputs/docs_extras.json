@@ -1,0 +1,336 @@
+{
+ "base": {
+  "thr": {
+   "factual": 0.27,
+   "math": 0.468,
+   "reasoning": 0.295
+  },
+  "out": 7,
+  "easy": 231,
+  "hard": 212,
+  "flag": 66,
+  "caught": 37,
+  "acc": 82.8,
+  "calls": 1291,
+  "acc_easy": 80.1,
+  "acc_hard": 73.6
+ },
+ "sens_p1": {
+  "1": {
+   "thr": {
+    "factual": 0.256,
+    "math": 0.452,
+    "reasoning": 0.277
+   },
+   "out": 5,
+   "easy": 232,
+   "hard": 213,
+   "flag": 64,
+   "caught": 37,
+   "acc": 82.9,
+   "calls": 1297,
+   "acc_easy": 80.2,
+   "acc_hard": 73.7
+  },
+  "2": {
+   "thr": {
+    "factual": 0.27,
+    "math": 0.468,
+    "reasoning": 0.295
+   },
+   "out": 7,
+   "easy": 231,
+   "hard": 212,
+   "flag": 66,
+   "caught": 37,
+   "acc": 82.8,
+   "calls": 1291,
+   "acc_easy": 80.1,
+   "acc_hard": 73.6
+  },
+  "5": {
+   "thr": {
+    "factual": 0.292,
+    "math": 0.504,
+    "reasoning": 0.324
+   },
+   "out": 23,
+   "easy": 222,
+   "hard": 205,
+   "flag": 80,
+   "caught": 43,
+   "acc": 83.8,
+   "calls": 1247,
+   "acc_easy": 81.5,
+   "acc_hard": 73.7
+  },
+  "10": {
+   "thr": {
+    "factual": 0.311,
+    "math": 0.531,
+    "reasoning": 0.346
+   },
+   "out": 43,
+   "easy": 214,
+   "hard": 193,
+   "flag": 95,
+   "caught": 45,
+   "acc": 83.7,
+   "calls": 1179,
+   "acc_easy": 81.8,
+   "acc_hard": 73.1
+  }
+ },
+ "sens_q": {
+  "0.3": {
+   "thr": {
+    "factual": 0.27,
+    "math": 0.468,
+    "reasoning": 0.295
+   },
+   "out": 7,
+   "easy": 133,
+   "hard": 310,
+   "flag": 92,
+   "caught": 52,
+   "acc": 85.8,
+   "calls": 1683,
+   "acc_easy": 78.9,
+   "acc_hard": 76.1
+  },
+  "0.4": {
+   "thr": {
+    "factual": 0.27,
+    "math": 0.468,
+    "reasoning": 0.295
+   },
+   "out": 7,
+   "easy": 179,
+   "hard": 264,
+   "flag": 81,
+   "caught": 47,
+   "acc": 84.8,
+   "calls": 1499,
+   "acc_easy": 80.4,
+   "acc_hard": 74.6
+  },
+  "0.5": {
+   "thr": {
+    "factual": 0.27,
+    "math": 0.468,
+    "reasoning": 0.295
+   },
+   "out": 7,
+   "easy": 231,
+   "hard": 212,
+   "flag": 66,
+   "caught": 37,
+   "acc": 82.8,
+   "calls": 1291,
+   "acc_easy": 80.1,
+   "acc_hard": 73.6
+  },
+  "0.6": {
+   "thr": {
+    "factual": 0.27,
+    "math": 0.468,
+    "reasoning": 0.295
+   },
+   "out": 7,
+   "easy": 275,
+   "hard": 168,
+   "flag": 53,
+   "caught": 30,
+   "acc": 81.6,
+   "calls": 1115,
+   "acc_easy": 78.5,
+   "acc_hard": 74.4
+  },
+  "0.7": {
+   "thr": {
+    "factual": 0.27,
+    "math": 0.468,
+    "reasoning": 0.295
+   },
+   "out": 7,
+   "easy": 315,
+   "hard": 128,
+   "flag": 44,
+   "caught": 25,
+   "acc": 80.8,
+   "calls": 955,
+   "acc_easy": 78.1,
+   "acc_hard": 74.2
+  }
+ },
+ "boot": {
+  "diff_caught_fw_minus_wo": [
+   -11.0,
+   7.0
+  ],
+  "p_fw_ge_wo": 0.35,
+  "acc_fw": [
+   79.2,
+   86.3
+  ],
+  "acc_nocheck": [
+   73.6,
+   80.7
+  ],
+  "acc_wo": [
+   79.9,
+   86.7
+  ],
+  "gain_fw_vs_nocheck": [
+   3.6,
+   8.0
+  ]
+ },
+ "missed": {
+  "total": 66,
+  "easy": {
+   "factual": 22,
+   "math": 3,
+   "reasoning": 21
+  },
+  "hard_agree": {
+   "factual": 3,
+   "math": 3,
+   "reasoning": 14
+  }
+ },
+ "easy_wrong_examples": [
+  [
+   "factual_0016",
+   2.66,
+   "Not counting the City of London, which is the smallest city in England by population?",
+   "Durham",
+   "Wells"
+  ],
+  [
+   "factual_0020",
+   2.12,
+   "\"Who represented the United Kingdom in the Eurovision Song Contest in 1975 with the song \"\"Let me be the one\"\"?\"",
+   "Wizzard",
+   "The Shadows"
+  ],
+  [
+   "factual_0022",
+   2.5,
+   "Who hosted the first edition of Top of the Pops?",
+   "Tom Baker",
+   "Jimmy Saville"
+  ],
+  [
+   "factual_0034",
+   2.93,
+   "Which poet, who died during World War One, wrote the poems 'Peace' and 'Tiare Tahiti'?",
+   "Edith Sitwell",
+   "RUPERT BROOKE"
+  ],
+  [
+   "factual_0045",
+   3.12,
+   "Which artist (1844-1910) painted many jungle scenes (although he never left France) and landscapes of Paris?",
+   "Hippolyte Boulenger",
+   "Henri Rousseau"
+  ],
+  [
+   "factual_0058",
+   3.14,
+   "Who married Liam Gallagher in 1997?",
+   "Nicole Appleton",
+   "Patsy Kensit"
+  ],
+  [
+   "factual_0062",
+   2.37,
+   "In which film, winner of the Best Animated Feature Oscar for 2011, is the central character a chameleon, voiced by Johnny Depp?",
+   "The Croods",
+   "Rango"
+  ],
+  [
+   "factual_0070",
+   2.36,
+   "The Isle of Man's 'Laxey Wheel' is the largest water wheel in the world. What name is it known by?",
+   "The Lady of the Glen",
+   "LADY ISABELLA"
+  ]
+ ],
+ "easy_wrong_agree": [
+  6,
+  46
+ ],
+ "two_answer_easy": {
+  "easy": 231,
+  "flagged": 48,
+  "wrong_caught": 31,
+  "easy_wrong": 46,
+  "extra_calls": 231
+ },
+ "ood": [
+  [
+   "factual_0126",
+   "factual",
+   "factual",
+   0.265,
+   0.27,
+   true,
+   "What name is given to the software program needed to access the Web?"
+  ],
+  [
+   "factual_0150",
+   "factual",
+   "math",
+   0.45,
+   0.468,
+   false,
+   "Gertrude Baines, the world's oldest person, died earlier this week. How old was she?"
+  ],
+  [
+   "math_0019",
+   "math",
+   "math",
+   0.451,
+   0.468,
+   true,
+   "When Jason plays the video game, Duty for Ashes, his mission to slay the dragon hoard requires that he fire his weapon on average every 15 seconds.   And each time he fires his weapon, his power-fire setting allows him to shoot a flame for 5 seconds.  On average, how many seconds per minute does Jason shoot flames at the dragon hoard?"
+  ],
+  [
+   "math_0131",
+   "math",
+   "math",
+   0.434,
+   0.468,
+   true,
+   "New York is two-thirds as populated as all of New England. If New England has 2100000 people, calculate the combined population of both states."
+  ],
+  [
+   "reasoning_0063",
+   "reasoning",
+   "reasoning",
+   0.268,
+   0.295,
+   true,
+   "Is a watchmaker likely to be able to fix an Apple Watch?"
+  ],
+  [
+   "reasoning_0098",
+   "reasoning",
+   "reasoning",
+   0.265,
+   0.295,
+   true,
+   "Can a software engineer work during a power outage?"
+  ],
+  [
+   "reasoning_0115",
+   "reasoning",
+   "reasoning",
+   0.283,
+   0.295,
+   true,
+   "Are tampons a good 24 hour solution for mentruation?"
+  ]
+ ]
+}

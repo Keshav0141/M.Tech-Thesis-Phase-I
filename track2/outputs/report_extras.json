@@ -1,0 +1,67 @@
+{
+ "lexical_auroc": {
+  "Unigram Jaccard": [
+   0.782,
+   0.868,
+   0.638,
+   0.797
+  ],
+  "Bigram Jaccard": [
+   0.788,
+   0.84,
+   0.674,
+   0.789
+  ],
+  "Trigram Jaccard": [
+   0.8,
+   0.837,
+   0.672,
+   0.789
+  ]
+ },
+ "tfidf_ci": [
+  0.773,
+  0.857
+ ],
+ "agree_by_domain": {
+  "factual": {
+   "hard": 64,
+   "agree": 31,
+   "acc_agree": 90.3,
+   "disagree": 33,
+   "acc_disagree": 36.4
+  },
+  "math": {
+   "hard": 73,
+   "agree": 69,
+   "acc_agree": 95.7,
+   "disagree": 4,
+   "acc_disagree": 50.0
+  },
+  "reasoning": {
+   "hard": 75,
+   "agree": 53,
+   "acc_agree": 73.6,
+   "disagree": 22,
+   "acc_disagree": 40.9
+  }
+ },
+ "first_right": {
+  "factual": 97,
+  "math": 142,
+  "reasoning": 108
+ },
+ "maj_right": {
+  "factual": 100,
+  "math": 144,
+  "reasoning": 108
+ },
+ "banking": {
+  "n": 3080,
+  "rejected": 2180,
+  "pct": 70.8,
+  "rej_ex": "Why couldn't I do a transfer to a beneficiary?",
+  "kept_ex": "Where is the money I topped off with?",
+  "note": "computed with the earlier single threshold 0.288"
+ }
+}

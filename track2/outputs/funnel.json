@@ -1,0 +1,159 @@
+{
+ "n": 450,
+ "data": {
+  "factual": {
+   "n": 150,
+   "majority_correct": 100,
+   "single_pass_acc": 64.7
+  },
+  "math": {
+   "n": 150,
+   "majority_correct": 144,
+   "single_pass_acc": 94.7
+  },
+  "reasoning": {
+   "n": 150,
+   "majority_correct": 108,
+   "single_pass_acc": 72.0
+  },
+  "all": {
+   "n": 450,
+   "majority_correct": 352,
+   "single_pass_acc": 77.1
+  }
+ },
+ "domain": {
+  "threshold": 0.236,
+  "k": 5,
+  "kept": 441,
+  "removed": 9,
+  "removed_ids": [
+   "factual_0073",
+   "factual_0102",
+   "factual_0126",
+   "reasoning_0038",
+   "reasoning_0053",
+   "reasoning_0068",
+   "reasoning_0098",
+   "reasoning_0101",
+   "reasoning_0125"
+  ],
+  "removed_examples": [
+   "November 11, 1889 saw the great state of Washington formed from what territory?",
+   "What is an overgrowth of fibrous tissue, usually produced at the site of a scar?",
+   "What name is given to the software program needed to access the Web?"
+  ],
+  "acc_kept": 77.1,
+  "acc_removed": 77.8,
+  "banking77_n": 3080,
+  "banking77_rejected": 2450,
+  "banking_kept_examples": [
+   "How long does a card delivery take?",
+   "I need to know your exchange rates.",
+   "What exchange rates do you offer?"
+  ],
+  "banking_rejected_examples": [
+   "What steps do I take to verify my identity?",
+   "What should I do to verify my identity?",
+   "What do I do for the identity check?"
+  ]
+ },
+ "difficulty": {
+  "feature": "mean_nll of question under Qwen/Qwen2.5-1.5B",
+  "threshold_per_category": {
+   "factual": 3.038,
+   "math": 0.371,
+   "reasoning": 4.212
+  },
+  "easy": 221,
+  "hard": 220,
+  "acc_easy": 81.9,
+  "acc_hard": 72.3,
+  "by_cat": {
+   "factual": {
+    "easy": 74,
+    "hard": 73,
+    "acc_easy": 68.9,
+    "acc_hard": 58.9
+   },
+   "math": {
+    "easy": 75,
+    "hard": 75,
+    "acc_easy": 96.0,
+    "acc_hard": 93.3
+   },
+   "reasoning": {
+    "easy": 72,
+    "hard": 72,
+    "acc_easy": 80.6,
+    "acc_hard": 63.9
+   }
+  },
+  "easy_example": "Nina makes one-of-a-kind jewelry and sells it at a local boutique.  She charges $25.00 for her necklaces, $15.00 for bracelets and $10.00 for a pair of earrings.  Over the weekend, she sold 5 necklaces, 10 bracelets, 20 earrings, and received 2 orders for a complete jewelry ensemble that Nina charged $45.00 for.  How much money did she make over the weekend?",
+  "hard_example": "Did the Paramount leader produce Titanic?"
+ },
+ "math_check": {
+  "pool": "hard",
+  "math_questions": 75,
+  "checkable": 43,
+  "not_checkable": 32,
+  "steps_checked": 133,
+  "steps_wrong": 0,
+  "acc_checkable": 95.3,
+  "acc_not_checkable": 90.6
+ },
+ "agreement": {
+  "pool": "hard",
+  "n": 220,
+  "coherent_5of5": 150,
+  "not_coherent": 70,
+  "coherent_and_correct": 133,
+  "acc_coherent": 88.7,
+  "acc_not_coherent": 37.1,
+  "by_cat": {
+   "factual": {
+    "coherent": 29,
+    "not": 44,
+    "acc_coherent": 93.1,
+    "acc_not": 36.4
+   },
+   "math": {
+    "coherent": 71,
+    "not": 4,
+    "acc_coherent": 95.8,
+    "acc_not": 50.0
+   },
+   "reasoning": {
+    "coherent": 50,
+    "not": 22,
+    "acc_coherent": 76.0,
+    "acc_not": 36.4
+   }
+  },
+  "coherent_but_wrong_examples": [
+   "factual_0044",
+   "factual_0075",
+   "math_0096",
+   "math_0117",
+   "math_0120"
+  ]
+ },
+ "decision_2x2": {
+  "easy_agree (accept)": {
+   "n": 157,
+   "acc": 94.9
+  },
+  "easy_disagree (verify)": {
+   "n": 64,
+   "acc": 50.0
+  },
+  "hard_agree (verify)": {
+   "n": 150,
+   "acc": 88.7
+  },
+  "hard_disagree (refuse)": {
+   "n": 70,
+   "acc": 37.1
+  }
+ }
+}

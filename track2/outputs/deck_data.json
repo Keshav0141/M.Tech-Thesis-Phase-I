@@ -1,0 +1,1234 @@
+{
+ "auroc": {
+  "Word overlap (TF-IDF)": {
+   "factual": 0.871,
+   "math": 0.767,
+   "reasoning": 0.615,
+   "all": 0.82
+  },
+  "Semantic Entropy": {
+   "factual": 0.63,
+   "math": 0.551,
+   "reasoning": 0.61,
+   "all": 0.683
+  },
+  "NumSets": {
+   "factual": 0.646,
+   "math": 0.553,
+   "reasoning": 0.606,
+   "all": 0.686
+  },
+  "Kev": {
+   "factual": 0.662,
+   "math": 0.503,
+   "reasoning": 0.573,
+   "all": 0.569
+  }
+ },
+ "phase1_cm": {
+  "k": 103,
+  "Word overlap (TF-IDF)": {
+   "caught": 52,
+   "false_alarm": 51,
+   "missed": 51,
+   "accepted_right": 296,
+   "acc_accepted": 85.3
+  },
+  "Semantic Entropy": {
+   "caught": 40,
+   "false_alarm": 63,
+   "missed": 63,
+   "accepted_right": 284,
+   "acc_accepted": 81.8
+  },
+  "NumSets": {
+   "caught": 40,
+   "false_alarm": 63,
+   "missed": 63,
+   "accepted_right": 284,
+   "acc_accepted": 81.8
+  },
+  "Kev": {
+   "caught": 30,
+   "false_alarm": 73,
+   "missed": 73,
+   "accepted_right": 274,
+   "acc_accepted": 79.0
+  }
+ },
+ "base_acc": 77.1,
+ "n_wrong": 103,
+ "bank_total": 3000,
+ "bank_per": 1000,
+ "step1": {
+  "bank_size": {
+   "factual": 1000,
+   "math": 1000,
+   "reasoning": 1000
+  },
+  "k": 5,
+  "thresholds": {
+   "factual": 0.27,
+   "math": 0.468,
+   "reasoning": 0.295
+  },
+  "threshold_pooled": 0.288,
+  "bank_score_median": {
+   "factual": 0.384,
+   "math": 0.622,
+   "reasoning": 0.419
+  },
+  "threshold_rule": "per domain: 2th percentile of that domain's bank leave-one-out scores (keeps 98% of the domain)",
+  "removed_by_domain": {
+   "factual": 1,
+   "math": 3,
+   "reasoning": 3
+  },
+  "removed_wrong": 1,
+  "kept": 443,
+  "removed": 7,
+  "routing_confusion": {
+   "factual": {
+    "factual": 126,
+    "math": 1,
+    "reasoning": 23
+   },
+   "math": {
+    "factual": 0,
+    "math": 150,
+    "reasoning": 0
+   },
+   "reasoning": {
+    "factual": 14,
+    "math": 0,
+    "reasoning": 136
+   }
+  },
+  "routing_accuracy": 91.6,
+  "examples_in": [
+   {
+    "q": "Who won the 2009 Australian men's tennis Open Championship?",
+    "true": "factual",
+    "pred": "factual",
+    "score": 0.547,
+    "thr": 0.27,
+    "first_correct": true,
+    "by_domain": {
+     "factual": 0.547,
+     "math": 0.284,
+     "reasoning": 0.37
+    }
+   },
+   {
+    "q": "John's neighbor tells him to walk his dog for 1 hour each day for a total of $10. He does this for April, save for the 4 Sundays in April. He later spent $50 on books and gave his sister Kaylee the same amount. How much money did John have left?",
+    "true": "math",
+    "pred": "math",
+    "score": 0.758,
+    "thr": 0.468,
+    "first_correct": true,
+    "by_domain": {
+     "factual": 0.254,
+     "math": 0.758,
+     "reasoning": 0.258
+    }
+   },
+   {
+    "q": "Will Dustin Hoffman likely vote for Trump in 2020?",
+    "true": "reasoning",
+    "pred": "reasoning",
+    "score": 0.586,
+    "thr": 0.295,
+    "first_correct": true,
+    "by_domain": {
+     "factual": 0.29,
+     "math": 0.182,
+     "reasoning": 0.586
+    }
+   }
+  ],
+  "examples_out": [
+   {
+    "q": "What name is given to the software program needed to access the Web?",
+    "true": "factual",
+    "pred": "factual",
+    "score": 0.265,
+    "thr": 0.27,
+    "first_correct": true,
+    "by_domain": {
+     "factual": 0.265,
+     "math": 0.129,
+     "reasoning": 0.246
+    }
+   },
+   {
+    "q": "New York is two-thirds as populated as all of New England. If New England has 2100000 people, calculate the combined population of both states.",
+    "true": "math",
+    "pred": "math",
+    "score": 0.434,
+    "thr": 0.468,
+    "first_correct": true,
+    "by_domain": {
+     "factual": 0.371,
+     "math": 0.434,
+     "reasoning": 0.323
+    }
+   },
+   {
+    "q": "Gertrude Baines, the world's oldest person, died earlier this week. How old was she?",
+    "true": "factual",
+    "pred": "math",
+    "score": 0.45,
+    "thr": 0.468,
+    "first_correct": false,
+    "by_domain": {
+     "factual": 0.355,
+     "math": 0.45,
+     "reasoning": 0.363
+    }
+   },
+   {
+    "q": "When Jason plays the video game, Duty for Ashes, his mission to slay the dragon hoard requires that he fire his weapon on average every 15 seconds.   And each time he fires his weapon, his power-fire setting allows him to shoot a flame for 5 seconds.  On average, how many seconds per minute does Jason shoot flames at the dragon hoard?",
+    "true": "math",
+    "pred": "math",
+    "score": 0.451,
+    "thr": 0.468,
+    "first_correct": true,
+    "by_domain": {
+     "factual": 0.261,
+     "math": 0.451,
+     "reasoning": 0.227
+    }
+   },
+   {
+    "q": "Can a software engineer work during a power outage?",
+    "true": "reasoning",
+    "pred": "reasoning",
+    "score": 0.265,
+    "thr": 0.295,
+    "first_correct": true,
+    "by_domain": {
+     "factual": 0.16,
+     "math": 0.134,
+     "reasoning": 0.265
+    }
+   },
+   {
+    "q": "Is a watchmaker likely to be able to fix an Apple Watch?",
+    "true": "reasoning",
+    "pred": "reasoning",
+    "score": 0.268,
+    "thr": 0.295,
+    "first_correct": true,
+    "by_domain": {
+     "factual": 0.197,
+     "math": 0.148,
+     "reasoning": 0.268
+    }
+   },
+   {
+    "q": "Are tampons a good 24 hour solution for mentruation?",
+    "true": "reasoning",
+    "pred": "reasoning",
+    "score": 0.283,
+    "thr": 0.295,
+    "first_correct": true,
+    "by_domain": {
+     "factual": 0.18,
+     "math": 0.191,
+     "reasoning": 0.283
+    }
+   }
+  ],
+  "misrouted": [
+   {
+    "q": "Which South Atlantic island suffered a volcanic eruption in 1963, forcing the inhabitants to be evacuated to Britain?",
+    "true": "factual",
+    "pred": "reasoning",
+    "score": 0.36,
+    "thr": 0.295,
+    "first_correct": false,
+    "by_domain": {
+     "factual": 0.352,
+     "math": 0.153,
+     "reasoning": 0.36
+    }
+   },
+   {
+    "q": "What was Kevin Kline's first movie?",
+    "true": "factual",
+    "pred": "reasoning",
+    "score": 0.381,
+    "thr": 0.295,
+    "first_correct": false,
+    "by_domain": {
+     "factual": 0.364,
+     "math": 0.258,
+     "reasoning": 0.381
+    }
+   },
+   {
+    "q": "What is the more common name for the species Panthera Onca?",
+    "true": "factual",
+    "pred": "reasoning",
+    "score": 0.461,
+    "thr": 0.295,
+    "first_correct": true,
+    "by_domain": {
+     "factual": 0.447,
+     "math": 0.298,
+     "reasoning": 0.461
+    }
+   },
+   {
+    "q": "Who hid in the Boscobel Oak?",
+    "true": "factual",
+    "pred": "reasoning",
+    "score": 0.39,
+    "thr": 0.295,
+    "first_correct": true,
+    "by_domain": {
+     "factual": 0.363,
+     "math": 0.288,
+     "reasoning": 0.39
+    }
+   },
+   {
+    "q": "Who was Britain\u2019s Defence Secretary at the time of the Falklands War?",
+    "true": "factual",
+    "pred": "reasoning",
+    "score": 0.387,
+    "thr": 0.295,
+    "first_correct": true,
+    "by_domain": {
+     "factual": 0.382,
+     "math": 0.167,
+     "reasoning": 0.387
+    }
+   },
+   {
+    "q": "\"Who has a series of weight-loss tapes called \"\"Sweatin' to the Oldies\"\"?\"",
+    "true": "factual",
+    "pred": "reasoning",
+    "score": 0.301,
+    "thr": 0.295,
+    "first_correct": false,
+    "by_domain": {
+     "factual": 0.267,
+     "math": 0.197,
+     "reasoning": 0.301
+    }
+   }
+  ],
+  "acc_in": 77.0,
+  "acc_out": 85.7
+ },
+ "step2": {
+  "thresholds": {
+   "factual": 3.157,
+   "math": 0.372,
+   "reasoning": 4.106
+  },
+  "easy": 231,
+  "hard": 212,
+  "acc_easy": 80.1,
+  "acc_hard": 73.6,
+  "by_domain": {
+   "factual": {
+    "easy": 75,
+    "hard": 64,
+    "acc_easy": 70.7,
+    "acc_hard": 62.5
+   },
+   "math": {
+    "easy": 75,
+    "hard": 73,
+    "acc_easy": 96.0,
+    "acc_hard": 93.2
+   },
+   "reasoning": {
+    "easy": 81,
+    "hard": 75,
+    "acc_easy": 74.1,
+    "acc_hard": 64.0
+   }
+  },
+  "nll_auroc": {
+   "factual": 0.561,
+   "math": 0.563,
+   "reasoning": 0.531
+  },
+  "examples": {
+   "factual": {
+    "easy": [
+     "Who invented Dynamite in 1867?",
+     2.45,
+     true
+    ],
+    "hard": [
+     "Who wrote the book Jo's Boys?",
+     4.24,
+     false
+    ]
+   },
+   "math": {
+    "easy": [
+     "John uses 5 liters of fuel per km to travel. How many liters of fuel should John plan to use if he plans to travel on two trips of 30 km and 20 km?",
+     0.36,
+     true
+    ],
+    "hard": [
+     "Anika has 4 more than twice the number of pencils as Reeta. If Reeta has 20 pencils, how many pencils do the two have together?",
+     0.61,
+     true
+    ]
+   },
+   "reasoning": {
+    "easy": [
+     "Could a chipmunk fit 100 chocolate chips in his mouth?",
+     3.07,
+     true
+    ],
+    "hard": [
+     "Can Kate Gosselin's household fill out a Bandy team?",
+     5.48,
+     true
+    ]
+   }
+  }
+ },
+ "step3": {
+  "hard_math": 73,
+  "checkable": 42,
+  "steps": 131,
+  "steps_wrong": 0
+ },
+ "step4": {
+  "agree": 153,
+  "disagree": 59,
+  "acc_agree": 86.9,
+  "acc_disagree": 39.0
+ },
+ "step5": {
+  "accepted": 384,
+  "acc_accepted": 82.8,
+  "flagged": 59,
+  "acc_flagged": 39.0,
+  "cells": {
+   "easy": [
+    231,
+    80.1
+   ],
+   "hard_agree": [
+    153,
+    86.9
+   ],
+   "hard_disagree": [
+    59,
+    39.0
+   ]
+  }
+ },
+ "compare_step2": {
+  "Framework": {
+   "flagged": 212,
+   "caught_wrong": 56,
+   "false_alarm": 156,
+   "missed_wrong": 46,
+   "accepted_right": 185,
+   "accepted_accuracy": 80.1,
+   "calls": 443
+  },
+  "Word overlap (TF-IDF), 5 answers": {
+   "flagged": 212,
+   "caught_wrong": 89,
+   "false_alarm": 123,
+   "missed_wrong": 13,
+   "accepted_right": 218,
+   "accepted_accuracy": 94.4,
+   "calls": 2215
+  },
+  "Semantic Entropy, 5 answers": {
+   "flagged": 212,
+   "caught_wrong": 72,
+   "false_alarm": 140,
+   "missed_wrong": 30,
+   "accepted_right": 201,
+   "accepted_accuracy": 87.0,
+   "calls": 2215
+  },
+  "NumSets (Lin et al.), 5 answers": {
+   "flagged": 212,
+   "caught_wrong": 74,
+   "false_alarm": 138,
+   "missed_wrong": 28,
+   "accepted_right": 203,
+   "accepted_accuracy": 87.9,
+   "calls": 2215
+  },
+  "Kev verifier, 1 answer": {
+   "flagged": 212,
+   "caught_wrong": 58,
+   "false_alarm": 154,
+   "missed_wrong": 44,
+   "accepted_right": 187,
+   "accepted_accuracy": 81.0,
+   "calls": 443
+  },
+  "No check (trust all)": {
+   "flagged": 0,
+   "caught_wrong": 0,
+   "false_alarm": 0,
+   "missed_wrong": 102,
+   "accepted_right": 341,
+   "accepted_accuracy": 77.0,
+   "calls": 443
+  }
+ },
+ "compare_final": {
+  "Framework": {
+   "flagged": 59,
+   "caught_wrong": 36,
+   "false_alarm": 23,
+   "missed_wrong": 66,
+   "accepted_right": 318,
+   "accepted_accuracy": 82.8,
+   "calls": 1291
+  },
+  "Word overlap (TF-IDF), 5 answers": {
+   "flagged": 59,
+   "caught_wrong": 38,
+   "false_alarm": 21,
+   "missed_wrong": 64,
+   "accepted_right": 320,
+   "accepted_accuracy": 83.3,
+   "calls": 2215
+  },
+  "Semantic Entropy, 5 answers": {
+   "flagged": 59,
+   "caught_wrong": 22,
+   "false_alarm": 37,
+   "missed_wrong": 80,
+   "accepted_right": 304,
+   "accepted_accuracy": 79.2,
+   "calls": 2215
+  },
+  "NumSets (Lin et al.), 5 answers": {
+   "flagged": 59,
+   "caught_wrong": 22,
+   "false_alarm": 37,
+   "missed_wrong": 80,
+   "accepted_right": 304,
+   "accepted_accuracy": 79.2,
+   "calls": 2215
+  },
+  "Kev verifier, 1 answer": {
+   "flagged": 59,
+   "caught_wrong": 21,
+   "false_alarm": 38,
+   "missed_wrong": 81,
+   "accepted_right": 303,
+   "accepted_accuracy": 78.9,
+   "calls": 443
+  },
+  "No check (trust all)": {
+   "flagged": 0,
+   "caught_wrong": 0,
+   "false_alarm": 0,
+   "missed_wrong": 102,
+   "accepted_right": 341,
+   "accepted_accuracy": 77.0,
+   "calls": 443
+  }
+ },
+ "s1_examples": {
+  "factual_0110": {
+   "q": "What connects the Red Sea to the Mediterranean Sea?",
+   "true": "factual",
+   "scores": {
+    "factual": 0.51,
+    "math": 0.25,
+    "reasoning": 0.42
+   },
+   "nearest": {
+    "factual": [
+     "An arm of the Mediterranean Sea In the Eastern part of which sea can you find the Greek island of Corfu ?",
+     0.6
+    ],
+    "math": [
+     "Nala found 5 seashells at the beach. The next day, she found another 7, and the following day, she found twice the number she got from the first two days. How many seashells does Nala have?",
+     0.28
+    ],
+    "reasoning": [
+     "Will a 2 Euro coin float across the Red Sea?",
+     0.47
+    ]
+   }
+  },
+  "math_0009": {
+   "q": "New York recorded 5000 new coronavirus cases on a particular week. In the second week, half as many new coronaviruses cases as the first week was recorded by the state. In the third week, 2000 more cases were recorded in the state. What is the total number of recorded new coronaviruses in the state after the three weeks?",
+   "true": "math",
+   "scores": {
+    "factual": 0.24,
+    "math": 0.49,
+    "reasoning": 0.25
+   },
+   "nearest": {
+    "factual": [
+     "If something is biannual how often does it occur?",
+     0.27
+    ],
+    "math": [
+     "Mark has to wait 4 days for his first coronavirus vaccine appointment. Then he has to wait 20 days for his second vaccine appointment. Then he has to wait 2 weeks for the vaccine to be fully effective. How many days does Mark have to wait in total?",
+     0.56
+    ],
+    "reasoning": [
+     "Does D\u00fcsseldorf have only a small number of smoggy days each year?",
+     0.27
+    ]
+   }
+  },
+  "reasoning_0061": {
+   "q": "Could ten gallons of seawater crush a six year old?",
+   "true": "reasoning",
+   "scores": {
+    "factual": 0.35,
+    "math": 0.35,
+    "reasoning": 0.44
+   },
+   "nearest": {
+    "factual": [
+     "Into which body of water does the River Nene drain?",
+     0.38
+    ],
+    "math": [
+     "Nancy is filling an aquarium for her fish. She fills it halfway and goes to answer the door. While she's gone, her cat knocks the aquarium over and spills half the water in it. Then Nancy comes back and triples the amount of water in the aquarium. If the aquarium is 4 feet long, 6 feet wide, and 3 feet high, how many cubic feet of water are in the aquarium?",
+     0.4
+    ],
+    "reasoning": [
+     "Will a Euro sink in water?",
+     0.45
+    ]
+   }
+  }
+ },
+ "cum": {
+  "nocheck": {
+   "label": "No check (every answer accepted)",
+   "calls": 450,
+   "flagged": 0,
+   "accepted": 450,
+   "caught": 0,
+   "false": 0,
+   "missed": 103,
+   "acc": 77.1
+  },
+  "wo": {
+   "label": "Word overlap, TF-IDF (5 answers)",
+   "calls": 2250,
+   "flagged": 103,
+   "accepted": 347,
+   "caught": 52,
+   "false": 51,
+   "missed": 51,
+   "acc": 85.3
+  },
+  "se": {
+   "label": "Semantic Entropy (5 answers)",
+   "calls": 2250,
+   "flagged": 103,
+   "accepted": 347,
+   "caught": 38,
+   "false": 65,
+   "missed": 65,
+   "acc": 81.3
+  },
+  "ns": {
+   "label": "NumSets (5 answers)",
+   "calls": 2250,
+   "flagged": 103,
+   "accepted": 347,
+   "caught": 38,
+   "false": 65,
+   "missed": 65,
+   "acc": 81.3
+  },
+  "kev": {
+   "label": "Kev verifier (1 answer)",
+   "calls": 450,
+   "flagged": 103,
+   "accepted": 347,
+   "caught": 30,
+   "false": 73,
+   "missed": 73,
+   "acc": 79.0,
+   "ref_wo": 52,
+   "ref_se": 38,
+   "ref_ns": 38
+  },
+  "s1": {
+   "label": "Framework: Step 1",
+   "calls": 443,
+   "flagged": 7,
+   "accepted": 443,
+   "caught": 1,
+   "false": 6,
+   "missed": 102,
+   "acc": 77.0,
+   "ref_wo": 6,
+   "ref_se": 3,
+   "ref_ns": 3
+  },
+  "s2": {
+   "label": "Framework: Steps 1 to 2",
+   "calls": 443,
+   "flagged": 219,
+   "accepted": 231,
+   "caught": 57,
+   "false": 162,
+   "missed": 46,
+   "acc": 80.1,
+   "ref_wo": 91,
+   "ref_se": 73,
+   "ref_ns": 73
+  },
+  "s3": {
+   "label": "Framework: Steps 1 to 3",
+   "calls": 443,
+   "flagged": 219,
+   "accepted": 231,
+   "caught": 57,
+   "false": 162,
+   "missed": 46,
+   "acc": 80.1,
+   "ref_wo": 91,
+   "ref_se": 73,
+   "ref_ns": 73
+  },
+  "s4": {
+   "label": "Framework: Steps 1 to 5",
+   "calls": 1291,
+   "flagged": 66,
+   "accepted": 384,
+   "caught": 37,
+   "false": 29,
+   "missed": 66,
+   "acc": 82.8,
+   "ref_wo": 40,
+   "ref_se": 25,
+   "ref_ns": 25
+  }
+ },
+ "cum_at": {
+  "66": {
+   "wo": {
+    "label": "wo",
+    "calls": 0,
+    "flagged": 66,
+    "accepted": 384,
+    "caught": 40,
+    "false": 26,
+    "missed": 63,
+    "acc": 83.6
+   },
+   "se": {
+    "label": "se",
+    "calls": 0,
+    "flagged": 66,
+    "accepted": 384,
+    "caught": 25,
+    "false": 41,
+    "missed": 78,
+    "acc": 79.7
+   },
+   "ns": {
+    "label": "ns",
+    "calls": 0,
+    "flagged": 66,
+    "accepted": 384,
+    "caught": 25,
+    "false": 41,
+    "missed": 78,
+    "acc": 79.7
+   },
+   "kev": {
+    "label": "kev",
+    "calls": 0,
+    "flagged": 66,
+    "accepted": 384,
+    "caught": 22,
+    "false": 44,
+    "missed": 81,
+    "acc": 78.9
+   }
+  },
+  "219": {
+   "wo": {
+    "label": "wo",
+    "calls": 0,
+    "flagged": 219,
+    "accepted": 231,
+    "caught": 91,
+    "false": 128,
+    "missed": 12,
+    "acc": 94.8
+   },
+   "se": {
+    "label": "se",
+    "calls": 0,
+    "flagged": 219,
+    "accepted": 231,
+    "caught": 73,
+    "false": 146,
+    "missed": 30,
+    "acc": 87.0
+   },
+   "ns": {
+    "label": "ns",
+    "calls": 0,
+    "flagged": 219,
+    "accepted": 231,
+    "caught": 73,
+    "false": 146,
+    "missed": 30,
+    "acc": 87.0
+   },
+   "kev": {
+    "label": "kev",
+    "calls": 0,
+    "flagged": 219,
+    "accepted": 231,
+    "caught": 60,
+    "false": 159,
+    "missed": 43,
+    "acc": 81.4
+   }
+  }
+ },
+ "arith_all": {
+  "answers": 1500,
+  "steps": 2887,
+  "wrong": 0
+ },
+ "auroc_pairs": {
+  "Word overlap (TF-IDF)": {
+   "factual": {
+    "wrong": 53,
+    "correct": 97,
+    "pairs": 5141,
+    "higher": 4479,
+    "ties": 0,
+    "auroc": 0.871
+   },
+   "math": {
+    "wrong": 8,
+    "correct": 142,
+    "pairs": 1136,
+    "higher": 871,
+    "ties": 0,
+    "auroc": 0.767
+   },
+   "reasoning": {
+    "wrong": 42,
+    "correct": 108,
+    "pairs": 4536,
+    "higher": 2788,
+    "ties": 0,
+    "auroc": 0.615
+   },
+   "all": {
+    "wrong": 103,
+    "correct": 347,
+    "pairs": 35741,
+    "higher": 29292,
+    "ties": 0,
+    "auroc": 0.82
+   }
+  },
+  "Semantic Entropy": {
+   "factual": {
+    "wrong": 53,
+    "correct": 97,
+    "pairs": 5141,
+    "higher": 2830,
+    "ties": 813,
+    "auroc": 0.63
+   },
+   "math": {
+    "wrong": 8,
+    "correct": 142,
+    "pairs": 1136,
+    "higher": 395,
+    "ties": 463,
+    "auroc": 0.551
+   },
+   "reasoning": {
+    "wrong": 42,
+    "correct": 108,
+    "pairs": 4536,
+    "higher": 2219,
+    "ties": 1092,
+    "auroc": 0.61
+   },
+   "all": {
+    "wrong": 103,
+    "correct": 347,
+    "pairs": 35741,
+    "higher": 21736,
+    "ties": 5384,
+    "auroc": 0.683
+   }
+  },
+  "NumSets": {
+   "factual": {
+    "wrong": 53,
+    "correct": 97,
+    "pairs": 5141,
+    "higher": 2778,
+    "ties": 1089,
+    "auroc": 0.646
+   },
+   "math": {
+    "wrong": 8,
+    "correct": 142,
+    "pairs": 1136,
+    "higher": 395,
+    "ties": 466,
+    "auroc": 0.553
+   },
+   "reasoning": {
+    "wrong": 42,
+    "correct": 108,
+    "pairs": 4536,
+    "higher": 2151,
+    "ties": 1194,
+    "auroc": 0.606
+   },
+   "all": {
+    "wrong": 103,
+    "correct": 347,
+    "pairs": 35741,
+    "higher": 21354,
+    "ties": 6295,
+    "auroc": 0.686
+   }
+  },
+  "Kev": {
+   "factual": {
+    "wrong": 53,
+    "correct": 97,
+    "pairs": 5141,
+    "higher": 3398,
+    "ties": 7,
+    "auroc": 0.662
+   },
+   "math": {
+    "wrong": 8,
+    "correct": 142,
+    "pairs": 1136,
+    "higher": 571,
+    "ties": 1,
+    "auroc": 0.503
+   },
+   "reasoning": {
+    "wrong": 42,
+    "correct": 108,
+    "pairs": 4536,
+    "higher": 2595,
+    "ties": 8,
+    "auroc": 0.573
+   },
+   "all": {
+    "wrong": 103,
+    "correct": 347,
+    "pairs": 35741,
+    "higher": 20328,
+    "ties": 45,
+    "auroc": 0.569
+   }
+  }
+ },
+ "auroc_example": [
+  {
+   "id": "factual_0097",
+   "q": "Lester and Carolyn Burnham are characters in which 1999 film?",
+   "score": 0.89,
+   "wrong": true,
+   "answers": [
+    "The Thomas Crown Affair",
+    "The Sixth Sense",
+    "The Insider",
+    "The thin blue line",
+    "The Thomas Crown Affair"
+   ],
+   "truth": "American Beauty",
+   "numsets": 4,
+   "group_sizes": [
+    2,
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "id": "factual_0010",
+   "q": "What was Kevin Kline's first movie?",
+   "score": 0.82,
+   "wrong": true,
+   "answers": [
+    "The Women",
+    "The Money Pit",
+    "The Women",
+    "The Women",
+    "Heaven's Gate"
+   ],
+   "truth": "Sophie's Choice",
+   "numsets": 2,
+   "group_sizes": [
+    4,
+    1
+   ]
+  },
+  {
+   "id": "factual_0044",
+   "q": "Who played Henry VIII in the TV Series Wolf Hall?",
+   "score": 0.12,
+   "wrong": true,
+   "answers": [
+    "Mark Rylance",
+    "Mark Rylance",
+    "Mark Rylance",
+    "Mark Rylance",
+    "Mark Rylance"
+   ],
+   "truth": "DAMIEN LEWIS",
+   "numsets": 3,
+   "group_sizes": [
+    3,
+    1,
+    1
+   ]
+  },
+  {
+   "id": "factual_0110",
+   "q": "What connects the Red Sea to the Mediterranean Sea?",
+   "score": 0.0,
+   "wrong": false,
+   "answers": [
+    "The Suez Canal",
+    "The Suez Canal",
+    "The Suez Canal",
+    "The Suez Canal",
+    "The Suez Canal"
+   ],
+   "truth": "The Suez Canal",
+   "numsets": 1,
+   "group_sizes": [
+    5
+   ]
+  },
+  {
+   "id": "factual_0133",
+   "q": "Who invented Dynamite in 1867?",
+   "score": 0.23,
+   "wrong": false,
+   "answers": [
+    "Alfred Nobel",
+    "Alfred Nobel",
+    "Alfred Nobel",
+    "Alfred Nobel",
+    "Alfred Nobel"
+   ],
+   "truth": "Alfred Nobel",
+   "numsets": 3,
+   "group_sizes": [
+    3,
+    1,
+    1
+   ]
+  },
+  {
+   "id": "factual_0068",
+   "q": "Films - Russell Crowe and Christian Bale starred in a remake of which famous western?",
+   "score": 1.0,
+   "wrong": false,
+   "answers": [
+    "3:10 to Yuma",
+    "The Man from Nowhere",
+    "A Fistful of Dollars",
+    "The Greatest Show on Earth",
+    "The Proposition"
+   ],
+   "truth": "3.10 TO YUMA",
+   "numsets": 5,
+   "group_sizes": [
+    1,
+    1,
+    1,
+    1,
+    1
+   ]
+  }
+ ],
+ "pair_count_example": {
+  "Word overlap (TF-IDF)": {
+   "n_wrong": 103,
+   "n_correct": 347,
+   "sum_higher": 29292,
+   "sum_ties": 0,
+   "examples": {
+    "factual_0097": {
+     "id": "factual_0097",
+     "score": 0.89,
+     "higher": 346,
+     "ties": 0,
+     "lower": 1,
+     "above": [
+      [
+       "factual_0068",
+       1.0,
+       "Films - Russell Crowe and Christian Bale starred in a remake of which famous western?",
+       5
+      ]
+     ]
+    },
+    "factual_0010": {
+     "id": "factual_0010",
+     "score": 0.82,
+     "higher": 345,
+     "ties": 0,
+     "lower": 2,
+     "above": [
+      [
+       "factual_0068",
+       1.0,
+       "Films - Russell Crowe and Christian Bale starred in a remake of which famous western?",
+       5
+      ],
+      [
+       "factual_0095",
+       0.84,
+       "Suzette Charles of New Jersey became Miss America 1984 because of the resignation of the actual winner. Whom did she replace?",
+       4
+      ]
+     ]
+    },
+    "factual_0044": {
+     "id": "factual_0044",
+     "score": 0.12,
+     "higher": 145,
+     "ties": 0,
+     "lower": 202,
+     "above": [
+      [
+       "factual_0068",
+       1.0,
+       "Films - Russell Crowe and Christian Bale starred in a remake of which famous western?",
+       5
+      ],
+      [
+       "factual_0095",
+       0.84,
+       "Suzette Charles of New Jersey became Miss America 1984 because of the resignation of the actual winner. Whom did she replace?",
+       4
+      ],
+      [
+       "factual_0028",
+       0.81,
+       "What creature is a slang word in French for a newspaper?",
+       5
+      ]
+     ]
+    }
+   }
+  },
+  "NumSets": {
+   "n_wrong": 103,
+   "n_correct": 347,
+   "sum_higher": 21354,
+   "sum_ties": 6295,
+   "examples": {
+    "factual_0097": {
+     "id": "factual_0097",
+     "score": 4,
+     "higher": 262,
+     "ties": 41,
+     "lower": 44,
+     "above": [
+      [
+       "factual_0003",
+       5,
+       "Who was the first Plantagenet monarch?",
+       1
+      ],
+      [
+       "factual_0028",
+       5,
+       "What creature is a slang word in French for a newspaper?",
+       5
+      ],
+      [
+       "factual_0057",
+       5,
+       "In 1995, which probe sent back the first major pictures of Jupiter?",
+       1
+      ]
+     ]
+    },
+    "factual_0010": {
+     "id": "factual_0010",
+     "score": 2,
+     "higher": 130,
+     "ties": 76,
+     "lower": 141,
+     "above": [
+      [
+       "factual_0003",
+       5,
+       "Who was the first Plantagenet monarch?",
+       1
+      ],
+      [
+       "factual_0028",
+       5,
+       "What creature is a slang word in French for a newspaper?",
+       5
+      ],
+      [
+       "factual_0057",
+       5,
+       "In 1995, which probe sent back the first major pictures of Jupiter?",
+       1
+      ]
+     ]
+    },
+    "factual_0044": {
+     "id": "factual_0044",
+     "score": 3,
+     "higher": 206,
+     "ties": 56,
+     "lower": 85,
+     "above": [
+      [
+       "factual_0003",
+       5,
+       "Who was the first Plantagenet monarch?",
+       1
+      ],
+      [
+       "factual_0028",
+       5,
+       "What creature is a slang word in French for a newspaper?",
+       5
+      ],
+      [
+       "factual_0057",
+       5,
+       "In 1995, which probe sent back the first major pictures of Jupiter?",
+       1
+      ]
+     ]
+    }
+   }
+  }
+ }
+}

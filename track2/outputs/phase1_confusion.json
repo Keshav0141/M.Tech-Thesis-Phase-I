@@ -1,0 +1,31 @@
+{
+ "k": 103,
+ "Word overlap (TF-IDF)": {
+  "caught": 52,
+  "false_alarm": 51,
+  "missed": 51,
+  "accepted_right": 296,
+  "acc_accepted": 85.3
+ },
+ "Semantic Entropy": {
+  "caught": 40,
+  "false_alarm": 63,
+  "missed": 63,
+  "accepted_right": 284,
+  "acc_accepted": 81.8
+ },
+ "NumSets": {
+  "caught": 40,
+  "false_alarm": 63,
+  "missed": 63,
+  "accepted_right": 284,
+  "acc_accepted": 81.8
+ },
+ "Kev": {
+  "caught": 30,
+  "false_alarm": 73,
+  "missed": 73,
+  "accepted_right": 274,
+  "acc_accepted": 79.0
+ }
+}

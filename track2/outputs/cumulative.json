@@ -1,0 +1,197 @@
+{
+ "n": 450,
+ "n_wrong": 103,
+ "rows": {
+  "nocheck": {
+   "label": "No check (every answer accepted)",
+   "calls": 450,
+   "flagged": 0,
+   "accepted": 450,
+   "caught": 0,
+   "false": 0,
+   "missed": 103,
+   "acc": 77.1
+  },
+  "wo": {
+   "label": "Word overlap, TF-IDF (5 answers)",
+   "calls": 2250,
+   "flagged": 103,
+   "accepted": 347,
+   "caught": 52,
+   "false": 51,
+   "missed": 51,
+   "acc": 85.3
+  },
+  "se": {
+   "label": "Semantic Entropy (5 answers)",
+   "calls": 2250,
+   "flagged": 103,
+   "accepted": 347,
+   "caught": 38,
+   "false": 65,
+   "missed": 65,
+   "acc": 81.3
+  },
+  "ns": {
+   "label": "NumSets (5 answers)",
+   "calls": 2250,
+   "flagged": 103,
+   "accepted": 347,
+   "caught": 38,
+   "false": 65,
+   "missed": 65,
+   "acc": 81.3
+  },
+  "kev": {
+   "label": "Kev verifier (1 answer)",
+   "calls": 450,
+   "flagged": 103,
+   "accepted": 347,
+   "caught": 30,
+   "false": 73,
+   "missed": 73,
+   "acc": 79.0,
+   "ref_wo": 52,
+   "ref_se": 38,
+   "ref_ns": 38
+  },
+  "s1": {
+   "label": "Framework: Step 1",
+   "calls": 443,
+   "flagged": 7,
+   "accepted": 443,
+   "caught": 1,
+   "false": 6,
+   "missed": 102,
+   "acc": 77.0,
+   "ref_wo": 6,
+   "ref_se": 3,
+   "ref_ns": 3
+  },
+  "s2": {
+   "label": "Framework: Steps 1 to 2",
+   "calls": 443,
+   "flagged": 219,
+   "accepted": 231,
+   "caught": 57,
+   "false": 162,
+   "missed": 46,
+   "acc": 80.1,
+   "ref_wo": 91,
+   "ref_se": 73,
+   "ref_ns": 73
+  },
+  "s3": {
+   "label": "Framework: Steps 1 to 3",
+   "calls": 443,
+   "flagged": 219,
+   "accepted": 231,
+   "caught": 57,
+   "false": 162,
+   "missed": 46,
+   "acc": 80.1,
+   "ref_wo": 91,
+   "ref_se": 73,
+   "ref_ns": 73
+  },
+  "s4": {
+   "label": "Framework: Steps 1 to 5",
+   "calls": 1291,
+   "flagged": 66,
+   "accepted": 384,
+   "caught": 37,
+   "false": 29,
+   "missed": 66,
+   "acc": 82.8,
+   "ref_wo": 40,
+   "ref_se": 25,
+   "ref_ns": 25
+  }
+ },
+ "at": {
+  "66": {
+   "wo": {
+    "label": "wo",
+    "calls": 0,
+    "flagged": 66,
+    "accepted": 384,
+    "caught": 40,
+    "false": 26,
+    "missed": 63,
+    "acc": 83.6
+   },
+   "se": {
+    "label": "se",
+    "calls": 0,
+    "flagged": 66,
+    "accepted": 384,
+    "caught": 25,
+    "false": 41,
+    "missed": 78,
+    "acc": 79.7
+   },
+   "ns": {
+    "label": "ns",
+    "calls": 0,
+    "flagged": 66,
+    "accepted": 384,
+    "caught": 25,
+    "false": 41,
+    "missed": 78,
+    "acc": 79.7
+   },
+   "kev": {
+    "label": "kev",
+    "calls": 0,
+    "flagged": 66,
+    "accepted": 384,
+    "caught": 22,
+    "false": 44,
+    "missed": 81,
+    "acc": 78.9
+   }
+  },
+  "219": {
+   "wo": {
+    "label": "wo",
+    "calls": 0,
+    "flagged": 219,
+    "accepted": 231,
+    "caught": 91,
+    "false": 128,
+    "missed": 12,
+    "acc": 94.8
+   },
+   "se": {
+    "label": "se",
+    "calls": 0,
+    "flagged": 219,
+    "accepted": 231,
+    "caught": 73,
+    "false": 146,
+    "missed": 30,
+    "acc": 87.0
+   },
+   "ns": {
+    "label": "ns",
+    "calls": 0,
+    "flagged": 219,
+    "accepted": 231,
+    "caught": 73,
+    "false": 146,
+    "missed": 30,
+    "acc": 87.0
+   },
+   "kev": {
+    "label": "kev",
+    "calls": 0,
+    "flagged": 219,
+    "accepted": 231,
+    "caught": 60,
+    "false": 159,
+    "missed": 43,
+    "acc": 81.4
+   }
+  }
+ }
+}
